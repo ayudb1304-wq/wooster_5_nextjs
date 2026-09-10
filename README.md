@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Wooster Prep landing (Next.js)
 
-## Getting Started
+Landing page for woosterprep.com, ported from the static site at
+https://github.com/ayudb1304-wq/wooster_5 to Next.js (App Router, TypeScript).
+Layout and motion follow videinfra.com; copy and product screenshots are Wooster Prep's own.
 
-First, run the development server:
+## Run
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+pnpm install
+pnpm dev        # http://localhost:3000
+pnpm build && pnpm start
+pnpm lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Layout
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `app/layout.tsx`: root layout, metadata, and self-hosted Google Fonts via `next/font`
+  (Inter for UI, Cormorant Garamond for the wordmark and statements). Exposes `--font-inter` and `--font-cormorant`.
+- `app/globals.css`: design tokens at the top (`:root`), then one block per section. Same CSS as the original site.
+- `app/page.tsx`: composes the sections in order.
+- `app/icon.jpg`: favicon (the logo).
+- `components/`: one file per section. Client components hold the interactive parts:
+  - `Header`: swaps its theme to match the section under it, mobile burger menu.
+  - `Wordmark`: fits the giant serif wordmark to the container width.
+  - `Film`: device tilt on scroll, sound toggle, pauses while off screen.
+  - `CaseVideo`: hover preview; click scrolls to the film and unmutes it (via `lib/events.ts`).
+  - `Accordion`: one item open at a time.
+  - `Pricing`: card rail with arrow buttons.
+  - `RevealObserver`: adds `.is-in` to `.reveal` elements as they scroll into view.
+- `lib/links.ts`: the external woosterprep.com URLs and the film paths, in one place.
+- `public/assets/`: logo, product screenshots, poster, and the film (`moneyball-web.mp4`).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Notes
 
-## Learn More
+- Screenshots and the logo go through `next/image` (static imports, so dimensions and blur placeholders are automatic).
+- The film is served from `public/assets/moneyball-web.mp4` (720p, about 9 MB). The original cut is ignored by git.
+  To re-encode after a new cut:
 
-To learn more about Next.js, take a look at the following resources:
+```
+ffmpeg -i public/assets/moneyball.mp4 -vf scale=1280:-2 -c:v libx264 -crf 30 -preset medium -c:a aac -b:a 96k -movflags +faststart public/assets/moneyball-web.mp4
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Links to the diagnostic, login, privacy, terms, and disclaimer pages point at woosterprep.com (see `lib/links.ts`).
+  Change them to relative paths when this app is deployed on the same domain.

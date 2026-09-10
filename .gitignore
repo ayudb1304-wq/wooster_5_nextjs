@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# original film cut (76 MB), re-encode to moneyball-web.mp4
+public/assets/moneyball.mp4
