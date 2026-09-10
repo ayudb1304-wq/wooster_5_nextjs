@@ -13,6 +13,11 @@ pnpm build && pnpm start
 pnpm lint
 ```
 
+## Brand
+
+`BRAND.md` is the brand card: colors, type, spacing, components, motion, voice, and a changelog.
+It is the reference for every page in the product. Update it in the same change as any UI or UX edit.
+
 ## Layout
 
 - `app/layout.tsx`: root layout, metadata, and self-hosted Google Fonts via `next/font`

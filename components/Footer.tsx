@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="footer" data-ui="light">
       <div className="container footer__grid">
         <a className="footer__brand" href="#top" aria-label="Wooster Prep home">
-          <Image src={logo} alt="Wooster Prep" width={140} height={40} />
+          <Image src={logo} alt="Wooster Prep" width={220} height={62} />
         </a>
         <nav className="footer__links" aria-label="Footer">
           <a href={links.privacy}>Privacy Policy</a>
@@ -21,7 +21,6 @@ export default function Footer() {
       </div>
       <div className="container footer__bottom">
         <span>&copy; {new Date().getFullYear()} Wooster Prep</span>
-        <a href={links.privacy}>Privacy Policy</a>
       </div>
     </footer>
   );

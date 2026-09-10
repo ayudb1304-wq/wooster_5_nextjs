@@ -32,20 +32,7 @@ export default function Included() {
     <section className="included" id="included" data-ui="dark">
       <div className="container included__grid">
         <div className="included__aside">
-          <span className="eyebrow eyebrow--light">
-            What is
-            <br />
-            included
-          </span>
-          <svg className="included__decor" viewBox="0 0 400 260" aria-hidden="true">
-            <g fill="none" stroke="currentColor" strokeWidth="1">
-              <circle cx="120" cy="260" r="120" />
-              <circle cx="170" cy="260" r="120" />
-              <circle cx="220" cy="260" r="120" />
-              <circle cx="270" cy="260" r="120" />
-              <circle cx="320" cy="260" r="120" />
-            </g>
-          </svg>
+          <span className="eyebrow eyebrow--light">What is included</span>
         </div>
 
         <Accordion items={includedItems} />
