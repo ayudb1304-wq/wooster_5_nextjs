@@ -44,13 +44,18 @@ export default function Pricing() {
         <div className="rail__track">
           <article className="price-card">
             <span className="price-card__badge">Full 2-month access</span>
-            <div className="price-card__amount">
-              <span className="price-card__currency">$</span>249<span className="price-card__cents">.99</span>
-            </div>
-            <p className="price-card__text">
-              For a little more than a generic SAT textbook, you get real results driven by Math, customized
-              specifically for you.
+            <p className="price-card__lead">
+              Two months of knowing <em>exactly</em> what to do next.
             </p>
+            <div className="price-card__offer">
+              <p className="price-card__price">
+                <b>$249.99</b> for two months. About $4 a day.
+              </p>
+              <p className="price-card__text">
+                About the cost of a couple of tutoring sessions, for a plan that knows your child and a score
+                you can watch move.
+              </p>
+            </div>
             <a className="btn btn--primary" href={links.diagnostic}>
               Begin with the Free Diagnostic
             </a>

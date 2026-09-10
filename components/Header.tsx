@@ -61,6 +61,7 @@ export default function Header() {
           <nav className="header__nav" aria-label="Primary">
             <a href="#how-it-works">Method</a>
             <a href="#included">Included</a>
+            <a href="#parents">For parents</a>
             <a href="#pricing">Pricing</a>
             <a href={links.login}>Login</a>
             <a className="btn btn--primary btn--sm" href={links.diagnostic}>
@@ -85,6 +86,7 @@ export default function Header() {
         <div className="container menu__inner">
           <a href="#how-it-works" onClick={closeMenu}>How it works</a>
           <a href="#included" onClick={closeMenu}>What is included</a>
+          <a href="#parents" onClick={closeMenu}>For parents</a>
           <a href="#pricing" onClick={closeMenu}>Pricing</a>
           <a href={links.login} onClick={closeMenu}>Existing Student Login</a>
           <a className="btn btn--primary" href={links.diagnostic} onClick={closeMenu}>

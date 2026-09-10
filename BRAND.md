@@ -79,7 +79,7 @@ All values live as custom properties on `:root` in `app/globals.css`. Use the to
 
 ### Ground sequence on the landing page
 
-White (hero) → dark (film) → white / soft alternating (steps 01 to 04) → dark and dark-2 (statements) → dark (included) → gray (pricing) → white (CTA, footer). The header follows the ground beneath it (see section 7).
+White (hero) → dark (film) → white / soft alternating (steps 01 to 04) → dark and dark-2 (statements, "The Wooster way") → white (why it works) → soft (for parents) → gray (pricing) → dark (included) → white (CTA, footer). The header follows the ground beneath it (see section 7).
 
 ### Rules
 
@@ -113,11 +113,15 @@ Body is 15px Inter, line-height 1.45, letterspacing -0.01em, antialiased, ink on
 | Style | Family | Size | Weight | Line height | Tracking | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | Hero headline `.hero__title` | Serif | `clamp(40px, 8.4vw, 110px)` | 500 | 0.98 | -0.03em | Line 1 navy, line 2 italic at `--ink-50`. Sized so the longer line fills the container. Centered. |
-| Statement `.statement__text` | Serif | `clamp(56px, 10.5vw, 160px)` | 500 | 0.92 | -0.03em | White at 92 percent. `<em>` is italic at `--light-60`. Max 11ch. |
+| Statement `.statement__text` | Serif | `clamp(56px, 10.5vw, 160px)` | 500 | 0.92 | -0.03em | White at 92 percent. `<em>` is italic at `--light-60`. Statements max 11ch. |
+| Parents statement `.parents__statement` | Serif | `clamp(32px, 4.2vw, 60px)` | 500 | 1.02 | -0.025em | Navy, `<em>` italic at `--ink-50`. Max 22ch. |
+| Price lead `.price-card__lead` | Serif | `clamp(34px, 3.6vw, 52px)` | 500 | 1.02 | -0.02em | Navy, `<em>` italic at `--ink-50`. Max 16ch. |
 | Pricing quote `.price-card__quote` | Serif | `clamp(30px, 3.3vw, 46px)` | 500 | 1.05 | -0.02em | |
 | Display `.display` | Sans | `clamp(38px, 5.4vw, 72px)` | 500 | 1 | -0.04em | Section intro and CTA headings. Max 14ch. |
 | H2 `.h2` | Sans | `clamp(30px, 3.2vw, 40px)` | 500 | 1.05 | -0.035em | Step and pricing headings. |
 | Accordion heading | Sans | `clamp(24px, 2.6vw, 34px)` | 500 | 1.05 | -0.035em | |
+| Why claim `.why__claim` | Sans | `clamp(26px, 2.6vw, 36px)` | 500 | 1.05 | -0.035em | Three words or fewer. |
+| Parents item title | Sans | `clamp(20px, 1.7vw, 24px)` | 500 | 1.1 | -0.025em | |
 | Mobile menu link | Sans | 26px | 500 | | -0.03em | |
 | Lede `.lede` | Sans | `clamp(17px, 1.45vw, 20px)` | 400 | 1.35 | -0.015em | `--ink-70`, max 56ch. |
 | Step body | Sans | `clamp(17px, 1.45vw, 20px)` | 400 | 1.3 | -0.02em | Max 48ch. |
@@ -156,7 +160,7 @@ Body is 15px Inter, line-height 1.45, letterspacing -0.01em, antialiased, ink on
 
 **Full-height slides.** The hero, film, and each statement are `min-height: 100svh` and `position: sticky; top: 0` so they stack as the page scrolls. Later sections carry a higher z-index and slide over them.
 
-**Alignment.** Left aligned by default. The hero headline is the one centered element. Step headings sit stacked under their number and pill, never in a right-hand column.
+**Alignment.** Left aligned by default. The hero headline, with the primary button, the "How it works" link and the "Free. No card." note directly beneath it, is the one centered block. The paragraph and the login link sit at the bottom of the hero. Step headings sit stacked under their number and pill, never in a right-hand column.
 
 **Grid.** Two equal columns for case cards, collapsing to one under 960px.
 
@@ -192,7 +196,7 @@ A 1px ring holding a 10px arrow. 18px default, 28px `--light` on dark, 30px `--l
 
 ### Header
 
-Fixed, 60px, hairline underneath. Logo left, nav right. Nav links are 14px weight 500 at 90 percent opacity, 55 percent on hover. Ends with a small primary button. Under 960px the nav collapses to a two-line burger that opens a full-screen white menu with 26px links.
+Fixed, 60px, hairline underneath. Logo left, nav right (Method, Included, For parents, Pricing, Login, then the button). Nav links are 14px weight 500 at 90 percent opacity, 55 percent on hover. Ends with a small primary button. Under 960px the nav collapses to a two-line burger that opens a full-screen white menu with 26px links.
 
 The header repaints to match the section under it: `header--dark` (dark ground, white text, white primary button) and `header--gray` (gray ground). The swap is a 0.45s color transition driven by scroll position.
 
@@ -206,15 +210,23 @@ The step 04 comparison. Uppercase 12px name, `--ink-70` description, then a list
 
 ### Statement block `.statement`
 
-Full-height dark panel, alternating `--dark` and `--dark-2`, serif statement plus a `--light-60` subline, and a 34px light icon circle bottom right that links to the next panel.
+Full-height dark panel, alternating `--dark` and `--dark-2`, serif statement plus a `--light-60` subline, and a 34px light icon circle bottom right that links to the next panel. The "The Wooster way" section is five of these stacked as sticky slides: the first reads "The Wooster way" with the intro paragraph as its subline, then the four statements. Each fills the screen as the reader scrolls. Keep them: the scroll is the point.
 
 ### Accordion `.accordion`
 
 Native `<details>`. Rows separated by `--light-12` hairlines, 26px vertical padding, heading plus a 28px light icon circle that rotates 180 degrees when open. One item open at a time. Body copy in `--light-60`, max 46ch, fades up 0.5s on open. Capped at 820px wide, left aligned.
 
+### Why it works `.why`
+
+White ground, `clamp(56px, 7vw, 96px)` vertical padding, directly after the statements. Eyebrow, a reduced display heading at `clamp(34px, 4.2vw, 56px)` ("Not magic. Math."), one-sentence lede. Sized so the heading and the last row are readable together in one viewport at desktop heights: rows use `clamp(14px, 1.7vw, 22px)` vertical padding and the claim runs `clamp(22px, 2.1vw, 30px)`. Then an index: five rows on hairlines, each a two-column grid of a claim of three words or fewer and a one-line proof in `--ink-70`. No numerals. Rows stack under 960px. No paragraphs anywhere in this section.
+
+### For parents `.parents`
+
+Soft ground (`--soft`), so it separates from the white "Why it works" above and steps down to the gray pricing below, `clamp(90px, 12vw, 180px)` vertical padding. Eyebrow "For parents", a display heading capped at 18ch, and a lede capped at 60ch. Below a hairline, three columns (one under 960px) each with a leading-zero numeral in `--ink-30`, a 20 to 24px title, and `--ink-70` body at 34ch. The section closes above a second hairline with a navy serif statement, a large primary button, and a 14px `--ink-50` note ("Free. No card."). This is the emotional argument and always sits directly before pricing.
+
 ### Price card `.price-card`
 
-White, 4px corners, `clamp(28px, 3.4vw, 48px)` padding, `min(86vw, 640px)` wide, in a horizontal snap rail with 32px gaps. Hairline badge top left. The price is `clamp(72px, 9vw, 132px)` at -0.05em with the currency and cents at 40 and 32 percent size in `--ink-50`. The checklist uses 22px ink circles with a white tick.
+White, 4px corners, `clamp(28px, 3.4vw, 48px)` padding, `min(86vw, 640px)` wide, in a horizontal snap rail with 32px gaps. Hairline badge top left. The card leads with a navy serif line about what the plan buys ("Two months of knowing exactly what to do next."), not with the number. The price itself is a 15px `--ink-50` sentence with the amount at weight 500 in ink, followed by the per-day equivalent, then a `--ink-70` sentence that ties the cost to what the family gets. There is no oversized numeral. The checklist uses 22px ink circles with a white tick.
 
 ### Footer
 
@@ -273,7 +285,11 @@ Only three icons exist, all 12 by 12 inline SVG, 1.2 stroke, `currentColor`, in 
 
 ## 10. Voice and copy
 
-**Tone.** Direct, confident, a little wry. Short sentences. Facts over adjectives. We say what the product does and what the student gets.
+**Audience.** Parents of the student are the primary reader of the landing page, but students land here too. The student is the user. The hero and every product section speak to the student in the second person ("your score", "what you study next"); a parent reads "you" as their child without friction. "Your child" appears only inside the "For parents" section, which names the feeling we solve (not knowing whether the effort is working, hours going to the wrong thing, a fixed test date). Explanatory sentences avoid the pronoun where they can ("A free diagnostic finds the gaps, then a plan says exactly what to study next").
+
+**Tone.** Direct, confident, a little wry. Short sentences, contractions welcome. Facts over adjectives. Say it in the fewest words that still land; a body line is one or two sentences, never three. We say what the product does and what the student gets. Urgency is real but quiet: the test date does not move, the plan can start today. Never countdowns, never fake scarcity.
+
+**Price.** The number never leads. Say what the two months buy first, then the amount in a plain sentence with its per-day equivalent, then one line that connects the cost to the family's peace of mind. Comparisons stay soft ("a couple of tutoring sessions"), never a table against competitors.
 
 **Signature lines.**
 
@@ -282,6 +298,13 @@ Only three icons exist, all 12 by 12 inline SVG, 1.2 stroke, `currentColor`, in 
 - Moneyball the SATs.
 - No guesswork. No wasted hours.
 - The difference between an 1100 and a 1590 is not just effort, it is strategy.
+- Not magic. Math.
+- Wooster runs on a loop, not a syllabus.
+- The hard part isn't the studying. It's not knowing if it's working.
+- Effort was never the problem. Direction was.
+- The test date is fixed. The plan isn't.
+- Most students find out from the score report. You can know today.
+- Two months of knowing exactly what to do next.
 
 **Rules.**
 
@@ -358,6 +381,15 @@ The hero headline uses viewport-relative sizing, so under about 500px the second
 
 Newest first. One line per UI or UX change. Date, what changed, where.
 
+- 2026-09-11 · Hero: primary button, "How it works" link and "Free. No card." note now sit under the headline; login stays at the bottom. Audience wording rule added.
+- 2026-09-11 · "For parents" moved onto the soft ground so it separates from "Why it works".
+- 2026-09-11 · "What is included" moved to sit after pricing, before the CTA.
+- 2026-09-11 · "The Wooster way" is now the first statement slide, with the intro paragraph as its subline.
+- 2026-09-11 · "Why it works" compressed to fit one viewport: tighter padding, smaller heading and rows.
+- 2026-09-11 · New "Why it works" section after the statements: index of five claims with one-line proofs. Statements section now headed "The Wooster way" at display size.
+- 2026-09-11 · Parents section and price card copy cut to roughly half the words.
+- 2026-09-11 · New "For parents" section between Included and Pricing: names the emotion, three truths, serif statement, CTA. Added to the nav and mobile menu.
+- 2026-09-11 · Price card: the giant numeral is gone. Serif lead about what the plan buys, then the price as a sentence with the per-day figure and an emotional tie-in.
 - 2026-09-10 · Brand card created from the shipped landing page.
 - 2026-09-10 · Footer: removed the duplicate Privacy Policy link; logo enlarged from 140px to 220px.
 - 2026-09-10 · Included section: stacked and left aligned, accordion capped at 820px, decorative arcs removed.

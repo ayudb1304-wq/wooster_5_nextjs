@@ -5,6 +5,12 @@ type Statement = { id?: string; text: ReactNode; sub: string; next: string };
 
 const statements: Statement[] = [
   {
+    text: "The Wooster way",
+    sub: "Your exam is maybe tomorrow or it is eight weeks out. You can't study the same way. Wooster Prep builds a plan around your timeline and your knowledge gaps using Math, then tells you exactly what to study now.",
+    next: "#s1",
+  },
+  {
+    id: "s1",
     text: (
       <>
         Study hard <em>or</em> study smart.
@@ -40,15 +46,6 @@ const statements: Statement[] = [
 export default function Statements() {
   return (
     <section className="statements" data-ui="dark">
-      <div className="container statements__intro reveal">
-        <span className="eyebrow eyebrow--light">Why it works</span>
-        <p className="lede lede--light">
-          Your exam is maybe tomorrow or it is eight weeks out. You can&apos;t study the same way. Wooster Prep
-          builds a plan around your timeline and your knowledge gaps using Math, then tells you exactly what to
-          study now.
-        </p>
-      </div>
-
       {statements.map((s, i) => (
         <div key={s.id ?? i} className="statement slide" id={s.id}>
           <div className="container">

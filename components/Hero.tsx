@@ -71,12 +71,18 @@ export default function Hero() {
             <span className="hero__title-line">Personalized SAT Prep.</span>
             <span className="hero__title-line hero__title-soft">That actually moves your score.</span>
           </h1>
-          <a className="hero__cta" href="#how-it-works" data-intro="cta">
-            <span>How it works</span>
-            <span className="icon-circle icon-circle--lg" aria-hidden="true">
-              <ArrowDown />
-            </span>
-          </a>
+          <div className="hero__cta-row" data-intro="cta">
+            <a className="btn btn--primary btn--lg" href={links.diagnostic}>
+              Start Your Diagnostic
+            </a>
+            <a className="hero__cta" href="#how-it-works">
+              <span>How it works</span>
+              <span className="icon-circle icon-circle--lg" aria-hidden="true">
+                <ArrowDown />
+              </span>
+            </a>
+            <span className="hero__note">Free. No card.</span>
+          </div>
         </div>
         <div className="hero__meta" data-intro="meta">
           <p>
@@ -84,9 +90,6 @@ export default function Hero() {
             strategy. Wooster Prep is tailored to you.
           </p>
           <div className="hero__actions">
-            <a className="btn btn--primary" href={links.diagnostic}>
-              Start Your Diagnostic
-            </a>
             <a className="btn btn--ghost" href={links.login}>
               Existing Student Login
             </a>
