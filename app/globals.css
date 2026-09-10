@@ -197,7 +197,11 @@ ol, ul { margin: 0; padding: 0; list-style: none; }
   align-items: center;
   gap: 20px;
 }
-.header__brand { font-weight: 500; font-size: 15px; letter-spacing: -0.02em; }
+.header__brand { display: inline-flex; align-items: center; height: 100%; }
+/* The logo is navy on a white JPG: multiply hides the white on light grounds,
+   invert + screen turns it white on the dark header. */
+.header__brand img { height: 34px; width: auto; mix-blend-mode: multiply; transition: filter 0.45s var(--ease); }
+.header--dark .header__brand img { filter: invert(1) grayscale(1) brightness(2); mix-blend-mode: screen; }
 .header__anchor {
   display: inline-flex;
   align-items: center;
@@ -673,7 +677,8 @@ ol, ul { margin: 0; padding: 0; list-style: none; }
   align-items: start;
   padding-bottom: clamp(80px, 12vw, 170px);
 }
-.footer__brand { font-weight: 500; font-size: 15px; letter-spacing: -0.02em; }
+.footer__brand { display: inline-block; }
+.footer__brand img { height: 40px; width: auto; mix-blend-mode: multiply; }
 .footer__links { display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 500; }
 .footer__links a { transition: opacity 0.3s; }
 .footer__links a:hover { opacity: 0.55; }

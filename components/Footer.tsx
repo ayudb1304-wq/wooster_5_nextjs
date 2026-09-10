@@ -1,11 +1,13 @@
+import Image from "next/image";
 import { links } from "@/lib/links";
+import logo from "@/public/assets/wooster-logo.jpg";
 
 export default function Footer() {
   return (
     <footer className="footer" data-ui="light">
       <div className="container footer__grid">
-        <a className="footer__brand" href="#top">
-          Wooster Prep
+        <a className="footer__brand" href="#top" aria-label="Wooster Prep home">
+          <Image src={logo} alt="Wooster Prep" width={140} height={40} />
         </a>
         <nav className="footer__links" aria-label="Footer">
           <a href={links.privacy}>Privacy Policy</a>
