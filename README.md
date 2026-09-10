@@ -22,7 +22,8 @@ pnpm lint
 - `app/icon.jpg`: favicon (the logo).
 - `components/`: one file per section. Client components hold the interactive parts:
   - `Header`: swaps its theme to match the section under it, mobile burger menu.
-  - `Wordmark`: fits the giant serif wordmark to the container width.
+  - `Hero`: runs the GSAP load intro (SplitText headline words land on the baseline, then the
+    "How it works" link and copy follow). Skipped under reduced motion.
   - `Film`: device tilt on scroll, sound toggle, pauses while off screen.
   - `CaseVideo`: hover preview; click scrolls to the film and unmutes it (via `lib/events.ts`).
   - `Accordion`: one item open at a time.

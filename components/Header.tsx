@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown } from "@/components/Icons";
 import { links } from "@/lib/links";
 import { raf } from "@/lib/motion";
 import logo from "@/public/assets/wooster-logo.jpg";
@@ -57,13 +56,6 @@ export default function Header() {
         <div className="container header__inner">
           <a className="header__brand" href="#top" aria-label="Wooster Prep home">
             <Image src={logo} alt="Wooster Prep" width={120} height={34} priority />
-          </a>
-
-          <a className="header__anchor" href="#how-it-works">
-            <span>How it works</span>
-            <span className="icon-circle" aria-hidden="true">
-              <ArrowDown />
-            </span>
           </a>
 
           <nav className="header__nav" aria-label="Primary">

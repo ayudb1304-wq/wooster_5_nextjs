@@ -1,16 +1,84 @@
-import Wordmark from "@/components/Wordmark";
+"use client";
+
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { SplitText } from "gsap/SplitText";
+import { useRef } from "react";
+import { ArrowDown } from "@/components/Icons";
 import { links } from "@/lib/links";
+import { prefersReducedMotion } from "@/lib/motion";
+
+gsap.registerPlugin(useGSAP, SplitText);
 
 export default function Hero() {
+  const scope = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+
+  /* Intro: the headline words land on the baseline, then the link and copy follow. */
+  useGSAP(
+    (_, contextSafe) => {
+      const title = titleRef.current;
+      if (!title || !contextSafe || prefersReducedMotion()) return; // CSS shows everything for reduced motion
+
+      let split: SplitText | undefined;
+      let cancelled = false;
+
+      const play = contextSafe(() => {
+        if (cancelled) return;
+        split = SplitText.create(title, { type: "words", wordsClass: "hero__word" });
+
+        gsap
+          .timeline({ defaults: { ease: "expo.out" }, onComplete: () => split?.revert() })
+          .set(title, { visibility: "visible" })
+          .from(
+            split.words,
+            { autoAlpha: 0, y: "-0.4em", scale: 0.94, transformOrigin: "50% 100%", duration: 1.4, stagger: 0.07 },
+            0.2,
+          )
+          .from("[data-intro='cta']", { autoAlpha: 0, y: 16, duration: 1 }, 0.9)
+          .from("[data-intro='meta']", { autoAlpha: 0, y: 22, duration: 1.2 }, 1.15);
+      });
+
+      // Wait for the serif face so the words that land are the real ones.
+      const start = () => {
+        if (document.fonts) document.fonts.ready.then(play);
+        else play();
+      };
+
+      // In a background tab the browser throttles frames, so hold the intro until the tab is seen.
+      const onVisible = () => {
+        if (document.visibilityState !== "visible") return;
+        document.removeEventListener("visibilitychange", onVisible);
+        start();
+      };
+      if (document.visibilityState === "visible") start();
+      else document.addEventListener("visibilitychange", onVisible);
+
+      return () => {
+        cancelled = true;
+        document.removeEventListener("visibilitychange", onVisible);
+        split?.revert();
+      };
+    },
+    { scope },
+  );
+
   return (
-    <section className="hero slide" data-ui="light">
+    <section ref={scope} className="hero slide" data-ui="light">
       <div className="container">
-        <h1 className="hero__tagline">
-          <span className="reveal">Personalized SAT Prep.</span>
-          <span className="reveal reveal--delay hero__tagline-soft">That actually moves your score.</span>
-        </h1>
-        <Wordmark>Wooster Prep</Wordmark>
-        <div className="hero__meta reveal reveal--delay-2">
+        <div className="hero__lead">
+          <h1 ref={titleRef} className="hero__title">
+            <span className="hero__title-line">Personalized SAT Prep.</span>
+            <span className="hero__title-line hero__title-soft">That actually moves your score.</span>
+          </h1>
+          <a className="hero__cta" href="#how-it-works" data-intro="cta">
+            <span>How it works</span>
+            <span className="icon-circle icon-circle--lg" aria-hidden="true">
+              <ArrowDown />
+            </span>
+          </a>
+        </div>
+        <div className="hero__meta" data-intro="meta">
           <p>
             Study hard or study smart. The difference between an 1100 and a 1590 is not just effort, it is
             strategy. Wooster Prep is tailored to you.
