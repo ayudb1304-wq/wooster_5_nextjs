@@ -251,6 +251,15 @@ White ground, between the dark "What is included" and the soft About, `clamp(90p
 
 Soft ground (`--soft`), between the dark "What is included" and the white CTA, `clamp(90px, 12vw, 180px)` vertical padding. Eyebrow "About us", then the opening line of the story as a sans heading at `clamp(34px, 4.2vw, 56px)`, weight 500, tracking -0.04em, capped at 20ch. Below, a two-column grid (1fr and 0.8fr, one column under 960px): the founder story on the left as step-body paragraphs at 48ch, with one pull line ("It worked so well it was slightly annoying.") mid-story, and on the right the team photo in a white 4px box at 4 by 5 that sticks below the header while the story scrolls. Under 960px the photo moves above the story at 4 by 3. The section closes with the audience columns. The photo is `public/assets/team.jpg` (1600 by 2000, 4 by 5 crop), passed through `next/image` with a static import and a blur placeholder.
 
+### Inner pages `.page`
+
+The header, footer, and reveal observer live in the root layout, so every route shares them; header links and footer anchors are written as `/#section` so they work from any page. An inner page starts under the header with a `.page__head`: eyebrow, display H1 capped at 16ch, optional lede, optional 13px `--ink-50` meta line (dates, author). White ground, `data-ui="light"`.
+
+- **Document `.doc`** (privacy, terms, disclaimer): a 62ch reading column at 16px with 1.5 leading, `--ink-70` paragraphs, 22 to 28px sans H2s, underlined links, and a hairline `.doc__callout` box for the one highlighted paragraph. The text is ported verbatim from the live pages at woosterprep.com, headings and effective dates included; edit it there first. A `.doc__note` box exists for marking drafts.
+- **Forms**: 13px labels, 48px inputs with a `--ink-30` hairline that goes ink on hover and navy with the focus ring on focus, 4px corners, 16px between fields, a large primary button, then a 14px `--ink-50` note. The login form is a UI shell: submitting shows a status line and sends nothing until it is wired to the auth backend.
+- **Login `.auth`**: two equal columns at full viewport height (one under 960px, where the photo is dropped). Left, a 440px column centred vertically with the logo, eyebrow, heading, lede, and closing line all centred (the form fields and their labels stay left-aligned inside the column): 180px logo, eyebrow, H2 "Welcome back.", lede "Sign in to continue prep.", then the form: email, password with a 13px "Show" / "Hide" text toggle inside the field, a row with the "Keep me signed in" checkbox (18px, 4px corners, ink when checked with a white tick) and a "Forgot your password?" link to email, a full-width primary "Sign in", an "Or continue with" hairline divider, a full-width ghost "Continue with Google" with no logo, and "New to Wooster Prep? Create an account" linking to the live register page. Right, the login photo `login.jpg` inset 16px with 4px corners, filling the column, with one white quote card bottom left (15px weight 500 quote, 13px `--ink-50` attribution). The head, form, and extras reveal in three steps. Email and password mirror the live form; Google sign in is described in the privacy policy but not yet on the live form.
+- **Diagnostic `.diag`**: the exam itself runs in the app at woosterprep.com/diagnostic, so this page is its front door: page head, three numbered steps on a hairline, then the large primary "Begin the diagnostic" button with the "Free. No card." note, linking out to the exam.
+
 ### Footer
 
 Hairline on top, `clamp(48px, 6vw, 80px)` above. A six-column grid (1.4fr for the brand, then five equal columns, 32px gap): the brand column holds the 220px logo over a 14px `--ink-70` tagline at 28ch; the five link columns are Product, Resources, Explore, Company, and Legal, each a 13px weight 500 heading over 14px weight 500 links in `--ink-70` that turn ink on hover. Product links the diagnostic, Included, Pricing, and the guarantee; Resources the blog, How it works, For parents, and login; Explore the film, the statements, Why it works, and Testimonials; Company About, Contact (email), and Careers; Legal the three policy pages. Below a second hairline, a bottom row with the copyright on the left and the social links (Instagram, X, YouTube, LinkedIn, TikTok, as text, no icons) on the right. Under 960px the brand column spans the row and the link columns go to three; under 600px they go to two and the bottom row stacks. Links appear once each. The film and statements sections carry `id="film"` and `id="method"` for the Explore anchors. Social handles and the careers page are placeholders in `lib/links.ts`.
@@ -302,7 +311,9 @@ Motion is slow, eased, and additive. Nothing bounces. Nothing loops except the f
 
 **Team photo.** `team.jpg` in the About section, the one stock photograph on the site, from Unsplash under the Unsplash License (photo by Priscilla Du Preez, unsplash.com/photos/XkKCui44iM0). Candid, warm, people mid-laugh over a laptop with books behind them. Shown edge to edge in the white 4 by 5 box, object-fit cover.
 
-**Style.** One photograph is allowed on the site: the team photo above. Everywhere else, no stock photography. No illustration. No gradients except the fade at the bottom of a case card and the device base.
+**Login photo.** `login.jpg` (1400 by 1900, portrait crop) from Unsplash under the Unsplash License (photo by season youn, unsplash.com/photos/Qzn1_t80vjI): students at long tables in a sunlit library. Fills the right column of the login page, object-fit cover.
+
+**Style.** Two photographs are allowed on the site: the team photo and the login photo above. Everywhere else, no stock photography. No illustration. No gradients except the fade at the bottom of a case card and the device base.
 
 ---
 
@@ -337,11 +348,13 @@ Only three icons exist, all 12 by 12 inline SVG, 1.2 stroke, `currentColor`, in 
 - It worked so well it was slightly annoying.
 - 100 points higher, or the course again for free.
 - We asked. The scale said no.
+- 10,000 and counting.
 
 **Rules.**
 
 - Sentence case everywhere, including buttons and headings. Title case only in the product name.
-- Numbers are written as numerals: 1100, 1590, 6,000, 98-question, 7-day, 2-month.
+- Numbers are written as numerals: 1100, 1590, 10,000, 98-question, 7-day, 2-month.
+- The question bank size is a live figure, never typed into copy. It lives once in `lib/stats.ts` and every mention (hero paragraph, statement slide, pricing heading) renders from it. Raise it there when the bank grows. Size is framed as a means to personalisation (a fresh question for the weakest concept), not as volume for its own sake; the statement slide says "and counting".
 - "SAT" is always uppercase. "Wooster Prep" is two words.
 - Call-to-action verbs: Start, Begin, See, Take. The main action is always "Start Your Diagnostic".
 - Do not use exclamation marks. Do not promise a specific score. The one promise we make is the score guarantee (1300 or below, at least 100 points higher on the next official score, or the course again for free), and it is stated in full only in the Guarantee section.
@@ -356,7 +369,7 @@ Only three icons exist, all 12 by 12 inline SVG, 1.2 stroke, `currentColor`, in 
 - The accordion is native `<details>` so it works without JavaScript.
 - Reduced motion is honored everywhere (section 7).
 - Contrast: ink on white and white on dark clear AA. The 50 percent alphas are for captions only, never for body copy or controls.
-- Focus styles are the browser default for now. When custom focus is added, use a 2px navy ring and document it here.
+- Focus: form inputs show a 2px navy outline with 1px offset on `:focus-visible`. Everything else is still the browser default; when that changes, use the same ring.
 
 ---
 
@@ -403,7 +416,10 @@ The hero headline uses viewport-relative sizing, so under about 500px the second
 | Favicon | `app/icon.jpg` |
 | Section components | `components/` |
 | Icons | `components/Icons.tsx` |
-| External links | `lib/links.ts` |
+| Routes and internal links | `lib/links.ts` |
+| Blog posts | `lib/posts.ts` |
+| Inner pages | `app/login`, `app/diagnostic`, `app/privacy`, `app/terms`, `app/disclaimer` |
+| Live figures (question count) | `lib/stats.ts` |
 | Motion helpers | `lib/motion.ts` |
 | Assets | `public/assets/` |
 
@@ -413,6 +429,12 @@ The hero headline uses viewport-relative sizing, so under about 500px the second
 
 Newest first. One line per UI or UX change. Date, what changed, where.
 
+- 2026-09-11 · Login page: logo, head, and closing line centred over the form column; fields stay left-aligned.
+- 2026-09-11 · Login page rebuilt as two columns after the 21st.dev sign-in reference: form left with password toggle, remember-me, Google option and divider; library photo with a quote card right. Second photograph added.
+- 2026-09-11 · Inner pages added for the routes the original site has: login, diagnostic, privacy, terms, disclaimer. Header, footer, and reveal observer moved to the root layout; those links now point at internal routes, blog and careers stay external placeholders. Legal text ported verbatim from the live site; login mirrors the live form; the diagnostic page hands off to the live exam. Form styles and the navy focus ring added.
+- 2026-09-11 · Pricing heading breaks before the question bank line.
+- 2026-09-11 · Question count now renders from one source in `lib/stats.ts`. Statement slide reads "10,000 and counting." with a subline about monthly growth; hero paragraph ties the bank size to a fresh question for the weakest concept.
+- 2026-09-11 · Question bank figure raised from ~6,000 to 10,000 in the hero paragraph, the statement slide, and the pricing heading.
 - 2026-09-11 · Header nav cut to About, Method, Blog, Testimonials, Pricing, Login. Mobile menu mirrors the order.
 - 2026-09-11 · Footer rebuilt: brand column with tagline, five link columns (Product, Resources, Explore, Company, Legal), bottom row with copyright and social links. Film and statements sections gained ids for the anchors.
 - 2026-09-11 · New placeholder "Blog" section between Included and About: three post cards built on the case card, ported from the 21st.dev glass blog card onto the brand tokens. Blog link added to `lib/links.ts`.

@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { ArrowLeft, ArrowRight } from "@/components/Icons";
 import { includedItems } from "@/components/Included";
 import { links } from "@/lib/links";
+import { questionCount } from "@/lib/stats";
 
 export default function Pricing() {
   const railRef = useRef<HTMLDivElement>(null);
@@ -22,7 +23,11 @@ export default function Pricing() {
         <div className="pricing__top reveal">
           <div>
             <span className="eyebrow">Pricing</span>
-            <h2 className="h2">One plan. Full support. Near 6000 question bank.</h2>
+            <h2 className="h2">
+              One plan. Full support.
+              <br />
+              {questionCount}-question bank.
+            </h2>
           </div>
           <div className="pricing__nav">
             <button

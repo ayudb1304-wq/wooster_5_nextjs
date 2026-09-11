@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import RevealObserver from "@/components/RevealObserver";
 import "./globals.css";
 
 const inter = Inter({
@@ -26,7 +29,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
-      <body>{children}</body>
+      <body>
+        <Header />
+        <main id="top">{children}</main>
+        <Footer />
+        <RevealObserver />
+      </body>
     </html>
   );
 }

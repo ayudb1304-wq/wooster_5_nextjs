@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import CaseShot from "@/components/CaseShot";
 import CaseVideo from "@/components/CaseVideo";
 import { links } from "@/lib/links";
+import { questionCount } from "@/lib/stats";
 import conceptLibrary from "@/public/assets/concept-library.png";
 import masteryBoard from "@/public/assets/mastery-board.png";
 import practiceExams from "@/public/assets/practice-exams.png";
@@ -68,8 +69,9 @@ export default function Steps() {
             <span className="eyebrow">How Wooster works</span>
             <h2 className="display">Simple steps. Real progress.</h2>
             <p className="lede">
-              Not some generic plan, a study plan tailored to you, using tactics made famous in Moneyball.
-              ~6,000 SAT-style questions. One complete path to a higher score. Free to try now.
+              Not some generic plan, a study plan tailored to you, using tactics made famous in Moneyball.{" "}
+              {questionCount} SAT-style questions, so there is always a fresh one for your weakest concept. One
+              complete path to a higher score. Free to try now.
             </p>
           </header>
         }

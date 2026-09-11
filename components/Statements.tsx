@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { ArrowDown } from "@/components/Icons";
+import { questionCount } from "@/lib/stats";
 
 type Statement = { id?: string; text: ReactNode; sub: string; next: string };
 
@@ -21,8 +22,12 @@ const statements: Statement[] = [
   },
   {
     id: "s2",
-    text: "~6,000 SAT-style questions.",
-    sub: "One complete path to a higher score. Free to try now.",
+    text: (
+      <>
+        {questionCount} <em>and counting.</em>
+      </>
+    ),
+    sub: "SAT-style questions, and the bank grows every month. One complete path to a higher score. Free to try now.",
     next: "#s3",
   },
   {

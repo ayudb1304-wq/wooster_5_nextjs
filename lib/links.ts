@@ -1,10 +1,12 @@
 export const links = {
-  diagnostic: "https://woosterprep.com/diagnostic",
-  login: "https://woosterprep.com/login",
+  diagnostic: "/diagnostic",
+  login: "/login",
+  register: "https://www.woosterprep.com/register",
+  exam: "https://www.woosterprep.com/diagnostic",
   blog: "https://woosterprep.com/blog",
-  privacy: "https://woosterprep.com/privacy",
-  terms: "https://woosterprep.com/terms",
-  disclaimer: "https://woosterprep.com/disclaimer",
+  privacy: "/privacy",
+  terms: "/terms",
+  disclaimer: "/disclaimer",
   email: "mailto:hal@woosterprep.com",
   careers: "https://woosterprep.com/careers",
 } as const;

@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { links } from "@/lib/links";
 import { raf } from "@/lib/motion";
@@ -12,6 +14,7 @@ export default function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const [theme, setTheme] = useState<Theme>("light");
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   /* Swap the header theme to match the section under it. */
   useEffect(() => {
@@ -34,7 +37,7 @@ export default function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     update();
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [pathname]);
 
   /* Lock page scroll while the mobile menu is open. */
   useEffect(() => {
@@ -54,16 +57,16 @@ export default function Header() {
     <>
       <header ref={headerRef} className={headerClass} data-ui="light">
         <div className="container header__inner">
-          <a className="header__brand" href="#top" aria-label="Wooster Prep home">
+          <Link className="header__brand" href="/#top" aria-label="Wooster Prep home">
             <Image src={logo} alt="Wooster Prep" width={120} height={34} priority />
-          </a>
+          </Link>
 
           <nav className="header__nav" aria-label="Primary">
-            <a href="#about">About</a>
-            <a href="#how-it-works">Method</a>
-            <a href="#blog">Blog</a>
-            <a href="#testimonials">Testimonials</a>
-            <a href="#pricing">Pricing</a>
+            <Link href="/#about">About</Link>
+            <Link href="/#how-it-works">Method</Link>
+            <Link href="/#blog">Blog</Link>
+            <Link href="/#testimonials">Testimonials</Link>
+            <Link href="/#pricing">Pricing</Link>
             <a href={links.login}>Login</a>
             <a className="btn btn--primary btn--sm" href={links.diagnostic}>
               Start Your Diagnostic
@@ -85,11 +88,11 @@ export default function Header() {
 
       <div className="menu" hidden={!menuOpen}>
         <div className="container menu__inner">
-          <a href="#about" onClick={closeMenu}>About</a>
-          <a href="#how-it-works" onClick={closeMenu}>Method</a>
-          <a href="#blog" onClick={closeMenu}>Blog</a>
-          <a href="#testimonials" onClick={closeMenu}>Testimonials</a>
-          <a href="#pricing" onClick={closeMenu}>Pricing</a>
+          <Link href="/#about" onClick={closeMenu}>About</Link>
+          <Link href="/#how-it-works" onClick={closeMenu}>Method</Link>
+          <Link href="/#blog" onClick={closeMenu}>Blog</Link>
+          <Link href="/#testimonials" onClick={closeMenu}>Testimonials</Link>
+          <Link href="/#pricing" onClick={closeMenu}>Pricing</Link>
           <a href={links.login} onClick={closeMenu}>Existing Student Login</a>
           <a className="btn btn--primary" href={links.diagnostic} onClick={closeMenu}>
             Start Your Diagnostic

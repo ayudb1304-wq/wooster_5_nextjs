@@ -1,10 +1,12 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { prefersReducedMotion } from "@/lib/motion";
 
 /** Adds `.is-in` to every `.reveal` element as it scrolls into view. Renders nothing. */
 export default function RevealObserver() {
+  const pathname = usePathname();
   useEffect(() => {
     const reveals = document.querySelectorAll<HTMLElement>(".reveal");
 
@@ -26,7 +28,7 @@ export default function RevealObserver() {
     );
     reveals.forEach((n) => io.observe(n));
     return () => io.disconnect();
-  }, []);
+  }, [pathname]);
 
   return null;
 }
