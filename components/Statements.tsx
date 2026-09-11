@@ -5,7 +5,7 @@ type Statement = { id?: string; text: ReactNode; sub: string; next: string };
 
 const statements: Statement[] = [
   {
-    text: "The Wooster way",
+    text: "The Wooster Prep way",
     sub: "Your exam is maybe tomorrow or it is eight weeks out. You can't study the same way. Wooster Prep builds a plan around your timeline and your knowledge gaps using Math, then tells you exactly what to study now.",
     next: "#s1",
   },

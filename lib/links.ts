@@ -1,6 +1,7 @@
 export const links = {
   diagnostic: "https://woosterprep.com/diagnostic",
   login: "https://woosterprep.com/login",
+  blog: "https://woosterprep.com/blog",
   privacy: "https://woosterprep.com/privacy",
   terms: "https://woosterprep.com/terms",
   disclaimer: "https://woosterprep.com/disclaimer",

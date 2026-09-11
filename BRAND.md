@@ -79,7 +79,7 @@ All values live as custom properties on `:root` in `app/globals.css`. Use the to
 
 ### Ground sequence on the landing page
 
-White (hero) → dark (film) → white / soft alternating (steps 01 to 04) → dark and dark-2 (statements, "The Wooster way") → white (why it works) → soft (for parents) → gray (pricing) → dark (included) → white (CTA, footer). The header follows the ground beneath it (see section 7).
+White (hero) → dark (film) → white / soft alternating (steps 01 to 04) → dark and dark-2 (statements, "The Wooster Prep way") → white (why it works) → soft (for parents) → gray (pricing) → white (guarantee head) → dark and dark-2 (guarantee gallery) → white (guarantee audiences) → soft (testimonials) → dark (included) → white (blog) → soft (about) → white (CTA, footer). The header follows the ground beneath it (see section 7).
 
 ### Rules
 
@@ -115,6 +115,9 @@ Body is 15px Inter, line-height 1.45, letterspacing -0.01em, antialiased, ink on
 | Hero headline `.hero__title` | Serif | `clamp(40px, 8.4vw, 110px)` | 500 | 0.98 | -0.03em | Line 1 navy, line 2 italic at `--ink-50`. Sized so the longer line fills the container. Centered. |
 | Statement `.statement__text` | Serif | `clamp(56px, 10.5vw, 160px)` | 500 | 0.92 | -0.03em | White at 92 percent. `<em>` is italic at `--light-60`. Statements max 11ch. |
 | Parents statement `.parents__statement` | Serif | `clamp(32px, 4.2vw, 60px)` | 500 | 1.02 | -0.025em | Navy, `<em>` italic at `--ink-50`. Max 22ch. |
+| Gallery panel title `.guarantee__panel-title` | Serif | `clamp(44px, 5.6vw, 84px)` | 500 | 0.95 | -0.03em | White at 92 percent, the statement face at a smaller size. Max 10ch. |
+| Gallery lead `.guarantee__lead` | Sans | `clamp(22px, 2.4vw, 34px)` | 500 | 1.1 | -0.03em | One sentence, max 20ch. Lines beneath are 15 to 17px `--ink-70`. |
+| Pull line `.pull` | Serif | `clamp(30px, 3.6vw, 48px)` | 500 | 1.02 | -0.025em | Navy, `<em>` italic at `--ink-50`. Max 16ch. One per section, pulled out of the running copy in About and Guarantee. |
 | Price lead `.price-card__lead` | Serif | `clamp(34px, 3.6vw, 52px)` | 500 | 1.02 | -0.02em | Navy, `<em>` italic at `--ink-50`. Max 16ch. |
 | Pricing quote `.price-card__quote` | Serif | `clamp(30px, 3.3vw, 46px)` | 500 | 1.05 | -0.02em | |
 | Display `.display` | Sans | `clamp(38px, 5.4vw, 72px)` | 500 | 1 | -0.04em | Section intro and CTA headings. Max 14ch. |
@@ -196,7 +199,7 @@ A 1px ring holding a 10px arrow. 18px default, 28px `--light` on dark, 30px `--l
 
 ### Header
 
-Fixed, 60px, hairline underneath. Logo left, nav right (Method, Included, For parents, Pricing, Login, then the button). Nav links are 14px weight 500 at 90 percent opacity, 55 percent on hover. Ends with a small primary button. Under 960px the nav collapses to a two-line burger that opens a full-screen white menu with 26px links.
+Fixed, 60px, hairline underneath. Logo left, nav right (Method, Included, For parents, Pricing, Guarantee, About, Login, then the button). Nav links are 14px weight 500 at 90 percent opacity, 55 percent on hover. Ends with a small primary button. Under 960px the nav collapses to a two-line burger that opens a full-screen white menu with 26px links.
 
 The header repaints to match the section under it: `header--dark` (dark ground, white text, white primary button) and `header--gray` (gray ground). The swap is a 0.45s color transition driven by scroll position.
 
@@ -210,7 +213,7 @@ The step 04 comparison. Uppercase 12px name, `--ink-70` description, then a list
 
 ### Statement block `.statement`
 
-Full-height dark panel, alternating `--dark` and `--dark-2`, serif statement plus a `--light-60` subline, and a 34px light icon circle bottom right that links to the next panel. The "The Wooster way" section is five of these stacked as sticky slides: the first reads "The Wooster way" with the intro paragraph as its subline, then the four statements. Each fills the screen as the reader scrolls. Keep them: the scroll is the point.
+Full-height dark panel, alternating `--dark` and `--dark-2`, serif statement plus a `--light-60` subline, and a 34px light icon circle bottom right that links to the next panel. The "The Wooster Prep way" section is five of these stacked as sticky slides: the first reads "The Wooster Prep way" with the intro paragraph as its subline, then the four statements. Each fills the screen as the reader scrolls. Keep them: the scroll is the point.
 
 ### Accordion `.accordion`
 
@@ -227,6 +230,26 @@ Soft ground (`--soft`), so it separates from the white "Why it works" above and 
 ### Price card `.price-card`
 
 White, 4px corners, `clamp(28px, 3.4vw, 48px)` padding, `min(86vw, 640px)` wide, in a horizontal snap rail with 32px gaps. Hairline badge top left. The card leads with a navy serif line about what the plan buys ("Two months of knowing exactly what to do next."), not with the number. The price itself is a 15px `--ink-50` sentence with the amount at weight 500 in ink, followed by the per-day equivalent, then a `--ink-70` sentence that ties the cost to what the family gets. There is no oversized numeral. The checklist uses 22px ink circles with a white tick.
+
+### Testimonials `.testimonials` and the card fan `.stagger`
+
+Soft ground, between the guarantee and the dark "What is included", `clamp(90px, 12vw, 180px)` above and a shorter `clamp(60px, 8vw, 120px)` below. Eyebrow "Testimonials", display heading, lede. Then a 600px stage (520px under 640px) holding a fan of square cards, 365px a side (290px under 640px), each a real `<button>`. Cards are white with a hairline border and 4px corners; the centre card is ink with white text and sits 65px higher, the rest step out at two thirds of a card width per position, offset 15px up or down and rotated 2 degrees alternately. A 40px hairline circle with the speaker's initial stands in for the photo, then the quote at step-body size and weight 500, then a 14px `--ink-50` attribution pinned to the foot of the card. Clicking a card brings it to the centre; two 40px white icon circles with the left and right arrows step one card at a time. Transforms ease over 0.9s, colours over 0.3s, none with reduced motion. Implemented in `components/StaggerTestimonials.tsx`. The quotes in `components/Testimonials.tsx` are placeholders and the lede says so; replace both before launch.
+
+### Audience columns `.audiences`
+
+Two columns (one under 960px), 32px gap, above a hairline with `clamp(40px, 5vw, 70px)` of padding and `clamp(70px, 9vw, 130px)` of space above. Each column is a "For parents" or "For students" title at 20 to 24px and `--ink-70` body at 46ch. Closes the About and Guarantee sections; always parents first.
+
+### Score guarantee `.guarantee`
+
+White ground, directly after pricing and before the dark "What is included", `clamp(90px, 12vw, 180px)` vertical padding. Eyebrow "The Wooster Prep score guarantee", a sans heading at `clamp(34px, 4.2vw, 56px)` capped at 18ch ("100 points higher, or the course again for free."), and the full one-sentence promise as a lede at 60ch. Then the three points ("Why anyone would promise that", "Why 1300", "How it works") as a pinned horizontal gallery: the wrapper is one viewport tall per panel, the stage sticks under the header at `100svh` minus the header, painted `--dark` with panels alternating `--dark` and `--dark-2` like the statement slides, a `--light-12` hairline on top, and the header swaps to its dark state over it; the track slides sideways with the scroll so one panel is in view at a time and scrolling back reverses it. Each panel is a two-column grid (0.8fr and 1.2fr) with a 44 to 84px serif title on the left, set like the statement slides, and on the right a 22 to 34px white sans lead of one short sentence followed by short `--light-60` lines at 15 to 17px, never a paragraph longer than two sentences. The "Why 1300" panel carries the section's one pull line ("We asked. The scale said no.") at a reduced 26 to 36px in white at 92 percent with the `<em>` at `--light-60`. A `--light-12` hairline with a white fill sits at the foot of the stage and fills as the gallery advances. Under 960px and with reduced motion the panels stack on hairlines with no pin. Closes with the audience columns.
+
+### Blog `.blog` and the post card `.post`
+
+White ground, between the dark "What is included" and the soft About, `clamp(90px, 12vw, 180px)` vertical padding. The top row is the eyebrow "From the blog" and an H2 capped at 20ch on the left, a ghost "See all posts" button on the right (stacked under 600px). Then three columns of post cards (one under 960px), 32px gap. A post card is a case card: the media box at 16 by 10 on the soft ground with the offset screenshot, the fade, and the "+" badge, plus the post's tags as white pills bottom left. Under it, a 20 to 24px title that turns navy on hover, a 15px `--ink-70` excerpt at 40ch, and above a hairline a meta row: a 30px hairline circle with the author's initial, the author at weight 500 with the date in `--ink-50` beneath, and the read time in `--ink-50` on the right. The whole card is one link to the post. No glass, no blur, no shadow. The posts in `components/Blog.tsx` are placeholders that link to the blog index; replace them with real posts.
+
+### About us `.about`
+
+Soft ground (`--soft`), between the dark "What is included" and the white CTA, `clamp(90px, 12vw, 180px)` vertical padding. Eyebrow "About us", then the opening line of the story as a sans heading at `clamp(34px, 4.2vw, 56px)`, weight 500, tracking -0.04em, capped at 20ch. Below, a two-column grid (1fr and 0.8fr, one column under 960px): the founder story on the left as step-body paragraphs at 48ch, with one pull line ("It worked so well it was slightly annoying.") mid-story, and on the right the team photo in a white 4px box at 4 by 5 that sticks below the header while the story scrolls. Under 960px the photo moves above the story at 4 by 3. The section closes with the audience columns. The photo is `public/assets/team.jpg` (1600 by 2000, 4 by 5 crop), passed through `next/image` with a static import and a blur placeholder.
 
 ### Footer
 
@@ -255,9 +278,13 @@ Motion is slow, eased, and additive. Nothing bounces. Nothing loops except the f
 5. The description and buttons rise 22px and fade in from 1.15s.
 6. On completion the split is reverted so the headline is plain text again.
 
+**Guarantee gallery.** Implemented in `components/GuaranteeGallery.tsx` with the same raf-throttled scroll handler as the film. Progress through the wrapper is split into one segment per transition; each segment holds the current panel for the first 30 percent, then eases to the next with a smoothstep. Only the track transform and the progress bar's `scaleX` change. Under 960px and with reduced motion the component adds `guarantee__gallery--static` and the panels stack.
+
 **Header theme swap.** On scroll the header reads which `data-ui` section sits under it (`light`, `dark`, `gray`) and swaps class. Throttled to one check per animation frame.
 
 **Film.** The device tilts from 14 degrees and 90 percent scale to flat and full size as the section scrolls into place. The film autoplays muted, pauses off screen, and unmutes from the glass button or from the case card that links to it.
+
+**Testimonial fan.** Cards move only by `transform` over 0.9s with `--ease` when the list rotates; the centre card swaps colour over 0.3s. With reduced motion the transform transition is dropped and cards jump.
 
 **Hover.** Primary buttons lift 1px. Case shots drift up-left. Plus badges rotate a quarter turn. Icon circles drop 2 to 3px on the links that point down.
 
@@ -273,7 +300,9 @@ Motion is slow, eased, and additive. Nothing bounces. Nothing loops except the f
 
 **Film.** `moneyball-web.mp4` (720p, about 9MB) with `moneyball-poster.jpg`. Shown inside the laptop device in the film section and as a hover preview in a case card. The 76MB original is kept locally and ignored by git. Re-encode command is in the README.
 
-**Style.** No stock photography. No illustration. No gradients except the fade at the bottom of a case card and the device base.
+**Team photo.** `team.jpg` in the About section, the one stock photograph on the site, from Unsplash under the Unsplash License (photo by Priscilla Du Preez, unsplash.com/photos/XkKCui44iM0). Candid, warm, people mid-laugh over a laptop with books behind them. Shown edge to edge in the white 4 by 5 box, object-fit cover.
+
+**Style.** One photograph is allowed on the site: the team photo above. Everywhere else, no stock photography. No illustration. No gradients except the fade at the bottom of a case card and the device base.
 
 ---
 
@@ -305,6 +334,9 @@ Only three icons exist, all 12 by 12 inline SVG, 1.2 stroke, `currentColor`, in 
 - The test date is fixed. The plan isn't.
 - Most students find out from the score report. You can know today.
 - Two months of knowing exactly what to do next.
+- It worked so well it was slightly annoying.
+- 100 points higher, or the course again for free.
+- We asked. The scale said no.
 
 **Rules.**
 
@@ -312,7 +344,7 @@ Only three icons exist, all 12 by 12 inline SVG, 1.2 stroke, `currentColor`, in 
 - Numbers are written as numerals: 1100, 1590, 6,000, 98-question, 7-day, 2-month.
 - "SAT" is always uppercase. "Wooster Prep" is two words.
 - Call-to-action verbs: Start, Begin, See, Take. The main action is always "Start Your Diagnostic".
-- Do not use exclamation marks. Do not promise a specific score.
+- Do not use exclamation marks. Do not promise a specific score. The one promise we make is the score guarantee (1300 or below, at least 100 points higher on the next official score, or the course again for free), and it is stated in full only in the Guarantee section.
 - Avoid ed-tech jargon: no "learners", "gamified", "AI-powered". Say student, plan, concept, mastery.
 
 ---
@@ -344,7 +376,7 @@ The hero headline uses viewport-relative sizing, so under about 500px the second
 **Do**
 
 - Let whitespace carry the layout.
-- Use one serif statement per screen at most.
+- Use one serif statement per screen at most. The guarantee gallery is the one exception: its panel titles are serif, and the "Why 1300" panel also carries the pull line.
 - Keep buttons round, ink, and sentence case.
 - Put screenshots in case cards with the offset crop.
 - Add the reduced-motion fallback with every animation.
@@ -381,6 +413,16 @@ The hero headline uses viewport-relative sizing, so under about 500px the second
 
 Newest first. One line per UI or UX change. Date, what changed, where.
 
+- 2026-09-11 · New placeholder "Blog" section between Included and About: three post cards built on the case card, ported from the 21st.dev glass blog card onto the brand tokens. Blog link added to `lib/links.ts`.
+- 2026-09-11 · New placeholder "Testimonials" section between the guarantee and Included: staggered card fan with prev and next arrows, ported from the 21st.dev pattern onto the brand tokens. Quotes are placeholders.
+- 2026-09-11 · Score guarantee gallery: panel titles set in the statement serif at 44 to 84px.
+- 2026-09-11 · Score guarantee gallery: numbered badges removed from the panels.
+- 2026-09-11 · Score guarantee gallery painted dark, panels alternating dark and dark-2 like the statements; header goes dark over it.
+- 2026-09-11 · Score guarantee: the three points are now a pinned horizontal gallery, one panel per viewport, copy cut into a lead line and short lines; progress hairline; stacked fallback under 960px and for reduced motion.
+- 2026-09-11 · New "Score guarantee" section between pricing and Included: the promise as heading and lede, three hairline rows, one pull line, audience columns. Added to the nav and mobile menu. Pull line and audience columns are now shared classes used by About too.
+- 2026-09-11 · About us: team photo added from Unsplash as `team.jpg`, replacing the empty slot.
+- 2026-09-11 · New "About us" section between Included and the CTA: founder story, one serif pull line, a team photo slot, and "For parents" and "For students" columns. Added to the nav and mobile menu. Imagery rule now allows the one team photo.
+- 2026-09-11 · First statement slide now reads "The Wooster Prep way" instead of "The Wooster way".
 - 2026-09-11 · Hero: primary button, "How it works" link and "Free. No card." note now sit under the headline; login stays at the bottom. Audience wording rule added.
 - 2026-09-11 · "For parents" moved onto the soft ground so it separates from "Why it works".
 - 2026-09-11 · "What is included" moved to sit after pricing, before the CTA.

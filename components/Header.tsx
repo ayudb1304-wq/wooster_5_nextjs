@@ -63,6 +63,8 @@ export default function Header() {
             <a href="#included">Included</a>
             <a href="#parents">For parents</a>
             <a href="#pricing">Pricing</a>
+            <a href="#guarantee">Guarantee</a>
+            <a href="#about">About</a>
             <a href={links.login}>Login</a>
             <a className="btn btn--primary btn--sm" href={links.diagnostic}>
               Start Your Diagnostic
@@ -88,6 +90,8 @@ export default function Header() {
           <a href="#included" onClick={closeMenu}>What is included</a>
           <a href="#parents" onClick={closeMenu}>For parents</a>
           <a href="#pricing" onClick={closeMenu}>Pricing</a>
+          <a href="#guarantee" onClick={closeMenu}>Score guarantee</a>
+          <a href="#about" onClick={closeMenu}>About us</a>
           <a href={links.login} onClick={closeMenu}>Existing Student Login</a>
           <a className="btn btn--primary" href={links.diagnostic} onClick={closeMenu}>
             Start Your Diagnostic
