@@ -87,7 +87,7 @@ export default function Film() {
   };
 
   return (
-    <section ref={sectionRef} className="film slide" data-ui="dark">
+    <section ref={sectionRef} className="film slide" id="film" data-ui="dark">
       <div className="film__stage">
         <div ref={deviceRef} className="device">
           <div className="device__screen">

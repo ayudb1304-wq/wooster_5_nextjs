@@ -199,7 +199,7 @@ A 1px ring holding a 10px arrow. 18px default, 28px `--light` on dark, 30px `--l
 
 ### Header
 
-Fixed, 60px, hairline underneath. Logo left, nav right (Method, Included, For parents, Pricing, Guarantee, About, Login, then the button). Nav links are 14px weight 500 at 90 percent opacity, 55 percent on hover. Ends with a small primary button. Under 960px the nav collapses to a two-line burger that opens a full-screen white menu with 26px links.
+Fixed, 60px, hairline underneath. Logo left, nav right (About, Method, Blog, Testimonials, Pricing, Login, then the button). Nav links are 14px weight 500 at 90 percent opacity, 55 percent on hover. Ends with a small primary button. Under 960px the nav collapses to a two-line burger that opens a full-screen white menu with 26px links in the same order, with login written out as "Existing Student Login".
 
 The header repaints to match the section under it: `header--dark` (dark ground, white text, white primary button) and `header--gray` (gray ground). The swap is a 0.45s color transition driven by scroll position.
 
@@ -253,7 +253,7 @@ Soft ground (`--soft`), between the dark "What is included" and the white CTA, `
 
 ### Footer
 
-Hairline on top. Three columns: 220px logo, links column (Privacy Policy, Terms, Educational Disclaimer, email), primary button. A single copyright line below. Links appear once each.
+Hairline on top, `clamp(48px, 6vw, 80px)` above. A six-column grid (1.4fr for the brand, then five equal columns, 32px gap): the brand column holds the 220px logo over a 14px `--ink-70` tagline at 28ch; the five link columns are Product, Resources, Explore, Company, and Legal, each a 13px weight 500 heading over 14px weight 500 links in `--ink-70` that turn ink on hover. Product links the diagnostic, Included, Pricing, and the guarantee; Resources the blog, How it works, For parents, and login; Explore the film, the statements, Why it works, and Testimonials; Company About, Contact (email), and Careers; Legal the three policy pages. Below a second hairline, a bottom row with the copyright on the left and the social links (Instagram, X, YouTube, LinkedIn, TikTok, as text, no icons) on the right. Under 960px the brand column spans the row and the link columns go to three; under 600px they go to two and the bottom row stacks. Links appear once each. The film and statements sections carry `id="film"` and `id="method"` for the Explore anchors. Social handles and the careers page are placeholders in `lib/links.ts`.
 
 ---
 
@@ -413,6 +413,8 @@ The hero headline uses viewport-relative sizing, so under about 500px the second
 
 Newest first. One line per UI or UX change. Date, what changed, where.
 
+- 2026-09-11 · Header nav cut to About, Method, Blog, Testimonials, Pricing, Login. Mobile menu mirrors the order.
+- 2026-09-11 · Footer rebuilt: brand column with tagline, five link columns (Product, Resources, Explore, Company, Legal), bottom row with copyright and social links. Film and statements sections gained ids for the anchors.
 - 2026-09-11 · New placeholder "Blog" section between Included and About: three post cards built on the case card, ported from the 21st.dev glass blog card onto the brand tokens. Blog link added to `lib/links.ts`.
 - 2026-09-11 · New placeholder "Testimonials" section between the guarantee and Included: staggered card fan with prev and next arrows, ported from the 21st.dev pattern onto the brand tokens. Quotes are placeholders.
 - 2026-09-11 · Score guarantee gallery: panel titles set in the statement serif at 44 to 84px.

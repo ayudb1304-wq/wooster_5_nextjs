@@ -59,12 +59,11 @@ export default function Header() {
           </a>
 
           <nav className="header__nav" aria-label="Primary">
-            <a href="#how-it-works">Method</a>
-            <a href="#included">Included</a>
-            <a href="#parents">For parents</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#guarantee">Guarantee</a>
             <a href="#about">About</a>
+            <a href="#how-it-works">Method</a>
+            <a href="#blog">Blog</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#pricing">Pricing</a>
             <a href={links.login}>Login</a>
             <a className="btn btn--primary btn--sm" href={links.diagnostic}>
               Start Your Diagnostic
@@ -86,12 +85,11 @@ export default function Header() {
 
       <div className="menu" hidden={!menuOpen}>
         <div className="container menu__inner">
-          <a href="#how-it-works" onClick={closeMenu}>How it works</a>
-          <a href="#included" onClick={closeMenu}>What is included</a>
-          <a href="#parents" onClick={closeMenu}>For parents</a>
+          <a href="#about" onClick={closeMenu}>About</a>
+          <a href="#how-it-works" onClick={closeMenu}>Method</a>
+          <a href="#blog" onClick={closeMenu}>Blog</a>
+          <a href="#testimonials" onClick={closeMenu}>Testimonials</a>
           <a href="#pricing" onClick={closeMenu}>Pricing</a>
-          <a href="#guarantee" onClick={closeMenu}>Score guarantee</a>
-          <a href="#about" onClick={closeMenu}>About us</a>
           <a href={links.login} onClick={closeMenu}>Existing Student Login</a>
           <a className="btn btn--primary" href={links.diagnostic} onClick={closeMenu}>
             Start Your Diagnostic

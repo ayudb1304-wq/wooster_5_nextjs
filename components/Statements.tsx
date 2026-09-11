@@ -45,7 +45,7 @@ const statements: Statement[] = [
 
 export default function Statements() {
   return (
-    <section className="statements" data-ui="dark">
+    <section id="method" className="statements" data-ui="dark">
       {statements.map((s, i) => (
         <div key={s.id ?? i} className="statement slide" id={s.id}>
           <div className="container">
