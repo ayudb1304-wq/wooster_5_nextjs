@@ -21,8 +21,9 @@ export default function Film() {
     const tilt = () => {
       const r = section.getBoundingClientRect();
       const vh = window.innerHeight;
-      // progress 0 = section top at bottom of viewport, 1 = section pinned at top
-      const p = clamp(1 - r.top / vh, 0, 1);
+      // progress 0 = band top at three quarters down the viewport, 1 = band top near the top;
+      // the device is flat by the time the band sits in the middle of the screen
+      const p = clamp(1 - (r.top - vh * 0.15) / (vh * 0.6), 0, 1);
       const deg = reduce ? 0 : 14 * (1 - p);
       const zoom = reduce ? 1 : 0.9 + 0.1 * p;
       device.style.setProperty("--tilt", `${deg.toFixed(2)}deg`);
@@ -87,7 +88,7 @@ export default function Film() {
   };
 
   return (
-    <section ref={sectionRef} className="film slide" id="film" data-ui="dark">
+    <section ref={sectionRef} className="film" id="film" data-ui="dark">
       <div className="film__stage">
         <div ref={deviceRef} className="device">
           <div className="device__screen">

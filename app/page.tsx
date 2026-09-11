@@ -5,19 +5,21 @@ import Film from "@/components/Film";
 import Guarantee from "@/components/Guarantee";
 import Hero from "@/components/Hero";
 import Included from "@/components/Included";
+import Method from "@/components/Method";
 import Parents from "@/components/Parents";
+import Pitch from "@/components/Pitch";
 import Pricing from "@/components/Pricing";
 import Statements from "@/components/Statements";
-import Steps from "@/components/Steps";
 import Testimonials from "@/components/Testimonials";
 import Why from "@/components/Why";
 
 export default function Home() {
   return (
-    <>
+    <div className="stack">
       <Hero />
+      <Pitch />
+      <Method />
       <Film />
-      <Steps />
       <Statements />
       <Why />
       <Parents />
@@ -28,6 +30,6 @@ export default function Home() {
       <Blog />
       <About />
       <Cta />
-    </>
+    </div>
   );
 }

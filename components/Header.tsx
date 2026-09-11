@@ -62,9 +62,9 @@ export default function Header() {
           </Link>
 
           <nav className="header__nav" aria-label="Primary">
-            <Link href="/#about">About</Link>
-            <Link href="/#how-it-works">Method</Link>
-            <Link href="/#blog">Blog</Link>
+            <Link href={links.about}>About</Link>
+            <Link href={links.method}>Method</Link>
+            <Link href={links.blog}>Blog</Link>
             <Link href="/#testimonials">Testimonials</Link>
             <Link href="/#pricing">Pricing</Link>
             <a href={links.login}>Login</a>
@@ -88,9 +88,9 @@ export default function Header() {
 
       <div className="menu" hidden={!menuOpen}>
         <div className="container menu__inner">
-          <Link href="/#about" onClick={closeMenu}>About</Link>
-          <Link href="/#how-it-works" onClick={closeMenu}>Method</Link>
-          <Link href="/#blog" onClick={closeMenu}>Blog</Link>
+          <Link href={links.about} onClick={closeMenu}>About</Link>
+          <Link href={links.method} onClick={closeMenu}>Method</Link>
+          <Link href={links.blog} onClick={closeMenu}>Blog</Link>
           <Link href="/#testimonials" onClick={closeMenu}>Testimonials</Link>
           <Link href="/#pricing" onClick={closeMenu}>Pricing</Link>
           <a href={links.login} onClick={closeMenu}>Existing Student Login</a>

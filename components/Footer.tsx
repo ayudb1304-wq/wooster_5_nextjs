@@ -14,14 +14,14 @@ const columns: Column[] = [
       { label: "Free diagnostic", href: links.diagnostic },
       { label: "What is included", href: "/#included" },
       { label: "Pricing", href: "/#pricing" },
-      { label: "Score guarantee", href: "/#guarantee" },
+      { label: "Score guarantee", href: links.guarantee },
     ],
   },
   {
     heading: "Resources",
     items: [
       { label: "Blog", href: links.blog },
-      { label: "How it works", href: "/#how-it-works" },
+      { label: "How it works", href: links.method },
       { label: "For parents", href: "/#parents" },
       { label: "Student login", href: links.login },
     ],
@@ -38,7 +38,7 @@ const columns: Column[] = [
   {
     heading: "Company",
     items: [
-      { label: "About us", href: "/#about" },
+      { label: "About us", href: links.about },
       { label: "Contact", href: links.email },
       { label: "Careers", href: links.careers },
     ],

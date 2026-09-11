@@ -1,8 +1,10 @@
+import Link from "next/link";
 import PostCard from "@/components/PostCard";
+import { getAllPosts } from "@/lib/blog";
 import { links } from "@/lib/links";
-import { posts } from "@/lib/posts";
 
 export default function Blog() {
+  const latest = getAllPosts().slice(0, 3);
   return (
     <section className="blog" id="blog" data-ui="light">
       <div className="container">
@@ -11,13 +13,13 @@ export default function Blog() {
             <span className="eyebrow">From the blog</span>
             <h2 className="h2">Notes on studying smarter.</h2>
           </div>
-          <a className="btn btn--ghost" href={links.blog}>
+          <Link className="btn btn--ghost" href={links.blog}>
             See all posts
-          </a>
+          </Link>
         </div>
 
         <ul className="blog__grid">
-          {posts.slice(0, 3).map((post, i) => (
+          {latest.map((post, i) => (
             <li key={post.slug} className={`reveal${i ? ` reveal--delay${i > 1 ? "-2" : ""}` : ""}`}>
               <PostCard post={post} />
             </li>

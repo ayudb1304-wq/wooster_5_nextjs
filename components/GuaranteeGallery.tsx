@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef } from "react";
+import type { Line } from "@/lib/guarantee";
 import { clamp, debounce, prefersReducedMotion, raf } from "@/lib/motion";
 
 export type GalleryPanel = {
   title: string;
   lead: string;
-  lines: ReactNode[];
+  lines: Line[];
 };
 
 type Props = { panels: GalleryPanel[] };
@@ -97,7 +98,15 @@ export default function GuaranteeGallery({ panels }: Props) {
                 <div className="guarantee__panel-body">
                   <p className="guarantee__lead">{p.lead}</p>
                   <div className="guarantee__lines">
-                    {p.lines.map((node, j) => (typeof node === "string" ? <p key={j}>{node}</p> : node))}
+                    {p.lines.map((line, j) =>
+                      typeof line === "string" ? (
+                        <p key={j}>{line}</p>
+                      ) : (
+                        <p key={j} className="pull">
+                          {line.pull} <em>{line.em}</em>
+                        </p>
+                      ),
+                    )}
                   </div>
                 </div>
               </div>

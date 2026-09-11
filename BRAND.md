@@ -79,12 +79,12 @@ All values live as custom properties on `:root` in `app/globals.css`. Use the to
 
 ### Ground sequence on the landing page
 
-White (hero) → dark (film) → white / soft alternating (steps 01 to 04) → dark and dark-2 (statements, "The Wooster Prep way") → white (why it works) → soft (for parents) → gray (pricing) → white (guarantee head) → dark and dark-2 (guarantee gallery) → white (guarantee audiences) → soft (testimonials) → dark (included) → white (blog) → soft (about) → white (CTA, footer). The header follows the ground beneath it (see section 7).
+White (hero) → dark (pitch) → white (method index) → dark (film band) → dark-2 (the Wooster Prep way) → white (why it works) → soft (for parents) → gray (pricing) → dark (guarantee) → soft (testimonials) → dark (included) → white (blog) → soft (about) → white (CTA, footer). The header follows the ground beneath it (see section 7).
 
 ### Rules
 
 - Text on light grounds is always an ink token. Text on dark grounds is always white or a light alpha. No mid-gray solid fills for text.
-- Navy is an accent, not a ground. Do not paint sections navy.
+- Navy is an accent, not a ground. Do not paint sections navy. Inline links in reading copy are navy with a 35 percent navy underline, full navy on hover.
 - Hairlines are 1px at the 12 percent alpha of the current ground.
 - `::selection` is navy with white text.
 - There is no success, warning, or error color yet. When one is needed, add it here first.
@@ -113,7 +113,11 @@ Body is 15px Inter, line-height 1.45, letterspacing -0.01em, antialiased, ink on
 | Style | Family | Size | Weight | Line height | Tracking | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | Hero headline `.hero__title` | Serif | `clamp(40px, 8.4vw, 110px)` | 500 | 0.98 | -0.03em | Line 1 navy, line 2 italic at `--ink-50`. Sized so the longer line fills the container. Centered. |
-| Statement `.statement__text` | Serif | `clamp(56px, 10.5vw, 160px)` | 500 | 0.92 | -0.03em | White at 92 percent. `<em>` is italic at `--light-60`. Statements max 11ch. |
+| Hero pitch `.hero__pitch` | Sans | `clamp(17px, 1.45vw, 20px)` | 400 | 1.35 | -0.015em | `--ink-70`, centred, max 52ch, at the foot of the hero. |
+| Statement `.statement__text` | Serif | `clamp(56px, 8vw, 120px)` | 500 | 0.92 | -0.03em | White at 92 percent. `<em>` is italic at `--light-60`. Max 11ch. One per page, in "The Wooster Prep way". |
+| Pitch statement `.pitch__statement` | Serif | `clamp(40px, 5.6vw, 84px)` | 500 | 0.95 | -0.03em | White at 92 percent, `<em>` at `--light-60`. Max 14ch. |
+| Statement line `.statements__line` | Serif | `clamp(26px, 2.6vw, 36px)` | 500 | 1.02 | -0.025em | The three supporting lines under the statement. Max 14ch. |
+| Pitch lead `.pitch__lead`, index title `.method__title` | Sans | `clamp(20px, 1.9vw, 26px)` / `clamp(20px, 1.7vw, 24px)` | 500 | 1.15 / 1.1 | -0.03em / -0.025em | One short sentence each. |
 | Parents statement `.parents__statement` | Serif | `clamp(32px, 4.2vw, 60px)` | 500 | 1.02 | -0.025em | Navy, `<em>` italic at `--ink-50`. Max 22ch. |
 | Gallery panel title `.guarantee__panel-title` | Serif | `clamp(44px, 5.6vw, 84px)` | 500 | 0.95 | -0.03em | White at 92 percent, the statement face at a smaller size. Max 10ch. |
 | Gallery lead `.guarantee__lead` | Sans | `clamp(22px, 2.4vw, 34px)` | 500 | 1.1 | -0.03em | One sentence, max 20ch. Lines beneath are 15 to 17px `--ink-70`. |
@@ -156,14 +160,16 @@ Body is 15px Inter, line-height 1.45, letterspacing -0.01em, antialiased, ink on
 | `--pad` | `clamp(20px, 5.5vw, 110px)` | Side gutter. |
 | `--header-h` | 60px | Fixed header height. |
 | `--radius` | 4px | Card and media corners. Buttons and pills are fully round (999px). |
+| `--section-y` | `clamp(72px, 9vw, 132px)` | Vertical padding of every landing section. |
+| `--head-gap` | `clamp(32px, 4.5vw, 64px)` | Space between a section head and its content. |
 
 **Container.** `.container` is full width, capped at `--max` plus two gutters, centered, with `--pad` inline padding. Everything sits inside one.
 
-**Vertical rhythm.** Section padding scales with the viewport: `clamp(70px, 9vw, 130px)` for steps, up to `clamp(90px, 12vw, 180px)` for included, `clamp(100px, 13vw, 190px)` for the CTA. Internal gaps between blocks are 28 to 44px. Grid gaps between cards are 32px.
+**Vertical rhythm.** Every landing section is one viewport tall (`min-height: 100svh`) with its content centred, pads with `--section-y` top and bottom, and separates its head from its content with `--head-gap`. Internal gaps between blocks are 28 to 44px. Grid gaps between cards are 32px.
 
-**Full-height slides.** The hero, film, and each statement are `min-height: 100svh` and `position: sticky; top: 0` so they stack as the page scrolls. Later sections carry a higher z-index and slide over them.
+**Hero snap only.** The document uses `scroll-snap-type: y proximity` and the hero is the one `scroll-snap-align: start` point, so a scroll that ends near the top settles back onto the hero; the rest of the page scrolls freely. Off under reduced motion.
 
-**Alignment.** Left aligned by default. The hero headline, with the primary button, the "How it works" link and the "Free. No card." note directly beneath it, is the one centered block. The paragraph and the login link sit at the bottom of the hero. Step headings sit stacked under their number and pill, never in a right-hand column.
+**Alignment.** Left aligned by default. The hero headline, with the primary button, the "How it works" link and the "Free. No card." note directly beneath it, is the one centered block. The pitch sentence and the login button sit centred at the bottom of the hero. Step headings sit stacked under their number and pill, never in a right-hand column.
 
 **Grid.** Two equal columns for case cards, collapsing to one under 960px.
 
@@ -195,7 +201,7 @@ A 1px ring holding a 10px arrow. 18px default, 28px `--light` on dark, 30px `--l
 
 ### Numbered badge `.num`
 
-26px ink circle, white 11px weight 600 numeral with a leading zero: 01, 02, 03, 04.
+26px ink circle, white 11px weight 600 numeral with a leading zero. Retired from every list of points on 2026-09-11; points are titled, never numbered. The rule stays for the plan comparison cards only.
 
 ### Header
 
@@ -211,13 +217,21 @@ A media box at 16 by 11.5 with 4px corners on a `--soft` ground (white on soft s
 
 The step 04 comparison. Uppercase 12px name, `--ink-70` description, then a list with hairline rows. The generic plan is two columns in `--ink-50`. The Wooster plan is one ranked column with leading-zero numerals in `--ink-30` and navy chips showing point gains.
 
-### Statement block `.statement`
+### The Wooster Prep way `.statements`
 
-Full-height dark panel, alternating `--dark` and `--dark-2`, serif statement plus a `--light-60` subline, and a 34px light icon circle bottom right that links to the next panel. The "The Wooster Prep way" section is five of these stacked as sticky slides: the first reads "The Wooster Prep way" with the intro paragraph as its subline, then the four statements. Each fills the screen as the reader scrolls. Keep them: the scroll is the point.
+One screen on `--dark-2`, `--section-y` padding. Light eyebrow "The Wooster Prep way", the statement "Study hard or study smart." in the statement style, its subline in `--light-60`, then below a `--light-12` hairline three columns (one under 960px) of serif statement lines ("10,000 and counting.", "Moneyball the SATs.", "No guesswork. No wasted hours.") each with a 15px `--light-60` note. Carries `id="method"`. This replaced the five pinned full-viewport slides.
 
 ### Accordion `.accordion`
 
 Native `<details>`. Rows separated by `--light-12` hairlines, 26px vertical padding, heading plus a 28px light icon circle that rotates 180 degrees when open. One item open at a time. Body copy in `--light-60`, max 46ch, fades up 0.5s on open. Capped at 820px wide, left aligned.
+
+### Pitch `.pitch`
+
+The elevator pitch, one dark screen directly after the hero, `id="pitch"`, the target of the hero's "How it works" arrow. Two columns (one under 960px): left, light eyebrow "What Wooster Prep is" and the problem as a serif statement ("Most students study everything. The SAT only rewards a few things."); right, three points spread to the full height of the statement column, each a 20 to 26px lead ("Find the gaps.", "Rank them by points.", "Do them in order.") over a 15px `--light-60` subline, separated by `--light-12` hairlines. No numerals. Below a hairline, the actions: the primary button in its dark-header form (white on dark) beside a light ghost "See the method" to `/method`.
+
+### Method index `.method` and the `/method` page
+
+Landing: white ground, `id="how-it-works"`. Eyebrow "How it works", H2 "Four steps. One plan.", a one-sentence lede, then on a hairline four columns (two under 960px, one under 600px) of a 20 to 24px title and one 15px `--ink-70` line per step. No numerals. Under that a strip of three case cards at 16 by 10 (dashboard, today's plan, mastery board; one column under 960px) and a ghost "See the method in detail" with the "Free. No card." note. The page `/method` carries the page head with the full lede and the old statement intro, then the four steps in full as `.expertise` sections (white and soft alternating, `--section-y` padding, the pills, H2, body, and the two-card `.cases` grid with screenshots, the film card, and the plan comparison), then a hairline CTA block. Copy lives in `lib/method.ts`.
 
 ### Why it works `.why`
 
@@ -225,7 +239,7 @@ White ground, `clamp(56px, 7vw, 96px)` vertical padding, directly after the stat
 
 ### For parents `.parents`
 
-Soft ground (`--soft`), so it separates from the white "Why it works" above and steps down to the gray pricing below, `clamp(90px, 12vw, 180px)` vertical padding. Eyebrow "For parents", a display heading capped at 18ch, and a lede capped at 60ch. Below a hairline, three columns (one under 960px) each with a leading-zero numeral in `--ink-30`, a 20 to 24px title, and `--ink-70` body at 34ch. The section closes above a second hairline with a navy serif statement, a large primary button, and a 14px `--ink-50` note ("Free. No card."). This is the emotional argument and always sits directly before pricing.
+Soft ground (`--soft`), so it separates from the white "Why it works" above and steps down to the gray pricing below, `clamp(90px, 12vw, 180px)` vertical padding. Eyebrow "For parents", a display heading capped at 18ch, and a lede capped at 60ch. Below a hairline, three columns (one under 960px) each with a 20 to 24px title and `--ink-70` body at 34ch. No numerals and no closing statement; the section is one viewport like the others and always sits directly before pricing.
 
 ### Price card `.price-card`
 
@@ -239,17 +253,31 @@ Soft ground, between the guarantee and the dark "What is included", `clamp(90px,
 
 Two columns (one under 960px), 32px gap, above a hairline with `clamp(40px, 5vw, 70px)` of padding and `clamp(70px, 9vw, 130px)` of space above. Each column is a "For parents" or "For students" title at 20 to 24px and `--ink-70` body at 46ch. Closes the About and Guarantee sections; always parents first.
 
+### Excerpt sections and their pages
+
+About and the score guarantee each exist twice: a full page (`/about`, `/guarantee`) and a landing-page excerpt. The copy lives once, in `lib/about.ts` and `lib/guarantee.ts`, and the excerpt is a slice of it, never a rewrite. Every excerpt ends with a ghost button ("Read the whole story", "Read the full guarantee") to its page. The parent and student columns appear only on the pages. Header "About" and the footer's "About us" and "Score guarantee" link to the pages.
+
 ### Score guarantee `.guarantee`
 
-White ground, directly after pricing and before the dark "What is included", `clamp(90px, 12vw, 180px)` vertical padding. Eyebrow "The Wooster Prep score guarantee", a sans heading at `clamp(34px, 4.2vw, 56px)` capped at 18ch ("100 points higher, or the course again for free."), and the full one-sentence promise as a lede at 60ch. Then the three points ("Why anyone would promise that", "Why 1300", "How it works") as a pinned horizontal gallery: the wrapper is one viewport tall per panel, the stage sticks under the header at `100svh` minus the header, painted `--dark` with panels alternating `--dark` and `--dark-2` like the statement slides, a `--light-12` hairline on top, and the header swaps to its dark state over it; the track slides sideways with the scroll so one panel is in view at a time and scrolling back reverses it. Each panel is a two-column grid (0.8fr and 1.2fr) with a 44 to 84px serif title on the left, set like the statement slides, and on the right a 22 to 34px white sans lead of one short sentence followed by short `--light-60` lines at 15 to 17px, never a paragraph longer than two sentences. The "Why 1300" panel carries the section's one pull line ("We asked. The scale said no.") at a reduced 26 to 36px in white at 92 percent with the `<em>` at `--light-60`. A `--light-12` hairline with a white fill sits at the foot of the stage and fills as the gallery advances. Under 960px and with reduced motion the panels stack on hairlines with no pin. Closes with the audience columns.
+Landing block. Dark ground (`--dark`), directly after pricing and before the soft testimonials, `clamp(90px, 12vw, 180px)` vertical padding, header in its dark state over it. Light eyebrow "The Wooster Prep score guarantee", then the promise as a serif statement at `clamp(44px, 6.4vw, 96px)`, white at 92 percent with the second half in italic `--light-60` ("100 points higher, or the course again for free."), then the one-sentence promise as a `--light-60` lede at 56ch. Below a `--light-12` hairline, an index of the three points in three columns (one under 960px): the point's title at 13px `--light-60` over its lead line at 20 to 26px white. The block closes with a large light ghost button "Read the full guarantee" (white text, `--light-30` ring, white on hover) beside a 14px `--light-60` note, all inside the same dark panel. No gallery, no audience columns here.
 
-### Blog `.blog` and the post card `.post`
+The page `/guarantee` carries the full copy: the page head with the display title and the promise as lede, then the three points as the pinned horizontal gallery (spec below) with every line, then the audience columns.
 
-White ground, between the dark "What is included" and the soft About, `clamp(90px, 12vw, 180px)` vertical padding. The top row is the eyebrow "From the blog" and an H2 capped at 20ch on the left, a ghost "See all posts" button on the right (stacked under 600px). Then three columns of post cards (one under 960px), 32px gap. A post card is a case card: the media box at 16 by 10 on the soft ground with the offset screenshot, the fade, and the "+" badge, plus the post's tags as white pills bottom left. Under it, a 20 to 24px title that turns navy on hover, a 15px `--ink-70` excerpt at 40ch, and above a hairline a meta row: a 30px hairline circle with the author's initial, the author at weight 500 with the date in `--ink-50` beneath, and the read time in `--ink-50` on the right. The whole card is one link to the post. No glass, no blur, no shadow. The posts in `components/Blog.tsx` are placeholders that link to the blog index; replace them with real posts.
+### Guarantee gallery `.guarantee__gallery`
+
+Lives on `/guarantee` only. The wrapper is one viewport tall per panel, the stage sticks under the header at `100svh` minus the header, painted `--dark` with panels alternating `--dark` and `--dark-2` like the statement slides, a `--light-12` hairline on top, and the header swaps to its dark state over it; the track slides sideways with the scroll so one panel is in view at a time and scrolling back reverses it. Each panel is a two-column grid (0.8fr and 1.2fr) with a 44 to 84px serif title on the left, set like the statement slides, and on the right a 22 to 34px white sans lead of one short sentence followed by short `--light-60` lines at 15 to 17px, never a paragraph longer than two sentences. The "Why 1300" panel carries the pull line ("We asked. The scale said no.") at a reduced 26 to 36px in white at 92 percent with the `<em>` at `--light-60`. A `--light-12` hairline with a white fill sits at the foot of the stage and fills as the gallery advances. Under 960px and with reduced motion the panels stack on hairlines with no pin.
+
+### Blog index `.bloglist` and post rows `.postrow`
+
+`/blog`. Page head (display heading and lede, no eyebrow), then a 760px column of post rows, 16px apart. A row is one link: a 13px `--ink-50` meta line (date, read time, the first tag as a small pill), a 20 to 26px title that turns navy on hover, a 15px `--ink-70` description at 60ch, and "Read article" with an arrow icon circle. Rows have a hairline border and 4px corners and go to the soft ground on hover. Modelled on the gscdaddy blog index, on the brand tokens.
+
+### Article `.article`
+
+`/blog/[slug]`. An "All posts" back link with the left-arrow circle, then a two-column grid (main at most 720px, a 220px aside; one column under 960px with the aside hidden). The head: tag pills, a 34 to 56px sans title at 18ch, the description as lede, and a 14px `--ink-50` meta line (author, date, updated, read time), above a hairline. The body `.prose` is a 62ch column at 17px with 1.55 leading: `--ink-70` paragraphs and lists, 24 to 30px H2s and 19 to 22px H3s with scroll margins for the table of contents, links in navy with a soft navy underline that darkens on hover (the same rule as the legal pages, so a link never reads as bold black text), and the one `<blockquote>` set as a navy serif pull line. Then previous and next links on a hairline, a "Keep reading" grid of up to three related posts ranked by shared tags (hairline cards with title, description, two tag pills), and a closing CTA card on the soft ground ("Begin with the free diagnostic." with the primary button). The aside holds the sticky "On this page" list: a 13px label, entries on a left hairline at 13px `--ink-50`, H3s indented, the heading in view marked in ink with a 2px ink rule. Posts and their HTML bodies live in `lib/posts.ts`; helpers (sorting, reading time, headings, related, neighbours) in `lib/blog.ts`. The six posts are lorem ipsum placeholders with working links between them.
 
 ### About us `.about`
 
-Soft ground (`--soft`), between the dark "What is included" and the white CTA, `clamp(90px, 12vw, 180px)` vertical padding. Eyebrow "About us", then the opening line of the story as a sans heading at `clamp(34px, 4.2vw, 56px)`, weight 500, tracking -0.04em, capped at 20ch. Below, a two-column grid (1fr and 0.8fr, one column under 960px): the founder story on the left as step-body paragraphs at 48ch, with one pull line ("It worked so well it was slightly annoying.") mid-story, and on the right the team photo in a white 4px box at 4 by 5 that sticks below the header while the story scrolls. Under 960px the photo moves above the story at 4 by 3. The section closes with the audience columns. The photo is `public/assets/team.jpg` (1600 by 2000, 4 by 5 crop), passed through `next/image` with a static import and a blur placeholder.
+Soft ground (`--soft`), between the dark "What is included" and the white CTA, `clamp(90px, 12vw, 180px)` vertical padding. Eyebrow "About us", then the opening line of the story as a sans heading at `clamp(34px, 4.2vw, 56px)`, weight 500, tracking -0.04em, capped at 20ch. Below, a two-column grid (1fr and 0.8fr, one column under 960px): the first two paragraphs of the founder story on the left as step-body paragraphs at 48ch, then the pull line ("It worked so well it was slightly annoying.") and the "Read the whole story" ghost button, and on the right the team photo in a white 4px box at 4 by 5 that sticks below the header while the story scrolls. Under 960px the photo moves above the story at 4 by 3. The page `/about` carries the whole story with the same grid on the white ground, the photo box on the soft ground, and the audience columns at the end. The photo is `public/assets/team.jpg` (1600 by 2000, 4 by 5 crop), passed through `next/image` with a static import and a blur placeholder.
 
 ### Inner pages `.page`
 
@@ -258,7 +286,7 @@ The header, footer, and reveal observer live in the root layout, so every route 
 - **Document `.doc`** (privacy, terms, disclaimer): a 62ch reading column at 16px with 1.5 leading, `--ink-70` paragraphs, 22 to 28px sans H2s, underlined links, and a hairline `.doc__callout` box for the one highlighted paragraph. The text is ported verbatim from the live pages at woosterprep.com, headings and effective dates included; edit it there first. A `.doc__note` box exists for marking drafts.
 - **Forms**: 13px labels, 48px inputs with a `--ink-30` hairline that goes ink on hover and navy with the focus ring on focus, 4px corners, 16px between fields, a large primary button, then a 14px `--ink-50` note. The login form is a UI shell: submitting shows a status line and sends nothing until it is wired to the auth backend.
 - **Login `.auth`**: two equal columns at full viewport height (one under 960px, where the photo is dropped). Left, a 440px column centred vertically with the logo, eyebrow, heading, lede, and closing line all centred (the form fields and their labels stay left-aligned inside the column): 180px logo, eyebrow, H2 "Welcome back.", lede "Sign in to continue prep.", then the form: email, password with a 13px "Show" / "Hide" text toggle inside the field, a row with the "Keep me signed in" checkbox (18px, 4px corners, ink when checked with a white tick) and a "Forgot your password?" link to email, a full-width primary "Sign in", an "Or continue with" hairline divider, a full-width ghost "Continue with Google" with no logo, and "New to Wooster Prep? Create an account" linking to the live register page. Right, the login photo `login.jpg` inset 16px with 4px corners, filling the column, with one white quote card bottom left (15px weight 500 quote, 13px `--ink-50` attribution). The head, form, and extras reveal in three steps. Email and password mirror the live form; Google sign in is described in the privacy policy but not yet on the live form.
-- **Diagnostic `.diag`**: the exam itself runs in the app at woosterprep.com/diagnostic, so this page is its front door: page head, three numbered steps on a hairline, then the large primary "Begin the diagnostic" button with the "Free. No card." note, linking out to the exam.
+- **Diagnostic `.diag`**: the exam itself runs in the app at woosterprep.com/diagnostic, so this page is its front door: page head, three titled steps on a hairline, then the large primary "Begin the diagnostic" button with the "Free. No card." note, linking out to the exam.
 
 ### Footer
 
@@ -276,7 +304,9 @@ Motion is slow, eased, and additive. Nothing bounces. Nothing loops except the f
 
 **Durations.** Hover and color changes 0.3s. Header repaint 0.45s. Reveal on scroll 0.9s. Card hover transforms 0.9s. Hero intro 1.4s per element with overlap.
 
-**Reveal on scroll.** Elements carrying `.reveal` start at opacity 0, 24px lower, and settle when 5 percent of them enters the viewport (with a 10 percent bottom margin). `--delay` adds 0.12s, `--delay-2` adds 0.28s. Each element reveals once. Implemented in `components/RevealObserver.tsx`.
+**Reveal on scroll.** Elements carrying `.reveal` start at opacity 0, 24px lower, and settle when 5 percent of them enters the viewport (with a 10 percent bottom margin). `--delay` adds 0.12s, `--delay-2` adds 0.28s. Each element reveals once. Implemented in `components/RevealObserver.tsx`, which re-scans on every route change and watches for elements added after load, so a hot reload or a client-side render never leaves something stuck invisible.
+
+**Reveal timing.** With no pinned slides, every section reveals in normal flow; the pitch, method index, and statements each reveal head first, then list, then foot.
 
 **Hero intro (GSAP).** Implemented in `components/Hero.tsx` with GSAP 3 and SplitText.
 
@@ -291,7 +321,7 @@ Motion is slow, eased, and additive. Nothing bounces. Nothing loops except the f
 
 **Header theme swap.** On scroll the header reads which `data-ui` section sits under it (`light`, `dark`, `gray`) and swaps class. Throttled to one check per animation frame.
 
-**Film.** The device tilts from 14 degrees and 90 percent scale to flat and full size as the section scrolls into place. The film autoplays muted, pauses off screen, and unmutes from the glass button or from the case card that links to it.
+**Film.** The film fills one viewport like every other section, no longer pinned, placed after the method index. The device (1040px wide at most, sized to fill the viewport under the header) tilts from 14 degrees and 90 percent scale to flat and full size as the band rises through the viewport, flat by the time it sits in the middle. The film autoplays muted, pauses off screen, and unmutes from the glass button or from the case card that links to it.
 
 **Testimonial fan.** Cards move only by `transform` over 0.9s with `--ease` when the list rotates; the centre card swaps colour over 0.3s. With reduced motion the transform transition is dropped and cards jump.
 
@@ -348,6 +378,8 @@ Only three icons exist, all 12 by 12 inline SVG, 1.2 stroke, `currentColor`, in 
 - It worked so well it was slightly annoying.
 - 100 points higher, or the course again for free.
 - We asked. The scale said no.
+- Most students study everything. The SAT only rewards a few things.
+- Four steps. One plan.
 - 10,000 and counting.
 
 **Rules.**
@@ -417,8 +449,10 @@ The hero headline uses viewport-relative sizing, so under about 500px the second
 | Section components | `components/` |
 | Icons | `components/Icons.tsx` |
 | Routes and internal links | `lib/links.ts` |
-| Blog posts | `lib/posts.ts` |
-| Inner pages | `app/login`, `app/diagnostic`, `app/privacy`, `app/terms`, `app/disclaimer` |
+| About, guarantee, and method copy | `lib/about.ts`, `lib/guarantee.ts`, `lib/method.ts` |
+| Blog posts and bodies | `lib/posts.ts` |
+| Blog helpers | `lib/blog.ts` |
+| Inner pages | `app/about`, `app/guarantee`, `app/method`, `app/blog`, `app/blog/[slug]`, `app/login`, `app/diagnostic`, `app/privacy`, `app/terms`, `app/disclaimer` |
 | Live figures (question count) | `lib/stats.ts` |
 | Motion helpers | `lib/motion.ts` |
 | Assets | `public/assets/` |
@@ -429,6 +463,15 @@ The hero headline uses viewport-relative sizing, so under about 500px the second
 
 Newest first. One line per UI or UX change. Date, what changed, where.
 
+- 2026-09-11 · Scroll snapping limited to the hero.
+- 2026-09-11 · Pitch loses its three proof chips; the film device grows to fill its viewport.
+- 2026-09-11 · Every landing section is one viewport tall with content centred, and snaps mildly into view (proximity scroll snap on `.stack`). Numerals removed from all points (pitch, method index, parents, method page, diagnostic). Pitch points spread to the statement's height. Parents section loses its closing statement and button.
+- 2026-09-11 · Landing restructured for the first three scrolls: hero gains the pitch sentence; new dark Pitch screen (problem, three steps, proofs, actions); the four steps become a one-screen Method index with the full steps on `/method`; the film is a two-thirds band; the five statement slides fold into one screen. No section is pinned any more. One spacing rhythm: `--section-y` and `--head-gap` on every section. Page height down from about 21,400px to about 13,800px at 1920 by 944.
+- 2026-09-11 · Inline links in blog posts and legal pages are navy with a soft underline.
+- 2026-09-11 · Blog pages added: index of post rows at `/blog` and an article template with a sticky table of contents, previous and next links, related posts, and a closing CTA, cloned from the gscdaddy blog onto the brand. Six lorem ipsum posts linked to each other. Header and landing cards now open the pages.
+- 2026-09-11 · Reveal observer now picks up elements added after load (hot reloads, client renders).
+- 2026-09-11 · Landing guarantee redesigned as one dark block: serif statement, promise, three-point index, and the read button inside it. The horizontal gallery moved to `/guarantee`.
+- 2026-09-11 · About and the score guarantee split into full pages (`/about`, `/guarantee`) and landing excerpts with "Read" buttons; copy moved to `lib/about.ts` and `lib/guarantee.ts`; audience columns only on the pages. Header and footer link to the pages.
 - 2026-09-11 · Login page: logo, head, and closing line centred over the form column; fields stay left-aligned.
 - 2026-09-11 · Login page rebuilt as two columns after the 21st.dev sign-in reference: form left with password toggle, remember-me, Google option and divider; library photo with a quote card right. Second photograph added.
 - 2026-09-11 · Inner pages added for the routes the original site has: login, diagnostic, privacy, terms, disclaimer. Header, footer, and reveal observer moved to the root layout; those links now point at internal routes, blog and careers stay external placeholders. Legal text ported verbatim from the live site; login mirrors the live form; the diagnostic page hands off to the live exam. Form styles and the navy focus ring added.

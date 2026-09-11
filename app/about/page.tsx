@@ -1,33 +1,34 @@
+import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { aboutExcerptCount, aboutPull, aboutStory, aboutTitle } from "@/lib/about";
-import { links } from "@/lib/links";
+import Audiences from "@/components/Audiences";
+import { aboutAudiences, aboutPull, aboutStory, aboutStoryAfter, aboutTitle } from "@/lib/about";
 import team from "@/public/assets/team.jpg";
 
-/* Landing excerpt of /about: the opening paragraphs and the pull line, then a
-   link to the whole story. The copy lives in lib/about.ts. */
-export default function About() {
+export const metadata: Metadata = {
+  title: "About us | Wooster Prep",
+  description: aboutTitle,
+};
+
+export default function AboutPage() {
   return (
-    <section className="about" id="about" data-ui="light">
+    <section className="page about-page" data-ui="light">
       <div className="container">
-        <header className="about__head reveal">
+        <header className="page__head reveal">
           <span className="eyebrow">About us</span>
-          <h2 className="about__title">{aboutTitle}</h2>
+          <h1 className="about__title">{aboutTitle}</h1>
         </header>
 
         <div className="about__grid">
           <div className="about__story reveal">
-            {aboutStory.slice(0, aboutExcerptCount).map((p) => (
+            {aboutStory.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
             <p className="pull">
               {aboutPull.text} <em>{aboutPull.em}</em>.
             </p>
-            <div className="about__more">
-              <Link className="btn btn--ghost" href={links.about}>
-                Read the whole story
-              </Link>
-            </div>
+            {aboutStoryAfter.map((p) => (
+              <p key={p.slice(0, 24)}>{p}</p>
+            ))}
           </div>
 
           <figure className="about__media reveal reveal--delay">
@@ -36,9 +37,12 @@ export default function About() {
               alt="Three people laughing at something on a laptop in a library"
               sizes="(max-width: 960px) 100vw, 420px"
               placeholder="blur"
+              priority
             />
           </figure>
         </div>
+
+        <Audiences items={aboutAudiences} />
       </div>
     </section>
   );

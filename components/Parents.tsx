@@ -1,5 +1,3 @@
-import { links } from "@/lib/links";
-
 const truths = [
   {
     title: "The not knowing",
@@ -33,24 +31,12 @@ export default function Parents() {
         <ul className="parents__grid">
           {truths.map((t, i) => (
             <li key={t.title} className={`parents__item reveal${i ? ` reveal--delay${i > 1 ? "-2" : ""}` : ""}`}>
-              <span className="parents__num">0{i + 1}</span>
               <h3 className="parents__title">{t.title}</h3>
               <p className="parents__body">{t.body}</p>
             </li>
           ))}
         </ul>
 
-        <div className="parents__close reveal">
-          <p className="parents__statement">
-            Most students find out from the score report. You can know <em>today</em>.
-          </p>
-          <div className="parents__actions">
-            <a className="btn btn--primary btn--lg" href={links.diagnostic}>
-              Start Your Diagnostic
-            </a>
-            <span className="parents__note">Free. No card.</span>
-          </div>
-        </div>
       </div>
     </section>
   );

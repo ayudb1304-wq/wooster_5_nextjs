@@ -4,30 +4,55 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { prefersReducedMotion } from "@/lib/motion";
 
-/** Adds `.is-in` to every `.reveal` element as it scrolls into view. Renders nothing. */
+/**
+ * Adds `.is-in` to every `.reveal` element as it scrolls into view. Also watches
+ * for elements added after mount (a hot reload in dev, any client-side render)
+ * so nothing is left stuck at opacity 0. Renders nothing.
+ */
 export default function RevealObserver() {
   const pathname = usePathname();
+
   useEffect(() => {
-    const reveals = document.querySelectorAll<HTMLElement>(".reveal");
+    const reduce = !("IntersectionObserver" in window) || prefersReducedMotion();
 
-    if (!("IntersectionObserver" in window) || prefersReducedMotion()) {
-      reveals.forEach((n) => n.classList.add("is-in"));
-      return;
-    }
+    const io = reduce
+      ? null
+      : new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("is-in");
+                io?.unobserve(e.target);
+              }
+            });
+          },
+          { rootMargin: "0px 0px -10% 0px", threshold: 0.05 },
+        );
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("is-in");
-            io.unobserve(e.target);
-          }
+    const observe = (n: Element) => {
+      if (n.classList.contains("is-in")) return;
+      if (io) io.observe(n);
+      else n.classList.add("is-in");
+    };
+    const observeWithin = (root: Element | Document) => root.querySelectorAll(".reveal").forEach(observe);
+
+    observeWithin(document);
+
+    const mo = new MutationObserver((records) => {
+      records.forEach((r) => {
+        r.addedNodes.forEach((node) => {
+          if (!(node instanceof Element)) return;
+          if (node.classList.contains("reveal")) observe(node);
+          observeWithin(node);
         });
-      },
-      { rootMargin: "0px 0px -10% 0px", threshold: 0.05 },
-    );
-    reveals.forEach((n) => io.observe(n));
-    return () => io.disconnect();
+      });
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      io?.disconnect();
+      mo.disconnect();
+    };
   }, [pathname]);
 
   return null;

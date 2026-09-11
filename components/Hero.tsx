@@ -64,7 +64,7 @@ export default function Hero() {
   );
 
   return (
-    <section ref={scope} className="hero slide" data-ui="light">
+    <section ref={scope} className="hero" data-ui="light">
       <div className="container">
         <div className="hero__lead">
           <h1 ref={titleRef} className="hero__title">
@@ -75,7 +75,7 @@ export default function Hero() {
             <a className="btn btn--primary btn--lg" href={links.diagnostic}>
               Start Your Diagnostic
             </a>
-            <a className="hero__cta" href="#how-it-works">
+            <a className="hero__cta" href="#pitch">
               <span>How it works</span>
               <span className="icon-circle icon-circle--lg" aria-hidden="true">
                 <ArrowDown />
@@ -85,15 +85,13 @@ export default function Hero() {
           </div>
         </div>
         <div className="hero__meta" data-intro="meta">
-          <p>
-            Study hard or study smart. The difference between an 1100 and a 1590 is not just effort, it is
-            strategy. Wooster Prep is tailored to you.
+          <p className="hero__pitch">
+            A free diagnostic finds the concepts costing you the most points. A plan tells you exactly what to
+            study next, every day, until the test.
           </p>
-          <div className="hero__actions">
-            <a className="btn btn--ghost" href={links.login}>
-              Existing Student Login
-            </a>
-          </div>
+          <a className="btn btn--ghost" href={links.login}>
+            Existing Student Login
+          </a>
         </div>
       </div>
     </section>

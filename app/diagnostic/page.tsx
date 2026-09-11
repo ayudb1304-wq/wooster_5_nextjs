@@ -37,9 +37,8 @@ export default function DiagnosticPage() {
         </header>
 
         <ol className="diag__steps reveal">
-          {steps.map((s, i) => (
+          {steps.map((s) => (
             <li key={s.title} className="diag__step">
-              <span className="num">0{i + 1}</span>
               <div>
                 <h3>{s.title}</h3>
                 <p>{s.body}</p>
