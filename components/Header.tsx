@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import HashLink from "@/components/HashLink";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { links } from "@/lib/links";
@@ -57,16 +58,16 @@ export default function Header() {
     <>
       <header ref={headerRef} className={headerClass} data-ui="light">
         <div className="container header__inner">
-          <Link className="header__brand" href="/#top" aria-label="Wooster Prep home">
+          <HashLink className="header__brand" href="/#top" aria-label="Wooster Prep home">
             <Image src={logo} alt="Wooster Prep" width={120} height={34} priority />
-          </Link>
+          </HashLink>
 
           <nav className="header__nav" aria-label="Primary">
             <Link href={links.about}>About</Link>
             <Link href={links.method}>Method</Link>
             <Link href={links.blog}>Blog</Link>
-            <Link href="/#testimonials">Testimonials</Link>
-            <Link href="/#pricing">Pricing</Link>
+            <HashLink href="/#testimonials">Testimonials</HashLink>
+            <HashLink href="/#pricing">Pricing</HashLink>
             <a href={links.login}>Login</a>
             <a className="btn btn--primary btn--sm" href={links.diagnostic}>
               Start Your Diagnostic
@@ -91,8 +92,8 @@ export default function Header() {
           <Link href={links.about} onClick={closeMenu}>About</Link>
           <Link href={links.method} onClick={closeMenu}>Method</Link>
           <Link href={links.blog} onClick={closeMenu}>Blog</Link>
-          <Link href="/#testimonials" onClick={closeMenu}>Testimonials</Link>
-          <Link href="/#pricing" onClick={closeMenu}>Pricing</Link>
+          <HashLink href="/#testimonials" onClick={closeMenu}>Testimonials</HashLink>
+          <HashLink href="/#pricing" onClick={closeMenu}>Pricing</HashLink>
           <a href={links.login} onClick={closeMenu}>Existing Student Login</a>
           <a className="btn btn--primary" href={links.diagnostic} onClick={closeMenu}>
             Start Your Diagnostic

@@ -6,7 +6,11 @@ import { includedItems } from "@/components/Included";
 import { links } from "@/lib/links";
 import { questionCount } from "@/lib/stats";
 
-export default function Pricing() {
+type Props = { headingLevel?: "h1" | "h2" };
+
+/** `headingLevel="h1"` when the rail is the page's own heading, as on /pricing. */
+export default function Pricing({ headingLevel = "h2" }: Props) {
+  const Heading = headingLevel;
   const railRef = useRef<HTMLDivElement>(null);
 
   const step = () => {
@@ -23,11 +27,11 @@ export default function Pricing() {
         <div className="pricing__top reveal">
           <div>
             <span className="eyebrow">Pricing</span>
-            <h2 className="h2">
+            <Heading className="h2">
               One plan. Full support.
               <br />
               {questionCount}-question bank.
-            </h2>
+            </Heading>
           </div>
           <div className="pricing__nav">
             <button

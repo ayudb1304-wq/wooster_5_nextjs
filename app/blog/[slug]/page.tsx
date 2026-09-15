@@ -14,6 +14,8 @@ import {
   getRelatedPosts,
 } from "@/lib/blog";
 import { links } from "@/lib/links";
+import JsonLd from "@/components/JsonLd";
+import { blogPosting, breadcrumbs, graph } from "@/lib/seo";
 
 type Params = { slug: string };
 
@@ -24,7 +26,18 @@ export function generateStaticParams(): Params[] {
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
-  return post ? { title: `${post.title} | Wooster Prep`, description: post.description } : {};
+  if (!post) return {};
+  return {
+    title: post.title,
+    description: post.description,
+    alternates: { canonical: `/blog/${post.slug}` },
+    openGraph: {
+      type: "article",
+      publishedTime: post.publishedAt,
+      modifiedTime: post.updatedAt ?? post.publishedAt,
+      tags: post.tags,
+    },
+  };
 }
 
 export default async function PostPage({ params }: { params: Promise<Params> }) {
@@ -39,6 +52,15 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
 
   return (
     <section className="page article" data-ui="light">
+      <JsonLd
+        data={graph(
+          blogPosting(post),
+          breadcrumbs([
+            { name: "Blog", path: "/blog" },
+            { name: post.title, path: `/blog/${post.slug}` },
+          ]),
+        )}
+      />
       <div className="container">
         <Link className="article__back reveal" href={links.blog}>
           <span className="icon-circle">

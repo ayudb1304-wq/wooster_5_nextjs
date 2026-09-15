@@ -6,8 +6,10 @@ import loginPhoto from "@/public/assets/login.jpg";
 import logo from "@/public/assets/wooster-logo.jpg";
 
 export const metadata: Metadata = {
-  title: "Login | Wooster Prep",
+  title: "Login",
   description: "Sign in to continue prep.",
+  alternates: { canonical: "/login" },
+  robots: { index: false, follow: true },
 };
 
 /* Placeholder quote until a real one exists. */

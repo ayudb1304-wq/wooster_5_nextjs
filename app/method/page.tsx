@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbs, graph } from "@/lib/seo";
 import Link from "next/link";
 import MethodSteps from "@/components/MethodSteps";
 import { links } from "@/lib/links";
 import { methodIntro } from "@/lib/method";
 
 export const metadata: Metadata = {
-  title: "How it works | Wooster Prep",
+  title: "How it works",
   description: methodIntro.lede,
+  alternates: { canonical: "/method" },
 };
 
 export default function MethodPage() {
   return (
     <>
       <section className="page method-page" data-ui="light">
+      <JsonLd data={graph(breadcrumbs([{ name: "How it works", path: "/method" }]))} />
         <div className="container">
           <header className="page__head reveal">
             <span className="eyebrow">{methodIntro.eyebrow}</span>

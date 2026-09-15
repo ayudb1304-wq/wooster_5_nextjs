@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbs, graph } from "@/lib/seo";
 import Audiences from "@/components/Audiences";
 import GuaranteeGallery from "@/components/GuaranteeGallery";
 import { guaranteeAudiences, guaranteePoints, guaranteePromise, guaranteeTitle } from "@/lib/guarantee";
 
 export const metadata: Metadata = {
-  title: "Score guarantee | Wooster Prep",
+  title: "Score guarantee",
   description: guaranteeTitle,
+  alternates: { canonical: "/guarantee" },
 };
 
 /* The full guarantee: the promise, then the three points as the pinned
@@ -13,6 +16,7 @@ export const metadata: Metadata = {
 export default function GuaranteePage() {
   return (
     <section className="page gpage" data-ui="light">
+      <JsonLd data={graph(breadcrumbs([{ name: "Score guarantee", path: "/guarantee" }]))} />
       <div className="container">
         <header className="page__head reveal">
           <span className="eyebrow">The Wooster Prep score guarantee</span>

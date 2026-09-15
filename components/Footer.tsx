@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import HashLink from "@/components/HashLink";
 import { links, socials } from "@/lib/links";
 import logo from "@/public/assets/wooster-logo.jpg";
 
@@ -13,7 +14,7 @@ const columns: Column[] = [
     items: [
       { label: "Free diagnostic", href: links.diagnostic },
       { label: "What is included", href: "/#included" },
-      { label: "Pricing", href: "/#pricing" },
+      { label: "Pricing", href: "/pricing" },
       { label: "Score guarantee", href: links.guarantee },
     ],
   },
@@ -23,7 +24,8 @@ const columns: Column[] = [
       { label: "Blog", href: links.blog },
       { label: "How it works", href: links.method },
       { label: "For parents", href: "/#parents" },
-      { label: "Student login", href: links.login },
+      { label: "SAT glossary", href: "/glossary" },
+      { label: "Questions", href: "/#faq" },
     ],
   },
   {
@@ -58,9 +60,9 @@ export default function Footer() {
     <footer className="footer" data-ui="light">
       <div className="container footer__grid">
         <div className="footer__brand">
-          <Link className="footer__logo" href="/#top" aria-label="Wooster Prep home">
+          <HashLink className="footer__logo" href="/#top" aria-label="Wooster Prep home">
             <Image src={logo} alt="Wooster Prep" width={220} height={62} />
-          </Link>
+          </HashLink>
           <p className="footer__tagline">Personalized SAT prep that tells you exactly what to study next.</p>
         </div>
 
@@ -68,7 +70,11 @@ export default function Footer() {
           <nav key={col.heading} className="footer__col" aria-label={col.heading}>
             <span className="footer__heading">{col.heading}</span>
             {col.items.map((item) =>
-              item.href.startsWith("/") ? (
+              item.href.includes("#") ? (
+                <HashLink key={item.label} href={item.href}>
+                  {item.label}
+                </HashLink>
+              ) : item.href.startsWith("/") ? (
                 <Link key={item.label} href={item.href}>
                   {item.label}
                 </Link>
@@ -82,6 +88,12 @@ export default function Footer() {
         ))}
       </div>
 
+      <div className="container footer__legal">
+        <p>
+          SAT, PSAT/NMSQT and Bluebook are registered trademarks of the College Board, which is not affiliated with
+          and does not endorse Wooster Prep.
+        </p>
+      </div>
       <div className="container footer__bottom">
         <span>&copy; {new Date().getFullYear()} Wooster Prep</span>
         <nav className="footer__social" aria-label="Social">

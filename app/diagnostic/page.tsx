@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbs, graph } from "@/lib/seo";
 import { links } from "@/lib/links";
 
 export const metadata: Metadata = {
-  title: "Free diagnostic | Wooster Prep",
+  title: "Free diagnostic",
   description: "A short SAT diagnostic that finds your knowledge gaps and tells you exactly what to study next.",
+  alternates: { canonical: "/diagnostic" },
 };
 
 /* The diagnostic itself runs in the Wooster Prep app at woosterprep.com/diagnostic.
@@ -26,6 +29,7 @@ const steps = [
 export default function DiagnosticPage() {
   return (
     <section className="page diag" data-ui="light">
+      <JsonLd data={graph(breadcrumbs([{ name: "Free diagnostic", path: "/diagnostic" }]))} />
       <div className="container">
         <header className="page__head reveal">
           <span className="eyebrow">Free diagnostic</span>

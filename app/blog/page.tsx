@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbs, graph } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowRight } from "@/components/Icons";
 import { formatDate, getAllPosts, getReadingTime } from "@/lib/blog";
 
 export const metadata: Metadata = {
-  title: "Blog | Wooster Prep",
+  title: "Blog",
   description: "Short posts on the method, the test, and what actually moves a score.",
+  alternates: { canonical: "/blog" },
 };
 
 export default function BlogIndexPage() {
   const posts = getAllPosts();
   return (
     <section className="page bloglist" data-ui="light">
+      <JsonLd data={graph(breadcrumbs([{ name: "Blog", path: "/blog" }]))} />
       <div className="container">
         <header className="page__head reveal">
           <h1 className="display">Notes on studying smarter.</h1>

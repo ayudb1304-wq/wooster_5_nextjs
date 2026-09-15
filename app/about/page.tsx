@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbs, graph } from "@/lib/seo";
 import Image from "next/image";
 import Audiences from "@/components/Audiences";
 import { aboutAudiences, aboutPull, aboutStory, aboutStoryAfter, aboutTitle } from "@/lib/about";
 import team from "@/public/assets/team.jpg";
 
 export const metadata: Metadata = {
-  title: "About us | Wooster Prep",
+  title: "About us",
   description: aboutTitle,
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {
   return (
     <section className="page about-page" data-ui="light">
+      <JsonLd data={graph(breadcrumbs([{ name: "About", path: "/about" }]))} />
       <div className="container">
         <header className="page__head reveal">
           <span className="eyebrow">About us</span>

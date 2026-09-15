@@ -18,6 +18,11 @@ pnpm lint
 `BRAND.md` is the brand card: colors, type, spacing, components, motion, voice, and a changelog.
 It is the reference for every page in the product. Update it in the same change as any UI or UX edit.
 
+## SEO
+
+`SEO.md` lists everything built for search, answer engines and AI assistants, with verification steps.
+Indexing is controlled by `NEXT_PUBLIC_INDEXABLE` (see `.env.example`); leave it off on previews.
+
 ## Layout
 
 - `app/layout.tsx`: root layout, metadata, and self-hosted Google Fonts via `next/font`

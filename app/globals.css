@@ -21,8 +21,8 @@
   --light-30: rgba(255, 255, 255, 0.3);
   --light-12: rgba(255, 255, 255, 0.12);
 
-  --sans: var(--font-inter), "Inter", "Helvetica Neue", Arial, sans-serif;
-  --serif: var(--font-cormorant), "Cormorant Garamond", "Times New Roman", Georgia, serif;
+  --sans: var(--font-public-sans), "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --serif: var(--font-newsreader), "Newsreader", "Times New Roman", Georgia, serif;
 
   --pad: clamp(20px, 5.5vw, 110px);
   --max: 1180px;
@@ -271,7 +271,7 @@ html { scroll-snap-type: y proximity; }
 
 .hero__title {
   font-family: var(--serif);
-  font-weight: 500;
+  font-weight: 400;
   /* 8.4vw puts the longer line at about the container width; the cap matches the 1180px max. */
   font-size: clamp(40px, 8.4vw, 110px);
   line-height: 0.98;
@@ -312,61 +312,41 @@ html { scroll-snap-type: y proximity; }
 
 /* Film ---------------------------------------------------------------- */
 
-.film {
-  position: relative;
-  min-height: 100svh;
+/* A dark rounded card on the page ground: copy left, the film right. */
+.film { position: relative; background: var(--white); padding-block: clamp(40px, 6vw, 96px); }
+.film__card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.5fr);
+  align-items: center;
+  gap: clamp(28px, 4vw, 56px);
+  padding: clamp(28px, 3.6vw, 56px);
+  border-radius: 28px;
   background: var(--dark);
   color: var(--white);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
 }
-.film__stage {
-  position: relative;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: calc(var(--header-h) + 32px) var(--pad) 24px;
-  perspective: 1600px;
-}
-.device {
-  width: min(100%, 1040px);
-  transform: rotateX(var(--tilt, 12deg)) scale(var(--zoom, 0.94));
-  transform-origin: 50% 60%;
-  transition: transform 0.15s linear;
-}
-.device__screen {
-  aspect-ratio: 16 / 10;
-  background: #000;
-  border-radius: 18px 18px 6px 6px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  padding: 12px 12px 0;
-  overflow: hidden;
-  box-shadow: 0 60px 90px rgba(0, 0, 0, 0.55);
-}
-.device__screen video { width: 100%; height: 100%; object-fit: cover; border-radius: 8px 8px 0 0; }
-.device__base {
-  height: 14px;
-  margin: 0 -3%;
-  border-radius: 0 0 14px 14px;
-  background: linear-gradient(180deg, #2b3038, #171a1f);
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-.film__panel {
-  position: relative;
-  flex: none;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 20px;
-  padding-bottom: 32px;
-}
-.film__label { display: flex; flex-direction: column; gap: 4px; }
+.film__copy { display: grid; gap: 16px; max-width: 34ch; }
 .film__kicker { font-size: 12px; font-weight: 500; letter-spacing: 0.02em; text-transform: uppercase; color: var(--light-60); }
-.film__title { font-size: 17px; font-weight: 500; letter-spacing: -0.02em; }
+.film__title { font-size: clamp(28px, 2.8vw, 40px); line-height: 1.05; color: var(--white); }
+.film__text { font-size: 16px; line-height: 1.45; color: var(--light-60); }
+.film__media { position: relative; border-radius: 16px; overflow: hidden; background: #000; aspect-ratio: 16 / 9; }
+.film__media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.film__mute {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.78);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 500;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background-color 0.3s var(--ease);
+}
+.film__mute:hover { background: rgba(0, 0, 0, 0.95); }
 
 /* Steps / expertise --------------------------------------------------- */
 
@@ -1272,6 +1252,9 @@ html { scroll-snap-type: y proximity; }
 /* Responsive ---------------------------------------------------------- */
 
 @media (max-width: 960px) {
+  .film__card { grid-template-columns: 1fr; border-radius: 20px; }
+  .film__copy { max-width: none; }
+  .glossary__row { grid-template-columns: 1fr; gap: 6px; }
   .header__inner { grid-template-columns: 1fr auto; }
   .header__nav { display: none; }
   .header__burger { display: flex; }
@@ -1287,10 +1270,6 @@ html { scroll-snap-type: y proximity; }
   .hero__meta { grid-template-columns: 1fr; align-items: start; }
   .footer__grid { grid-template-columns: repeat(3, 1fr); }
   .footer__brand { grid-column: 1 / -1; }
-  .film__stage { padding: var(--section-y) 20px 20px; }
-  .device__base { display: none; }
-  .device__screen { border-radius: 10px; padding: 6px; }
-  .device__screen video { border-radius: 6px; }
 }
 
 @media (max-width: 600px) {
@@ -1307,3 +1286,48 @@ html { scroll-snap-type: y proximity; }
 /* Print / misc -------------------------------------------------------- */
 
 ::selection { background: var(--navy); color: var(--white); }
+
+/* FAQ ------------------------------------------------------------------ */
+
+.faq { background: var(--dark); color: var(--white); padding-block: clamp(90px, 12vw, 180px); position: relative; z-index: 3; border-top: 1px solid var(--light-12); }
+.faq__grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+.faq__aside { display: grid; gap: 14px; }
+.faq__title { font-size: clamp(30px, 3.2vw, 40px); line-height: 1.05; max-width: 18ch; color: var(--white); }
+.faq .accordion { max-width: 820px; }
+
+/* Glossary ------------------------------------------------------------- */
+
+.glossary { padding-bottom: clamp(90px, 12vw, 180px); }
+.glossary__list { border-top: 1px solid var(--ink-12); max-width: 900px; }
+.glossary__row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  align-items: baseline;
+  gap: 24px;
+  padding-block: clamp(16px, 1.8vw, 24px);
+  border-bottom: 1px solid var(--ink-12);
+}
+.glossary__row:hover .glossary__term { color: var(--navy); }
+.glossary__term { font-size: clamp(22px, 2.1vw, 30px); line-height: 1.05; transition: color 0.3s var(--ease); }
+.glossary__short { font-size: 15px; line-height: 1.4; color: var(--ink-70); }
+.glossary__related { display: flex; flex-wrap: wrap; gap: 8px; }
+.glossary__related li a { display: inline-flex; align-items: center; height: 30px; padding: 0 14px; border-radius: 999px; background: var(--soft); font-size: 13px; font-weight: 500; text-decoration: none; }
+.glossary__related li a:hover { background: var(--ink); color: var(--white); }
+
+.pricing-page .pricing { padding-top: clamp(70px, 9vw, 130px); }
+
+/* Footer legal --------------------------------------------------------- */
+
+.footer__legal { padding-bottom: 20px; }
+.footer__legal p { font-size: 13px; line-height: 1.45; color: var(--ink-50); max-width: 70ch; }
+
+/* Headings ------------------------------------------------------------ */
+
+/* Every heading is Newsreader. Placed last so it wins over per-section tracking tuned for a grotesque. */
+:is(h1, h2, h3, .display, .h2) {
+  font-family: var(--serif);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  font-optical-sizing: auto;
+}
+.hero__title { font-weight: 400; }

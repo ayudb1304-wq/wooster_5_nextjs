@@ -93,26 +93,26 @@ White (hero) → dark (pitch) → white (method index) → dark (film band) → 
 
 ## 4. Typography
 
-Two families, loaded through `next/font/google` in `app/layout.tsx` and exposed as `--font-inter` and `--font-cormorant`. The stylesheet consumes them through `--sans` and `--serif`.
+Two families, loaded through `next/font/google` in `app/layout.tsx` and exposed as `--font-public-sans` and `--font-newsreader`. Both are variable fonts, so every weight is available. The stylesheet consumes them through `--sans` and `--serif`.
 
 ### Families
 
 | Token | Family | Weights loaded | Role |
 | --- | --- | --- | --- |
-| `--sans` | Inter | 400, 500, 600 | Everything: UI, body, headings, buttons, labels. |
-| `--serif` | Cormorant Garamond | 500, 600, plus italics | Statements only: the hero headline, the dark statement blocks, the pricing quote. |
+| `--sans` | Public Sans | variable | Body, UI, navigation, buttons, labels, captions. |
+| `--serif` | Newsreader | variable, plus italics | Every heading (h1 to h3, `.display`, `.h2`), the hero headline, the statements, the pricing lead and quote. |
 
-Fallbacks: Inter → Helvetica Neue, Arial. Cormorant Garamond → Times New Roman, Georgia.
+Fallbacks: Public Sans → Helvetica Neue, Arial. Newsreader → Times New Roman, Georgia.
 
 ### Global defaults
 
-Body is 15px Inter, line-height 1.45, letterspacing -0.01em, antialiased, ink on white.
+Body is 15px Public Sans, line-height 1.45, letterspacing -0.01em, antialiased, ink on white. A single rule at the end of `app/globals.css` sets every heading to Newsreader at weight 500 with -0.02em tracking, overriding the tighter per-section tracking that was tuned for a grotesque.
 
 ### Scale
 
 | Style | Family | Size | Weight | Line height | Tracking | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| Hero headline `.hero__title` | Serif | `clamp(40px, 8.4vw, 110px)` | 500 | 0.98 | -0.03em | Line 1 navy, line 2 italic at `--ink-50`. Sized so the longer line fills the container. Centered. |
+| Hero headline `.hero__title` | Serif | `clamp(40px, 8.4vw, 110px)` | 400 | 0.98 | -0.03em | Line 1 navy, line 2 italic at `--ink-50`. Sized so the longer line fills the container. Centered. |
 | Hero pitch `.hero__pitch` | Sans | `clamp(17px, 1.45vw, 20px)` | 400 | 1.35 | -0.015em | `--ink-70`, centred, max 52ch, at the foot of the hero. |
 | Statement `.statement__text` | Serif | `clamp(56px, 8vw, 120px)` | 500 | 0.92 | -0.03em | White at 92 percent. `<em>` is italic at `--light-60`. Max 11ch. One per page, in "The Wooster Prep way". |
 | Pitch statement `.pitch__statement` | Serif | `clamp(40px, 5.6vw, 84px)` | 500 | 0.95 | -0.03em | White at 92 percent, `<em>` at `--light-60`. Max 14ch. |
@@ -124,11 +124,11 @@ Body is 15px Inter, line-height 1.45, letterspacing -0.01em, antialiased, ink on
 | Pull line `.pull` | Serif | `clamp(30px, 3.6vw, 48px)` | 500 | 1.02 | -0.025em | Navy, `<em>` italic at `--ink-50`. Max 16ch. One per section, pulled out of the running copy in About and Guarantee. |
 | Price lead `.price-card__lead` | Serif | `clamp(34px, 3.6vw, 52px)` | 500 | 1.02 | -0.02em | Navy, `<em>` italic at `--ink-50`. Max 16ch. |
 | Pricing quote `.price-card__quote` | Serif | `clamp(30px, 3.3vw, 46px)` | 500 | 1.05 | -0.02em | |
-| Display `.display` | Sans | `clamp(38px, 5.4vw, 72px)` | 500 | 1 | -0.04em | Section intro and CTA headings. Max 14ch. |
-| H2 `.h2` | Sans | `clamp(30px, 3.2vw, 40px)` | 500 | 1.05 | -0.035em | Step and pricing headings. |
-| Accordion heading | Sans | `clamp(24px, 2.6vw, 34px)` | 500 | 1.05 | -0.035em | |
-| Why claim `.why__claim` | Sans | `clamp(26px, 2.6vw, 36px)` | 500 | 1.05 | -0.035em | Three words or fewer. |
-| Parents item title | Sans | `clamp(20px, 1.7vw, 24px)` | 500 | 1.1 | -0.025em | |
+| Display `.display` | Serif | `clamp(38px, 5.4vw, 72px)` | 500 | 1 | -0.04em | Section intro and CTA headings. Max 14ch. |
+| H2 `.h2` | Serif | `clamp(30px, 3.2vw, 40px)` | 500 | 1.05 | -0.035em | Step and pricing headings. |
+| Accordion heading | Serif | `clamp(24px, 2.6vw, 34px)` | 500 | 1.05 | -0.035em | |
+| Why claim `.why__claim` | Serif | `clamp(26px, 2.6vw, 36px)` | 500 | 1.05 | -0.035em | Three words or fewer. |
+| Parents item title | Serif | `clamp(20px, 1.7vw, 24px)` | 500 | 1.1 | -0.025em | |
 | Mobile menu link | Sans | 26px | 500 | | -0.03em | |
 | Lede `.lede` | Sans | `clamp(17px, 1.45vw, 20px)` | 400 | 1.35 | -0.015em | `--ink-70`, max 56ch. |
 | Step body | Sans | `clamp(17px, 1.45vw, 20px)` | 400 | 1.3 | -0.02em | Max 48ch. |
@@ -142,9 +142,9 @@ Body is 15px Inter, line-height 1.45, letterspacing -0.01em, antialiased, ink on
 
 ### Rules
 
-- Headings are weight 500, never bold. 600 is reserved for tiny labels and badges.
-- Tracking tightens as size grows. Large sans headings sit at -0.035 to -0.04em.
-- The serif is for feeling, not reading. Never set body copy, buttons, or navigation in Cormorant.
+- Headings are Newsreader at weight 500, never bold, tracked at -0.02em. 600 is reserved for tiny sans labels and badges.
+- Sans tracking tightens as size grows for ledes and UI; headings are always -0.02em.
+- The serif is for headings and statements, not reading. Never set body copy, buttons, or navigation in Newsreader.
 - Italic serif always pairs with a softer color (`--ink-50` on light, `--light-60` on dark).
 - Measure: ledes at most 56ch, body at most 46 to 48ch, statements at most 11ch.
 - Uppercase is limited to 12px kickers with positive tracking.
@@ -209,6 +209,10 @@ Fixed, 60px, hairline underneath. Logo left, nav right (About, Method, Blog, Tes
 
 The header repaints to match the section under it: `header--dark` (dark ground, white text, white primary button) and `header--gray` (gray ground). The swap is a 0.45s color transition driven by scroll position.
 
+### Film card `.film`
+
+A `--dark` card with 28px corners (20px on phones) on the white ground, `clamp(28px, 3.6vw, 56px)` padding. Two columns, 0.9 to 1.5: copy on the left (uppercase 12px kicker in `--light-60`, a serif title at `clamp(28px, 2.8vw, 40px)`, a 16px `--light-60` paragraph capped at 34ch), the film on the right at 16 by 9 with 16px corners. An "Unmute" pill (40px, 12px corners, black at 78 percent with blur) sits centered at the top of the video and reads "Mute" while sound is on. Stacks to one column under 960px.
+
 ### Case card `.case`
 
 A media box at 16 by 11.5 with 4px corners on a `--soft` ground (white on soft sections), with a product screenshot offset 9 percent from the top left, a soft navy shadow, and a fade to the ground color at the bottom. A 30px translucent "+" sits bottom right. Hover nudges the shot up-left 1.5 percent and rotates the plus 90 degrees. Caption beneath: 14px title, 14px `--ink-50` subtitle.
@@ -236,6 +240,14 @@ Landing: white ground, `id="how-it-works"`. Eyebrow "How it works", H2 "Four ste
 ### Why it works `.why`
 
 White ground, `clamp(56px, 7vw, 96px)` vertical padding, directly after the statements. Eyebrow, a reduced display heading at `clamp(34px, 4.2vw, 56px)` ("Not magic. Math."), one-sentence lede. Sized so the heading and the last row are readable together in one viewport at desktop heights: rows use `clamp(14px, 1.7vw, 22px)` vertical padding and the claim runs `clamp(22px, 2.1vw, 30px)`. Then an index: five rows on hairlines, each a two-column grid of a claim of three words or fewer and a one-line proof in `--ink-70`. No numerals. Rows stack under 960px. No paragraphs anywhere in this section.
+
+### FAQ `.faq`
+
+Dark ground, same padding and hairline as "What is included". Eyebrow "Questions", an h2 at H2 size in white, then the accordion capped at 820px with the ten questions from `lib/faq.ts`. Answers are answer-first, one to three sentences. This section always sits directly before the CTA and emits `FAQPage` schema; the visible text and the schema come from the same array.
+
+### Glossary `.glossary`
+
+Page-head pattern, then rows on hairlines: term in the serif at `clamp(22px, 2.1vw, 30px)` (navy on hover), first sentence of the definition in `--ink-70` beside it. Term pages use the Doc layout with the definition as the lede, related terms as pills, and the trademark callout at the end.
 
 ### For parents `.parents`
 
@@ -425,7 +437,7 @@ The hero headline uses viewport-relative sizing, so under about 500px the second
 - Keep buttons round, ink, and sentence case.
 - Put screenshots in case cards with the offset crop.
 - Add the reduced-motion fallback with every animation.
-- Update this file in the same change as the UI.
+- Update this file in the same change as the UI, and `SEO.md` when a route, a number, or a schema changes.
 
 **Do not**
 
@@ -463,6 +475,10 @@ The hero headline uses viewport-relative sizing, so under about 500px the second
 
 Newest first. One line per UI or UX change. Date, what changed, where.
 
+- 2026-09-15 · Film section rebuilt as a dark rounded card: copy left, film right with rounded corners and an Unmute pill. The tilted laptop is gone.
+- 2026-09-15 · Discoverability layer added (see `SEO.md`): metadata defaults and share images, robots and sitemap, JSON-LD on every page, FAQ section before the CTA, `/pricing` and `/glossary` routes, trademark line in the footer, Speed Insights. Indexing is off until `NEXT_PUBLIC_INDEXABLE=true`.
+- 2026-09-15 · Hero headline at weight 400; Newsreader loads its optical-size axis so large headings render with finer strokes.
+- 2026-09-15 · Type families swapped: Newsreader for all headings and statements, Public Sans for body and UI. Heading rule added at the end of the stylesheet.
 - 2026-09-11 · Scroll snapping limited to the hero.
 - 2026-09-11 · Pitch loses its three proof chips; the film device grows to fill its viewport.
 - 2026-09-11 · Every landing section is one viewport tall with content centred, and snaps mildly into view (proximity scroll snap on `.stack`). Numerals removed from all points (pitch, method index, parents, method page, diagnostic). Pitch points spread to the statement's height. Parents section loses its closing statement and button.
