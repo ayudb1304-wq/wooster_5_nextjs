@@ -15,7 +15,7 @@ The signed-in product, rebuilt to the brand inside this repo. Eight screens behi
 | Data | `lib/app/data.ts` | One typed module: the student, the 29 concepts with rank, section, upside, status and mastery, exam attempts, the trajectory. Every screen reads from it through props. The live app replaces this module with real data calls and leaves the components alone. |
 | Shell | `app/(app)/layout.tsx`, `components/app/AppSidebar.tsx`, `components/app/TopBar.tsx` | shadcn collapsible sidebar with grouped, iconed navigation and a user menu; a sticky top bar with breadcrumb, ⌘K search over pages and concepts, streak badge and the primary action. Routes are the live app's routes, path for path. |
 | Styles | `app/(app)/theme.css`, `app/(app)/app.css` | Tailwind v4 and the shadcn theme, imported only by the app layout, without Tailwind's preflight so the marketing pages are untouched. Theme tokens map to the brand palette; fonts are Newsreader and Public Sans by literal name. `app.css` keeps the styles the not-yet-rebuilt screens use. |
-| Components | `components/ui/*` (shadcn), `components/app/dashboard/*` | shadcn: sidebar, card, badge, button, progress, tooltip, dropdown-menu, avatar, separator, skeleton, chart (Recharts), breadcrumb, command, input. Dashboard regions: StudyNextCard with the Ring, KpiCards, TrajectoryChart, StreakHeatmap, PriorityCards, RecentActivity. Legacy: `components/app/ui.tsx` and `ConceptGrid.tsx` for the screens not yet rebuilt. |
+| Components | `components/ui/*` (shadcn), `components/app/dashboard/*` | shadcn: sidebar, card, badge, button, progress, tooltip, dropdown-menu, avatar, separator, skeleton, chart (Recharts), breadcrumb, command, input, tabs, select, toggle-group, empty. Dashboard regions: StudyNextCard with the Ring, KpiCards, TrajectoryChart, StreakHeatmap, PriorityCards, RecentActivity. `components/app/concepts/ConceptLibrary.tsx` and `components/app/PageHeader.tsx` for the four library screens. Legacy: `components/app/ui.tsx` for exams, stats and profile until they are rebuilt. |
 | Screens | `app/(app)/*/page.tsx` | Thin: compose the shared pieces with the data. |
 
 ---
@@ -25,10 +25,10 @@ The signed-in product, rebuilt to the brand inside this repo. Eight screens behi
 | Live route | POC | What changed and why |
 | --- | --- | --- |
 | `/dashboard` | same, rebuilt on shadcn | 12-column grid. "Study this next" as a dark card with a mastery ring and the primary pill; score path card; four KPI tiles (projection with delta, gap covered, mastered, study time with a 7-day sparkline); Recharts score trajectory with the dashed target; a 12-week study-days heatmap; three priority cards; recent activity. Skeleton loading state. The red and blue of the live app become navy, ink and the three status colors. |
-| `/concepts` | same | The four concept grids on the live site are one component here with a mode. Hero tile with the logo dropped: the page head carries the count instead. Cards keep rank, section, tier, status, upside and the bar. Search and R&W/Math filters work. |
-| `/flashcards` | same | Same grid, "Open flash cards", sub-label "PDF deck". |
-| `/practice` | same | Same grid, "Open review deck". |
-| `/practice-exams/mastery` | same | Same grid, "Start mastery set". |
+| `/concepts` | same, rebuilt on shadcn | One `ConceptLibrary` component serves all four grids with a mode. Header badges for total, mastered and in progress. Toolbar: search, section tabs (All, R&W, Math), a sort select (priority, most points, name, status), and a grid or list toggle. Cards carry section, rank, tier, status with the mastery score, the upside bar, and the action; the study-next concept is outlined in navy. List view is a compact table. Empty state with a clear-filters action. |
+| `/flashcards` | same, rebuilt | Same library, "Open flash cards", sub-label "PDF deck". |
+| `/practice` | same, rebuilt | Same library, "Open review deck". |
+| `/practice-exams/mastery` | same, rebuilt | Same library, "Start mastery set". |
 | `/exams` | same | Start card plus the attempt list as rows on hairlines instead of stacked cards. |
 | `/stats` | same | Four tiles with a colored top rule instead of colored dashes, quick links, the trajectory chart drawn in navy, and the "next best move" panel in status colors. |
 | `/profile` | same | Account facts as a hairline list, access card, snapshot tiles. Demo data only. |

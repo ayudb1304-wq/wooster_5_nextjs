@@ -3,11 +3,11 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Progress, ProgressIndicator, ProgressTrack } from "@/components/ui/progress";
+import { Progress } from "@/components/ui/progress";
 import { tierLabel, tierOf, topPriorities } from "@/lib/app/data";
 
 const tone = { critical: "bg-critical-tint text-critical", high: "bg-progress-tint text-progress", steady: "bg-muted text-muted-foreground" } as const;
-const bar = { critical: "bg-critical", high: "bg-progress", steady: "bg-foreground/40" } as const;
+const bar = { critical: "[&_[data-slot=progress-indicator]]:bg-critical", high: "[&_[data-slot=progress-indicator]]:bg-progress", steady: "[&_[data-slot=progress-indicator]]:bg-foreground/40" } as const;
 
 export default function PriorityCards() {
   return (
@@ -39,11 +39,7 @@ export default function PriorityCards() {
                   <span className="font-semibold">+{c.upside} pts</span>
                   <span className="text-muted-foreground">· {c.tip}</span>
                 </div>
-                <Progress value={c.upside} className="mt-auto">
-                  <ProgressTrack className="h-1.5">
-                    <ProgressIndicator className={bar[t]} />
-                  </ProgressTrack>
-                </Progress>
+                <Progress value={c.upside} className={`[&_[data-slot=progress-track]]:h-1.5 ${bar[t]} mt-auto`} />
                 <Button variant="outline" size="sm" className="w-fit" nativeButton={false} render={<Link href={`/concepts/${c.slug}`} />}>
                   Open concept
                 </Button>

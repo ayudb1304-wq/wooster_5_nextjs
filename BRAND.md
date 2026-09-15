@@ -324,6 +324,7 @@ Documented in full in `APP.md`. The app is built on shadcn/ui (Base UI primitive
 - **Cards.** shadcn `Card`, white, hairline border, 8px radius (`--radius: 0.5rem`), no shadow, 20px padding. The one dark card per screen ("Study this next") uses `--dark` with a white pill button and a white progress ring. Priority cards lift 2px on hover. Status color appears in badges and progress fills, never as a fill behind text.
 - **Type.** Page titles and card titles in Newsreader; numbers on tiles and the score path in Newsreader; everything else Public Sans. Eyebrows are 12px uppercase in `--ink-50`.
 - **Badges.** shadcn `Badge`, sentence case, tinted with the status color for tiers and outcomes; `secondary` for section labels (R&W, Math); `outline` on a white ground for stats like the streak.
+- **Toolbars.** Search input on a white ground with a leading icon, segmented tabs for a small set of filters, a select for sort, and a two-item toggle group for view. All 36px tall, in one row on desktop, stacked on phones.
 - **Bars and charts.** shadcn `Progress` at 6px with a status-colored indicator; the score path bar is 8px in navy. Charts are Recharts through the shadcn `ChartContainer`: navy line and gradient fill, dashed navy target line, dotted grid, no vertical grid lines. The study-days heatmap uses four steps of the mastered green.
 - **Copy.** Sidebar labels are two words. The page head carries the long description.
 
@@ -496,6 +497,7 @@ The hero headline uses viewport-relative sizing, so under about 500px the second
 
 Newest first. One line per UI or UX change. Date, what changed, where.
 
+- 2026-09-15 · Concept library (and the flash card, review deck and mastery set screens that share it) rebuilt on shadcn: header badges, search, section tabs, sort, grid or list view, navy outline on the study-next card, empty state.
 - 2026-09-15 · Dashboard rebuilt on shadcn/ui: collapsible sidebar with groups and icons, top bar with ⌘K search, dark study-next card with mastery ring, four KPI tiles with a sparkline, Recharts trajectory, 12-week study heatmap, priority cards, recent activity, and a loading skeleton. Tailwind is scoped to the app.
 - 2026-09-15 · App screens added as a proof of concept (see `APP.md`): shell, dashboard, four concept grids, exams, stats, profile, on demo data, behind the login. Status colors added to the palette. Marketing pages moved into a site route group.
 - 2026-09-15 · Film section rebuilt as a dark rounded card: copy left, film right with rounded corners and an Unmute pill. The tilted laptop is gone.
