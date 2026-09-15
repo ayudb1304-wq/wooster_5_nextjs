@@ -4,6 +4,8 @@ The signed-in product, rebuilt to the brand inside this repo. Eight screens behi
 
 **How to view it.** Open `/login`, submit the form with anything, and you land on `/dashboard` as the demo student, Michael Scott. Nothing is sent anywhere. The sidebar says "Demo account" so it cannot be mistaken for live.
 
+**Dark mode.** Every app screen has a dark theme. The sun-and-moon toggle in the top bar switches it; the choice is stored per browser under `wooster-theme` and light is the default. The palette is in `app/(app)/theme.css` under `.dark` and documented in the brand card. The marketing site is unaffected.
+
 **What stays out of search.** Every app route is `noindex` and disallowed in `robots.txt`, on any deployment.
 
 ---
@@ -13,7 +15,7 @@ The signed-in product, rebuilt to the brand inside this repo. Eight screens behi
 | Concern | Where | Why it matters for the port |
 | --- | --- | --- |
 | Data | `lib/app/data.ts` | One typed module: the student, the 29 concepts with rank, section, upside, status and mastery, exam attempts, the trajectory. Every screen reads from it through props. The live app replaces this module with real data calls and leaves the components alone. |
-| Shell | `app/(app)/layout.tsx`, `components/app/AppSidebar.tsx`, `components/app/TopBar.tsx` | shadcn collapsible sidebar with grouped, iconed navigation and a user menu; a sticky top bar with breadcrumb, ⌘K search over pages and concepts, streak badge and the primary action. Routes are the live app's routes, path for path. |
+| Shell | `app/(app)/layout.tsx`, `components/app/AppSidebar.tsx`, `components/app/TopBar.tsx`, `components/app/ThemeProvider.tsx`, `components/app/ThemeToggle.tsx`, `components/ui/sky-toggle.tsx` | shadcn collapsible sidebar with grouped, iconed navigation and a user menu; a sticky top bar with breadcrumb, ⌘K search over pages and concepts, streak badge and the primary action. Routes are the live app's routes, path for path. |
 | Styles | `app/(app)/theme.css`, `app/(app)/app.css` | Tailwind v4 and the shadcn theme, imported only by the app layout, without Tailwind's preflight so the marketing pages are untouched. Theme tokens map to the brand palette; fonts are Newsreader and Public Sans by literal name. `app.css` holds only the content column. |
 | Components | `components/ui/*` (shadcn), `components/app/dashboard/*` | shadcn: sidebar, card, badge, button, progress, tooltip, dropdown-menu, avatar, separator, skeleton, chart (Recharts), breadcrumb, command, input, tabs, select, toggle-group, empty, table. Dashboard regions: StudyNextCard with the Ring, KpiCards, TrajectoryChart, StreakHeatmap, PriorityCards, RecentActivity. `components/app/concepts/ConceptLibrary.tsx` and `components/app/PageHeader.tsx` for the four library screens; `components/app/StatTile.tsx` and `components/app/stats/*` (UpsideChart, AttemptsChart) for stats, exams and profile. No legacy components remain. |
 | Screens | `app/(app)/*/page.tsx` | Thin: compose the shared pieces with the data. |

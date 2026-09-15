@@ -8,7 +8,7 @@ import { roiOf, sessionMinutes, studyNext, tierLabel, tierOf } from "@/lib/app/d
 export default function StudyNextCard() {
   const c = studyNext;
   return (
-    <section className="animate-in fade-in slide-in-from-bottom-2 duration-500 relative overflow-hidden rounded-xl bg-[#12161d] text-white lg:col-span-8">
+    <section className="animate-in fade-in slide-in-from-bottom-2 duration-500 relative overflow-hidden rounded-xl bg-[#12161d] text-white dark:bg-[#1b2a4d] dark:ring-1 dark:ring-white/10 lg:col-span-8">
       <div className="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-white/[0.04]" aria-hidden="true" />
       <div className="relative flex flex-col gap-6 p-6 md:flex-row md:items-center md:justify-between md:p-8">
         <div className="flex flex-col gap-4">
@@ -22,7 +22,7 @@ export default function StudyNextCard() {
             A focused {sessionMinutes}-minute session can unlock about {c.upside} projected points. {c.tip}
           </p>
           <div className="mt-1 flex flex-wrap items-center gap-2">
-            <Button className="h-10 rounded-full bg-white px-5 text-ink hover:bg-white/90" nativeButton={false} render={<Link href={`/concepts/${c.slug}`} />}>
+            <Button className="h-10 rounded-full bg-white px-5 text-ink hover:bg-white/90 dark:text-[#12161d]" nativeButton={false} render={<Link href={`/concepts/${c.slug}`} />}>
               Start session <ArrowRight />
             </Button>
             <span className="inline-flex items-center gap-1.5 text-xs text-white/60">

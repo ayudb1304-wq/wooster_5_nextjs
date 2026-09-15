@@ -34,7 +34,7 @@ The single source of truth for how Wooster Prep looks, moves, and speaks. Every 
 **Rendering on colored grounds.** The file is a JPG with a white background, so it never sits raw on anything but white.
 
 - On white and light gray grounds: `mix-blend-mode: multiply` so the white box disappears.
-- On the dark header: `filter: invert(1) grayscale(1) brightness(2)` with `mix-blend-mode: screen`, which yields a pure white mark with no box.
+- On dark grounds (the marketing header over dark sections, and the app sidebar in dark mode): `filter: invert(1) grayscale(1) brightness(2)` with `mix-blend-mode: screen`, which yields a pure white mark with no box.
 - Never stretch, rotate, recolor, or add effects beyond those two rules.
 - Always pass through `next/image` with a static import so dimensions and placeholders are automatic.
 
@@ -78,6 +78,24 @@ All values live as custom properties on `:root` in `app/globals.css`. Use the to
 | `--mastered`, `--mastered-tint` | `#2D6B4A`, 12 percent | Mastered concepts, streaks kept. |
 
 Used only in the signed-in app for concept and exam state: chips, the top rule on tiles and concept cards, progress bars. Never on the marketing pages, never for actions. Actions are ink or navy.
+
+### Dark mode (app only)
+
+The signed-in app has a dark theme, switched from the top bar and remembered per browser; light is the default. The marketing site is light only. Dark grounds come from the brand's own darks; accents are lifted so they keep contrast.
+
+| Role | Light | Dark |
+| --- | --- | --- |
+| Background | `#F4F4F5` | `#0F1218` |
+| Card | `#FFFFFF` | `#171B22` |
+| Foreground | `#171B22` | `#F2F2F3` |
+| Muted text | ink at 55 percent | white at 60 percent |
+| Borders | ink at 10 percent | white at 10 percent |
+| Navy accent | `#14213D` | `#AEBBE0` |
+| Critical | `#A83A2E` | `#E07A6B` |
+| In progress | `#9A6B12` | `#D9A441` |
+| Mastered | `#2D6B4A` | `#6FBF95` |
+
+Tints step up to 16 percent on dark. The "Study this next" card turns deep navy (`#1B2A4D`) with a white hairline so it still stands apart from the ground. Anything white on navy switches to ink on dark, because navy becomes light.
 
 ### Light alphas (text and lines on dark grounds)
 
@@ -325,6 +343,8 @@ Documented in full in `APP.md`. The app is built on shadcn/ui (Base UI primitive
 - **Type.** Page titles and card titles in Newsreader; numbers on tiles and the score path in Newsreader; everything else Public Sans. Eyebrows are 12px uppercase in `--ink-50`.
 - **Badges.** shadcn `Badge`, sentence case, tinted with the status color for tiers and outcomes; `secondary` for section labels (R&W, Math); `outline` on a white ground for stats like the streak.
 - **Toolbars.** Search input on a white ground with a leading icon, segmented tabs for a small set of filters, a select for sort, and a two-item toggle group for view. All 36px tall, in one row on desktop, stacked on phones.
+- **Theme toggle.** The sky toggle in `components/ui/sky-toggle.tsx`: sun and clouds for light, moon and stars for dark, 12px base size. Checked means dark. Bound to next-themes in `components/app/ThemeToggle.tsx`. In the top bar from the tablet breakpoint up; on phones it lives in the profile's Appearance row so the top bar keeps room for the primary action, and the streak badge hides on the narrowest screens.
+- **Segmented switch.** For two to three views inside a card (`components/app/SegmentedTabs.tsx`): a 40px fully rounded `--muted` track with 4px inset, a white pill with a hairline shadow that slides to the active tab over 300ms on the brand ease, labels at 14px weight 500 with a 16px icon, muted until active. Used for Account and Access on the profile. The shadcn `Tabs` stays for filters in toolbars.
 - **Tables.** shadcn `Table` inside a card, header in `--muted-foreground`, hairline rows, the row action as a ghost button at the right. Secondary columns hide under 640px.
 - **Bars and charts.** shadcn `Progress` at 6px with a status-colored indicator; the score path bar is 8px in navy. Charts are Recharts through the shadcn `ChartContainer`: navy line and gradient fill, dashed navy target line, dotted grid, no vertical grid lines. The study-days heatmap uses four steps of the mastered green.
 - **Copy.** Sidebar labels are two words. The page head carries the long description.
@@ -498,6 +518,8 @@ The hero headline uses viewport-relative sizing, so under about 500px the second
 
 Newest first. One line per UI or UX change. Date, what changed, where.
 
+- 2026-09-16 · Dark mode for every app screen, switched with the sky toggle in the top bar; dark palette added to the color section.
+- 2026-09-16 · Profile: Account and Access switch replaced with a sliding segmented control with icons.
 - 2026-09-15 · Stats, exams and profile rebuilt on shadcn: shared stat tile, by-section card, points-available bar chart, stacked attempts chart, attempts table, profile tabs. Every app screen is now on the new system.
 - 2026-09-15 · Concept library (and the flash card, review deck and mastery set screens that share it) rebuilt on shadcn: header badges, search, section tabs, sort, grid or list view, navy outline on the study-next card, empty state.
 - 2026-09-15 · Dashboard rebuilt on shadcn/ui: collapsible sidebar with groups and icons, top bar with ⌘K search, dark study-next card with mastery ring, four KPI tiles with a sparkline, Recharts trajectory, 12-week study heatmap, priority cards, recent activity, and a loading skeleton. Tailwind is scoped to the app.

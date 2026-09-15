@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import { CalendarDays, Mail, Phone, ShieldCheck } from "lucide-react";
+import { CalendarDays, KeyRound, Mail, Phone, ShieldCheck, SunMoon, User } from "lucide-react";
 import PageHeader from "@/components/app/PageHeader";
 import StatTile from "@/components/app/StatTile";
+import ThemeToggle from "@/components/app/ThemeToggle";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { SegmentedList, SegmentedPanel, SegmentedTab, SegmentedTabs } from "@/components/app/SegmentedTabs";
 import { concepts, formatDate, masteredCount, student } from "@/lib/app/data";
 
 export const metadata: Metadata = { title: "Profile" };
@@ -55,19 +56,23 @@ export default function ProfilePage() {
               </div>
             </div>
           </div>
-          <Tabs defaultValue="account" className="mt-5">
-            <TabsList className="w-full">
-              <TabsTrigger value="account" className="flex-1">Account</TabsTrigger>
-              <TabsTrigger value="access" className="flex-1">Access</TabsTrigger>
-            </TabsList>
-            <TabsContent value="account" className="mt-2 divide-y">
+          <SegmentedTabs defaultValue="account" className="mt-5">
+            <SegmentedList aria-label="Profile sections">
+              <SegmentedTab value="account">
+                <User /> Account
+              </SegmentedTab>
+              <SegmentedTab value="access">
+                <KeyRound /> Access
+              </SegmentedTab>
+            </SegmentedList>
+            <SegmentedPanel value="account" className="divide-y">
               <Fact label="Grade" value={student.grade} />
               <Fact label="Target score" value={student.target} />
               <Fact label="Phone" value={<span className="inline-flex items-center gap-1.5"><Phone className="size-3.5 text-muted-foreground" /> •••• {student.phoneLast4}</span>} />
               <Fact label="Email status" value={student.emailVerified ? <Badge variant="outline" className="border-transparent bg-mastered-tint text-mastered">Verified</Badge> : "Unverified"} />
               <Fact label="Member since" value={<span className="inline-flex items-center gap-1.5"><CalendarDays className="size-3.5 text-muted-foreground" /> {formatDate(student.memberSince)}</span>} />
-            </TabsContent>
-            <TabsContent value="access" className="mt-2">
+            </SegmentedPanel>
+            <SegmentedPanel value="access">
               <div className="divide-y">
                 <Fact label="Plan" value={student.plan} />
                 <Fact label="Access ends" value={formatDate(student.accessEnds)} />
@@ -77,8 +82,19 @@ export default function ProfilePage() {
                 <Progress value={accessPct} className="[&_[data-slot=progress-track]]:h-1.5 [&_[data-slot=progress-indicator]]:bg-navy" />
                 <span className="text-xs text-muted-foreground">Two months of access, {formatDate(student.memberSince)} to {formatDate(student.accessEnds)}.</span>
               </div>
-            </TabsContent>
-          </Tabs>
+            </SegmentedPanel>
+          </SegmentedTabs>
+          <Separator className="my-4" />
+          <div className="flex items-center justify-between gap-4 py-1">
+            <div className="flex items-center gap-2 text-sm">
+              <SunMoon className="size-4 text-muted-foreground" />
+              <div>
+                <div className="font-medium">Appearance</div>
+                <div className="text-xs text-muted-foreground">Light or dark, remembered on this device.</div>
+              </div>
+            </div>
+            <ThemeToggle size={12} />
+          </div>
           <Separator className="my-4" />
           <div className="flex gap-2">
             <Button variant="outline" size="sm">Edit profile</Button>

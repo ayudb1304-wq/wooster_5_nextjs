@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Newsreader, Public_Sans } from "next/font/google";
 import JsonLd from "@/components/JsonLd";
+import ThemeProvider from "@/components/app/ThemeProvider";
 import { graph, indexable, organization, site, siteUrl, website } from "@/lib/seo";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -33,10 +34,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${publicSans.variable} ${newsreader.variable}`} data-scroll-behavior="smooth">
+    <html lang="en" className={`${publicSans.variable} ${newsreader.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body>
         <JsonLd data={graph(organization(), website())} />
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
         <Analytics />
         <SpeedInsights />
       </body>

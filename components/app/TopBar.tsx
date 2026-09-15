@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import ThemeToggle from "@/components/app/ThemeToggle";
 import { concepts, student, studyNext } from "@/lib/app/data";
 
 const titles: Record<string, string> = {
@@ -69,10 +70,13 @@ export default function TopBar() {
           <span className="hidden md:inline">Search</span>
           <kbd className="hidden rounded border border-border bg-muted px-1.5 font-mono text-[10px] text-muted-foreground md:inline">⌘K</kbd>
         </Button>
-        <Badge variant="outline" className="h-7 gap-1.5 bg-card px-2.5 text-[13px] font-medium">
+        <Badge variant="outline" className="hidden h-7 gap-1.5 bg-card px-2.5 text-[13px] font-medium sm:inline-flex">
           <Flame className="size-3.5 text-progress" />
           {student.streakDays}-day streak
         </Badge>
+        <div className="mx-1 hidden items-center md:flex" title="Theme">
+          <ThemeToggle size={12} />
+        </div>
         <Button size="sm" className="rounded-full px-3.5" nativeButton={false} render={<Link href={`/concepts/${studyNext.slug}`} />}>
           Start session
         </Button>

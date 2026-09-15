@@ -56,8 +56,8 @@ export default function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarHeader className="px-3 pt-4 pb-2">
         <Link href="/dashboard" aria-label="Dashboard" className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center">
-          <Image src={logo} alt="Wooster Prep" width={120} height={34} priority className="h-auto w-[120px] mix-blend-multiply group-data-[collapsible=icon]:hidden" />
-          <span className="hidden size-7 items-center justify-center rounded-md bg-navy font-serif text-sm text-white group-data-[collapsible=icon]:flex">W</span>
+          <Image src={logo} alt="Wooster Prep" width={120} height={34} priority className="h-auto w-[120px] mix-blend-multiply group-data-[collapsible=icon]:hidden dark:mix-blend-screen dark:[filter:invert(1)_grayscale(1)_brightness(2)]" />
+          <span className="hidden size-7 items-center justify-center rounded-md bg-navy font-serif text-sm text-white dark:text-ink group-data-[collapsible=icon]:flex">W</span>
         </Link>
       </SidebarHeader>
 
@@ -94,7 +94,7 @@ export default function AppSidebar() {
                 }
               >
                 <Avatar className="size-8 rounded-md">
-                  <AvatarFallback className="rounded-md bg-navy text-white text-xs">{initials}</AvatarFallback>
+                  <AvatarFallback className="rounded-md bg-navy text-white dark:text-ink text-xs">{initials}</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">

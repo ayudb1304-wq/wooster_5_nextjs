@@ -127,7 +127,7 @@ export default function ConceptLibrary({ concepts, mode }: { concepts: Concept[]
                     </div>
                     <h3 className="font-serif text-[22px] leading-tight">{c.name}</h3>
                     <div className="flex flex-wrap items-center gap-2 text-xs">
-                      {next && <Badge className="bg-navy text-white hover:bg-navy">Study next</Badge>}
+                      {next && <Badge className="bg-navy text-white dark:text-ink hover:bg-navy">Study next</Badge>}
                       {mode.sub ? (
                         <span className="text-muted-foreground">{mode.sub}</span>
                       ) : (
@@ -164,7 +164,7 @@ export default function ConceptLibrary({ concepts, mode }: { concepts: Concept[]
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="truncate font-serif text-lg leading-tight">{c.name}</span>
-                      {next && <Badge className="bg-navy text-white hover:bg-navy">Study next</Badge>}
+                      {next && <Badge className="bg-navy text-white dark:text-ink hover:bg-navy">Study next</Badge>}
                     </div>
                     <div className="mt-0.5 text-xs text-muted-foreground md:hidden">
                       {c.section} · {tierLabel[t]} · {mode.sub ?? statusLabel[c.status]}
