@@ -249,6 +249,7 @@ ol, ul { margin: 0; padding: 0; list-style: none; }
 html { scroll-snap-type: y proximity; }
 @media (prefers-reduced-motion: reduce) { html { scroll-snap-type: none; } }
 .stack > section { min-height: 100svh; }
+.stack > .film { min-height: auto; } /* the film card sets its own height */
 .stack > .hero { scroll-snap-align: start; }
 .stack > section:not(.hero):not(.film) { display: flex; flex-direction: column; justify-content: center; }
 .stack > section:not(.hero):not(.film) > .container { width: 100%; }
