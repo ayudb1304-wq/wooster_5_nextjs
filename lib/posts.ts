@@ -113,7 +113,7 @@ export const posts: Post[] = [
     title: "How to read a mastery score",
     description: "One number per concept, and what it means when it rises, stalls, or slips after a retake.",
     image: masteryBoard,
-    alt: "The mastery board with one score per concept",
+    alt: "The mastery sets library, one 10-question set per concept",
     tags: ["Mastery", "For parents"],
     author: "Wooster Prep",
     publishedAt: "2026-08-05",

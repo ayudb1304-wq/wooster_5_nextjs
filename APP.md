@@ -70,3 +70,18 @@ Everything on the dashboard comes from free sources: the official shadcn/ui regi
 2. Replace `lib/app/data.ts` exports with real data, keeping the exported names and types.
 3. Point `Sidebar` links and the login flow at real auth.
 4. Fill in the linked flows listed in section 3.
+
+---
+
+## 6. Recapturing the marketing screenshots
+
+The five product images under `public/assets/` are captures of these screens. After a visual change, rebuild, start the production server, and capture with headless Chrome (no browser download; Playwright drives the installed Chrome):
+
+```
+pnpm build && PORT=3100 pnpm start &
+for pair in "dashboard:todays-plan" "stats:stats-dashboard" "concepts:concept-library" "exams:practice-exams" "practice-exams/mastery:mastery-board"; do
+  pnpm dlx playwright@latest screenshot --channel chrome --device "Desktop Chrome HiDPI" \
+    --viewport-size 1440,900 --color-scheme light --wait-for-timeout 3500 \
+    "http://localhost:3100/${pair%%:*}" "public/assets/${pair##*:}.png"
+done
+```

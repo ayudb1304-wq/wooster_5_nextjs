@@ -43,7 +43,7 @@ export const methodIndex = {
 export const shots = {
   statsDashboard: {
     src: statsDashboard,
-    alt: "Wooster Prep performance dashboard showing current projection, diagnostic baseline and mastery progress",
+    alt: "Wooster Prep stats page showing the projected score, diagnostic baseline, latest exam and mastery progress",
     title: "Performance dashboard",
     sub: "Diagnostic baseline, projected score",
   },
@@ -55,13 +55,13 @@ export const shots = {
   },
   todaysPlan: {
     src: todaysPlan,
-    alt: "Wooster Prep Today's Plan with the next concept to study and score path",
+    alt: "Wooster Prep dashboard with the concept to study next, the score path and study days",
     title: "Today's plan",
     sub: "Study this next, ranked by score ROI",
   },
   conceptLibrary: {
     src: conceptLibrary,
-    alt: "Wooster Prep concept library ranked by personal score ROI",
+    alt: "Wooster Prep concept library ranked by personal score upside",
     title: "Concept library",
     sub: "29 SAT concepts, ordered by your upside",
   },

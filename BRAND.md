@@ -392,7 +392,7 @@ Motion is slow, eased, and additive. Nothing bounces. Nothing loops except the f
 
 ## 8. Imagery and media
 
-**Product screenshots.** Real UI captures in `public/assets/`: `stats-dashboard.png`, `practice-exams.png`, `todays-plan.png`, `concept-library.png`, `mastery-board.png`. Always shown inside a case card, offset and cropped from the top-left, never edge to edge, never with a device frame. Alt text describes what the screen shows.
+**Product screenshots.** Captures of the rebuilt app in `public/assets/`, taken from a production build at 1440 by 900 at 2x in the light theme: `todays-plan.png` (dashboard), `stats-dashboard.png` (stats), `concept-library.png` (concepts), `practice-exams.png` (exams), `mastery-board.png` (mastery sets). Case cards show them at 150 percent width, offset 9 percent, so the crop stays legible. Recapture after any app change with headless Chrome; the command is in `APP.md`. Always shown inside a case card, offset and cropped from the top-left, never edge to edge, never with a device frame. Alt text describes what the screen shows.
 
 **Film.** `moneyball-web.mp4` (720p, about 9MB) with `moneyball-poster.jpg`. Shown inside the laptop device in the film section and as a hover preview in a case card. The 76MB original is kept locally and ignored by git. Re-encode command is in the README.
 
@@ -521,6 +521,7 @@ The hero headline uses viewport-relative sizing, so under about 500px the second
 
 Newest first. One line per UI or UX change. Date, what changed, where.
 
+- 2026-09-16 · Marketing screenshots replaced with captures of the rebuilt app screens.
 - 2026-09-16 · Hero: "Free. No card." back under the buttons; the Existing Student Login button removed (login stays in the header).
 - 2026-09-16 · "Free. No card." kept on the diagnostic page only; removed from the hero, the method section, the method page, the blog CTA and the included list. Pitch steps given an even rhythm.
 - 2026-09-16 · Hero: mesh-gradient shader background in brand tints with a white wash behind the copy.

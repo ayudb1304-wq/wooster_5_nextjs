@@ -423,7 +423,7 @@ html { scroll-snap-type: y proximity; }
   position: absolute;
   top: 9%;
   left: 9%;
-  width: 100%;
+  width: 150%; /* full-screen captures: show a zoomed top-left crop so the UI stays legible */
   height: auto;
   border-radius: 8px 0 0 0;
   box-shadow: 0 30px 60px rgba(20, 33, 61, 0.18), 0 0 0 1px rgba(20, 33, 61, 0.06);
@@ -1112,6 +1112,7 @@ html { scroll-snap-type: y proximity; }
 }
 .about__media img { width: 100%; height: 100%; object-fit: cover; }
 .about__more { margin-top: 10px; }
+.about-page { padding-bottom: clamp(90px, 12vw, 180px); }
 .about-page .about__media { background: var(--soft); }
 .about-page .page__head .about__title { max-width: 18ch; }
 
