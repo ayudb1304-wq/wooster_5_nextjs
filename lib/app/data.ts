@@ -133,3 +133,28 @@ export const gapCovered = Math.round(((student.projection - student.baseline) / 
 export const formatDateTime = (iso: string) =>
   new Date(iso).toLocaleString("en-US", { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit" });
 export const formatDate = (iso: string) => new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+
+/* Activity for the streak calendar: minutes studied per day for the last 12 weeks.
+   Deterministic so server and client render the same values. */
+export type ActivityDay = { date: string; minutes: number };
+
+const dayMs = 86_400_000;
+const anchor = new Date("2026-09-15T00:00:00");
+export const activityDays: ActivityDay[] = Array.from({ length: 84 }, (_, i) => {
+  const d = new Date(anchor.getTime() - (83 - i) * dayMs);
+  const seed = (i * 37) % 11;
+  const minutes = i < 60 ? 0 : seed < 3 ? 0 : seed < 6 ? 15 : seed < 9 ? 30 : 45;
+  return { date: d.toISOString().slice(0, 10), minutes: i === 83 ? student.studyMinutes : minutes };
+});
+
+/** Last seven days, oldest first, for the study-time sparkline. */
+export const weekMinutes = activityDays.slice(-7).map((d) => ({ day: d.date.slice(5), minutes: d.minutes }));
+
+export type Activity = { id: string; kind: "mastery" | "exam" | "review"; title: string; detail: string; at: string };
+
+export const recentActivity: Activity[] = [
+  { id: "r1", kind: "mastery", title: "Boundaries mastery set", detail: "5/10, retake suggested", at: "2026-09-15T18:40:00" },
+  { id: "r2", kind: "review", title: "Reviewed Boundaries lesson", detail: "12 minutes", at: "2026-09-15T18:20:00" },
+  { id: "r3", kind: "exam", title: "Full-length exam attempt", detail: "0/98, abandoned early", at: "2026-06-07T16:47:07" },
+  { id: "r4", kind: "mastery", title: "Linear Equations in One Variable", detail: "10/10, mastered", at: "2026-06-05T20:10:00" },
+];

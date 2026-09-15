@@ -1,109 +1,55 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Bar, Card, PageHead, SectionChip, Tile, TierChip } from "@/components/app/ui";
-import { gapCovered, masteredCount, roiOf, sessionMinutes, student, studyNext, tierOf, topPriorities, concepts } from "@/lib/app/data";
+import KpiCards from "@/components/app/dashboard/KpiCards";
+import PriorityCards from "@/components/app/dashboard/PriorityCards";
+import RecentActivity from "@/components/app/dashboard/RecentActivity";
+import StreakHeatmap from "@/components/app/dashboard/StreakHeatmap";
+import StudyNextCard from "@/components/app/dashboard/StudyNextCard";
+import TrajectoryChart from "@/components/app/dashboard/TrajectoryChart";
+import { Card, CardContent } from "@/components/ui/card";
+import { student } from "@/lib/app/data";
 
 export const metadata: Metadata = { title: "Dashboard" };
 
 export default function DashboardPage() {
   return (
-    <>
-      <PageHead
-        eyebrow="Today's plan"
-        title={`Welcome back, ${student.firstName}.`}
-        lede="Study the next highest-upside concept. Keep the streak alive."
-        aside={
-          <>
-            <span className="chip chip--stat">{student.streakDays}-day streak</span>
-            <span className="chip chip--stat">
-              {student.projection} → {student.target}
-            </span>
-          </>
-        }
-      />
+    <div className="grid gap-4 lg:grid-cols-12">
+      <header className="flex flex-col gap-1 lg:col-span-12">
+        <span className="text-xs font-medium uppercase tracking-[0.08em] text-muted-foreground">Today&rsquo;s plan</span>
+        <h1 className="font-serif text-4xl leading-none tracking-tight md:text-[44px]">Welcome back, {student.firstName}.</h1>
+        <p className="text-[15px] text-muted-foreground">Study the next highest-upside concept. Keep the streak alive.</p>
+      </header>
 
-      <Card className="card__row">
-        <div>
-          <b style={{ fontWeight: 500 }}>New to your study plan?</b>
-          <p className="card__text">Watch the five-minute guide before your next concept session.</p>
-        </div>
-        <Link className="btn btn--ghost" href="/#film">
-          Watch guide
-        </Link>
+      <StudyNextCard />
+
+      <Card className="gap-0 py-0 shadow-none lg:col-span-4">
+        <CardContent className="flex h-full flex-col justify-between gap-5 p-5">
+          <div>
+            <span className="text-[11px] font-medium uppercase tracking-[0.08em] text-muted-foreground">Score path</span>
+            <div className="mt-3 flex items-baseline gap-2">
+              <span className="font-serif text-5xl leading-none tracking-tight">{student.projection}</span>
+              <span className="text-sm text-muted-foreground">of {student.target}</span>
+            </div>
+          </div>
+          <div>
+            <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+              <div className="h-full rounded-full bg-navy" style={{ width: `${Math.max(2, ((student.projection - 1000) / (student.target - 1000)) * 100)}%` }} />
+            </div>
+            <div className="mt-2 flex justify-between text-xs text-muted-foreground">
+              <span>Baseline {student.baseline}</span>
+              <span>Target {student.target}</span>
+            </div>
+          </div>
+          <p className="text-[13px] leading-relaxed text-muted-foreground">
+            +{student.projection - student.baseline} points since the diagnostic. Every mastery set moves this number before test day does.
+          </p>
+        </CardContent>
       </Card>
 
-      <div className="cols-2">
-        <Card dark>
-          <span className="card__eyebrow">Study this next</span>
-          <div className="card__row">
-            <h2 className="card__title">{studyNext.name}</h2>
-            <div style={{ display: "flex", gap: 6 }}>
-              <TierChip concept={studyNext} />
-              <span className="chip">#{studyNext.rank}</span>
-            </div>
-          </div>
-          <p className="card__text" style={{ marginTop: 10 }}>
-            A focused {sessionMinutes}-minute session can unlock about {studyNext.upside} projected points.
-          </p>
-          <div className="card__actions">
-            <Link className="btn btn--primary" href={`/concepts/${studyNext.slug}`}>
-              Start session
-            </Link>
-            <span className="chip">{sessionMinutes} min target</span>
-            <span className="chip">{roiOf(studyNext)} ROI</span>
-          </div>
-        </Card>
-
-        <div className="stack-16">
-          <Card>
-            <div className="path">
-              <div className="path__row">
-                <span className="card__eyebrow" style={{ marginBottom: 0 }}>
-                  Score path
-                </span>
-                <span className="path__target">Target {student.target}</span>
-              </div>
-              <span className="path__value">{student.projection}</span>
-              <Bar value={gapCovered} tone="mastered" />
-              <span className="card__note">
-                +{student.projection - student.baseline} points improved. {gapCovered}% of the gap to target covered.
-              </span>
-            </div>
-          </Card>
-          <div className="cols-2" style={{ gridTemplateColumns: "1fr 1fr" }}>
-            <Tile value={`${masteredCount}/${concepts.length}`} label="Mastered" sub="Concepts completed" tone="mastered" />
-            <Tile value={student.studyMinutes} label="Study time" sub="Minutes logged" />
-          </div>
-        </div>
-      </div>
-
-      <div className="section-head">
-        <div>
-          <h2 className="h3">Top priorities</h2>
-          <p>The highest score return for your next study sessions.</p>
-        </div>
-        <Link href="/concepts">View all concepts</Link>
-      </div>
-      <ul className="cgrid">
-        {topPriorities.map((c) => (
-          <li key={c.slug} className={`ccard ccard--${tierOf(c)}`}>
-            <div className="ccard__top">
-              <TierChip concept={c} />
-              <span className="ccard__rank">#{c.rank}</span>
-            </div>
-            <h3 className="ccard__name">{c.name}</h3>
-            <div className="ccard__chips">
-              <SectionChip section={c.section} />
-              <b style={{ fontSize: 13 }}>+{c.upside} pts</b>
-            </div>
-            <Bar value={c.upside} tone={tierOf(c)} />
-            <div className="ccard__foot">
-              <span className="ccard__sub">{c.tip}</span>
-              <Link href={`/concepts/${c.slug}`}>Open</Link>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </>
+      <KpiCards />
+      <TrajectoryChart />
+      <StreakHeatmap />
+      <PriorityCards />
+      <RecentActivity />
+    </div>
   );
 }

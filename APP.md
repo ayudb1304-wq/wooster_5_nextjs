@@ -13,9 +13,9 @@ The signed-in product, rebuilt to the brand inside this repo. Eight screens behi
 | Concern | Where | Why it matters for the port |
 | --- | --- | --- |
 | Data | `lib/app/data.ts` | One typed module: the student, the 29 concepts with rank, section, upside, status and mastery, exam attempts, the trajectory. Every screen reads from it through props. The live app replaces this module with real data calls and leaves the components alone. |
-| Shell | `app/(app)/layout.tsx`, `components/app/Sidebar.tsx` | Sidebar plus content column. Routes are the live app's routes, path for path. |
-| Styles | `app/(app)/app.css` | Scoped under `.app`, built on the same tokens as the site. Nothing leaks into the marketing pages, and the marketing chrome (header, footer) does not appear in the app: those now live in `app/(site)/layout.tsx`. |
-| Shared pieces | `components/app/ui.tsx`, `components/app/ConceptGrid.tsx` | Page head, card, tile, chips, progress bar, and the concept grid with search and section filters. |
+| Shell | `app/(app)/layout.tsx`, `components/app/AppSidebar.tsx`, `components/app/TopBar.tsx` | shadcn collapsible sidebar with grouped, iconed navigation and a user menu; a sticky top bar with breadcrumb, ⌘K search over pages and concepts, streak badge and the primary action. Routes are the live app's routes, path for path. |
+| Styles | `app/(app)/theme.css`, `app/(app)/app.css` | Tailwind v4 and the shadcn theme, imported only by the app layout, without Tailwind's preflight so the marketing pages are untouched. Theme tokens map to the brand palette; fonts are Newsreader and Public Sans by literal name. `app.css` keeps the styles the not-yet-rebuilt screens use. |
+| Components | `components/ui/*` (shadcn), `components/app/dashboard/*` | shadcn: sidebar, card, badge, button, progress, tooltip, dropdown-menu, avatar, separator, skeleton, chart (Recharts), breadcrumb, command, input. Dashboard regions: StudyNextCard with the Ring, KpiCards, TrajectoryChart, StreakHeatmap, PriorityCards, RecentActivity. Legacy: `components/app/ui.tsx` and `ConceptGrid.tsx` for the screens not yet rebuilt. |
 | Screens | `app/(app)/*/page.tsx` | Thin: compose the shared pieces with the data. |
 
 ---
@@ -24,7 +24,7 @@ The signed-in product, rebuilt to the brand inside this repo. Eight screens behi
 
 | Live route | POC | What changed and why |
 | --- | --- | --- |
-| `/dashboard` | same | Same structure: greeting, guide prompt, "Study this next" card, score path, two tiles, top priorities. The red gradient card becomes the dark card from the brand; the blue accents become navy; serif for the greeting and the concept name. Streak and score range become quiet chips at the top right. |
+| `/dashboard` | same, rebuilt on shadcn | 12-column grid. "Study this next" as a dark card with a mastery ring and the primary pill; score path card; four KPI tiles (projection with delta, gap covered, mastered, study time with a 7-day sparkline); Recharts score trajectory with the dashed target; a 12-week study-days heatmap; three priority cards; recent activity. Skeleton loading state. The red and blue of the live app become navy, ink and the three status colors. |
 | `/concepts` | same | The four concept grids on the live site are one component here with a mode. Hero tile with the logo dropped: the page head carries the count instead. Cards keep rank, section, tier, status, upside and the bar. Search and R&W/Math filters work. |
 | `/flashcards` | same | Same grid, "Open flash cards", sub-label "PDF deck". |
 | `/practice` | same | Same grid, "Open review deck". |
@@ -58,9 +58,13 @@ These are flows, not screens, and their content lives in the question bank. The 
 
 ---
 
+## 4b. Component sources
+
+Everything on the dashboard comes from free sources: the official shadcn/ui registry (Base UI primitives), Recharts through shadcn's chart wrapper, and Lucide icons. The progress ring and the study-days heatmap are small custom pieces (`Ring.tsx`, `StreakHeatmap.tsx`) written to the brand rather than pulled from a paid registry. Nothing from 21st.dev's paid tier was used.
+
 ## 5. Porting checklist
 
-1. Copy `app/(app)`, `components/app`, `lib/app`, and the status tokens in `app/globals.css` into the application repo.
+1. Copy `app/(app)`, `components/app`, `components/ui`, `hooks`, `lib/app`, `lib/utils.ts`, `components.json`, `postcss.config.mjs`, the Tailwind and shadcn dependencies, and the status tokens in `app/globals.css` into the application repo.
 2. Replace `lib/app/data.ts` exports with real data, keeping the exported names and types.
 3. Point `Sidebar` links and the login flow at real auth.
 4. Fill in the linked flows listed in section 3.

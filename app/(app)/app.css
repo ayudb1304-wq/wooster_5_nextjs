@@ -3,42 +3,8 @@
    pages. Uses the same tokens as globals.css.
    ------------------------------------------------------------------ */
 
-.app { display: grid; grid-template-columns: 240px minmax(0, 1fr); min-height: 100svh; background: var(--soft); }
-
-/* Sidebar */
-.app__side {
-  position: sticky;
-  top: 0;
-  height: 100svh;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-  padding: 26px 18px;
-  background: var(--white);
-  border-right: 1px solid var(--ink-12);
-}
-.app__logo { display: block; padding: 0 12px; }
-.app__logo img { width: 140px; height: auto; mix-blend-mode: multiply; }
-.app__nav { display: grid; gap: 2px; }
-.app__nav a {
-  display: block;
-  padding: 9px 12px;
-  border-radius: var(--radius);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--ink-70);
-  transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
-}
-.app__nav a:hover { color: var(--ink); background: var(--soft); }
-.app__nav a.is-active { color: var(--navy); background: var(--soft); }
-.app__user { margin-top: auto; display: grid; gap: 4px; padding: 14px 12px 0; border-top: 1px solid var(--ink-12); font-size: 13px; }
-.app__user-name { font-weight: 500; }
-.app__user-note { color: var(--ink-50); }
-.app__logout { margin-top: 8px; color: var(--ink-70); font-weight: 500; }
-.app__logout:hover { color: var(--ink); }
-
 /* Main */
-.app__main { width: 100%; max-width: 1240px; padding: clamp(24px, 3vw, 44px) clamp(20px, 4vw, 56px) clamp(60px, 6vw, 96px); display: grid; gap: 28px; align-content: start; }
+.app-content { width: 100%; max-width: 1400px; margin-inline: auto; padding: clamp(24px, 3vw, 44px) clamp(20px, 4vw, 56px) clamp(60px, 6vw, 96px); display: grid; gap: 28px; align-content: start; }
 .app__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
 .app__head-copy { display: grid; gap: 8px; }
 .app__head-copy .eyebrow { margin-bottom: 0; color: var(--ink-50); }
@@ -158,14 +124,5 @@
 .quick span { font-size: 13px; color: var(--ink-50); }
 
 @media (max-width: 960px) {
-  .app { grid-template-columns: 1fr; }
-  .app__side { position: static; height: auto; flex-direction: row; align-items: center; gap: 12px; padding: 12px 16px; border-right: 0; border-bottom: 1px solid var(--ink-12); overflow-x: auto; }
-  .app__logo { padding: 0; }
-  .app__logo img { width: 110px; }
-  .app__nav { display: flex; gap: 2px; }
-  .app__nav a { white-space: nowrap; padding: 8px 10px; }
-  .app__user { margin-top: 0; margin-left: auto; padding: 0; border: 0; grid-auto-flow: column; align-items: center; gap: 10px; }
-  .app__user-note { display: none; }
-  .app__logout { margin-top: 0; }
   .cols-2, .cols-3, .cols-4, .cgrid { grid-template-columns: 1fr; }
 }
