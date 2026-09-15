@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { useRef } from "react";
 import { ArrowDown } from "@/components/Icons";
+import { HeroShader } from "@/components/ui/shader-hero";
 import { links } from "@/lib/links";
 import { prefersReducedMotion } from "@/lib/motion";
 
@@ -65,6 +66,7 @@ export default function Hero() {
 
   return (
     <section ref={scope} className="hero" data-ui="light">
+      <HeroShader />
       <div className="container">
         <div className="hero__lead">
           <h1 ref={titleRef} className="hero__title">

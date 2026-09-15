@@ -273,8 +273,20 @@ html { scroll-snap-type: y proximity; }
   display: flex;
   align-items: stretch;
   overflow: hidden;
+  position: relative;
 }
-.hero .container { display: flex; flex-direction: column; justify-content: space-between; gap: 32px; }
+.hero .container { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 32px; }
+
+/* Shader background: a slow mesh of whites and pale navy, with a white wash behind the copy. */
+.hero__bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.hero__shader { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero__wash {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 62% 48% at 50% 42%, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.22) 60%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0) 28%, rgba(255, 255, 255, 0) 74%, rgba(255, 255, 255, 0.55));
+}
 
 .hero__lead { display: grid; gap: clamp(28px, 4vw, 44px); justify-items: center; text-align: center; margin: auto; }
 

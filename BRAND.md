@@ -197,6 +197,8 @@ Body is 15px Public Sans, line-height 1.45, letterspacing -0.01em, antialiased, 
 
 **Hero snap only.** The document uses `scroll-snap-type: y proximity` and the hero is the one `scroll-snap-align: start` point, so a scroll that ends near the top settles back onto the hero; the rest of the page scrolls freely. Off under reduced motion.
 
+**Hero ground.** Behind the hero sits a slow mesh-gradient shader (`components/ui/shader-hero.tsx`, Paper Shaders) in whites, the soft ground and three navy tints down to `#7F95C3`, distortion 0.8, swirl 0.12, a trace of grain, speed 0.18 and paused under reduced motion. A white radial wash sits over it behind the copy and white fades at the top and bottom, so the navy headline and ink text keep their contrast and the section still reads as white at its edges. It is decoration only, hidden from assistive tech.
+
 **Alignment.** Left aligned by default. The hero headline, with the primary button, the "How it works" link and the "Free. No card." note directly beneath it, is the one centered block. The pitch sentence and the login button sit centred at the bottom of the hero. Step headings sit stacked under their number and pill, never in a right-hand column.
 
 **Grid.** Two equal columns for case cards, collapsing to one under 960px.
@@ -488,7 +490,7 @@ The hero headline uses viewport-relative sizing, so under about 500px the second
 - Use bold weights for headings.
 - Set body copy in the serif.
 - Use box shadows outside case shots and the device.
-- Use gradients as decoration.
+- Use gradients as decoration, except the hero shader and the fades that keep it readable.
 - Animate blur or layout properties.
 - Repeat a link in two places in the same component.
 
@@ -518,6 +520,7 @@ The hero headline uses viewport-relative sizing, so under about 500px the second
 
 Newest first. One line per UI or UX change. Date, what changed, where.
 
+- 2026-09-16 · Hero: mesh-gradient shader background in brand tints with a white wash behind the copy.
 - 2026-09-16 · Dark mode for every app screen, switched with the sky toggle in the top bar; dark palette added to the color section.
 - 2026-09-16 · Profile: Account and Access switch replaced with a sliding segmented control with icons.
 - 2026-09-15 · Stats, exams and profile rebuilt on shadcn: shared stat tile, by-section card, points-available bar chart, stacked attempts chart, attempts table, profile tabs. Every app screen is now on the new system.
