@@ -13,9 +13,9 @@ const data = Array.from({ length: 9 }, (_, week) => {
   return { week, score: point?.score ?? null };
 });
 
-export default function TrajectoryChart() {
+export default function TrajectoryChart({ className = "lg:col-span-7" }: { className?: string }) {
   return (
-    <Card className="gap-0 py-0 shadow-none lg:col-span-7">
+    <Card className={`gap-0 py-0 shadow-none ${className}`}>
       <CardHeader className="flex flex-row items-start justify-between gap-4 p-5 pb-0">
         <div>
           <CardTitle className="font-serif text-xl font-normal">Score trajectory</CardTitle>

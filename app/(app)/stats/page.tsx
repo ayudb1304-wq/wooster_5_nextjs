@@ -1,107 +1,90 @@
 import type { Metadata } from "next";
+import { ArrowRight, BookCheck, Target, Timer, TrendingUp } from "lucide-react";
 import Link from "next/link";
-import { Card, PageHead, Tile } from "@/components/app/ui";
-import { concepts, examAttempts, inProgressCount, latestAttempt, masteredCount, student, studyNext, trajectory } from "@/lib/app/data";
+import TrajectoryChart from "@/components/app/dashboard/TrajectoryChart";
+import PageHeader from "@/components/app/PageHeader";
+import AttemptsChart from "@/components/app/stats/AttemptsChart";
+import UpsideChart from "@/components/app/stats/UpsideChart";
+import StatTile from "@/components/app/StatTile";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { concepts, inProgressCount, latestAttempt, masteredCount, sectionSummary, student, studyNext } from "@/lib/app/data";
 
 export const metadata: Metadata = { title: "Stats" };
-
-/* Weeks 0 to 8; y from 1000 to 1600. */
-function Trajectory() {
-  const w = 600, h = 240, px = 40, py = 20;
-  const x = (week: number) => px + (week / 8) * (w - px * 2);
-  const y = (score: number) => h - py - ((score - 1000) / 600) * (h - py * 2);
-  const line = trajectory.map((p, i) => `${i ? "L" : "M"}${x(p.week)},${y(p.score)}`).join(" ");
-  const last = trajectory[trajectory.length - 1];
-  return (
-    <svg className="chart" viewBox={`0 0 ${w} ${h}`} role="img" aria-label="Projected score by week">
-      {[1000, 1200, 1400, 1600].map((s) => (
-        <g key={s}>
-          <line x1={px} x2={w - px} y1={y(s)} y2={y(s)} stroke="rgba(23,27,34,0.12)" />
-          <text x={px - 8} y={y(s) + 4} textAnchor="end">{s}</text>
-        </g>
-      ))}
-      <line x1={px} x2={w - px} y1={y(student.target)} y2={y(student.target)} stroke="#14213d" strokeDasharray="4 4" />
-      <text x={w - px} y={y(student.target) - 6} textAnchor="end">Target {student.target}</text>
-      <path d={line} fill="none" stroke="#14213d" strokeWidth="2" />
-      <line x1={x(last.week)} x2={x(8)} y1={y(last.score)} y2={y(student.target)} stroke="rgba(20,33,61,0.35)" strokeDasharray="2 4" />
-      {trajectory.map((p) => (
-        <circle key={p.week} cx={x(p.week)} cy={y(p.score)} r="4" fill="#14213d" />
-      ))}
-      {[0, 2, 4, 6, 8].map((wk) => (
-        <text key={wk} x={x(wk)} y={h - 4} textAnchor="middle">
-          wk {wk}
-        </text>
-      ))}
-    </svg>
-  );
-}
 
 export default function StatsPage() {
   const latestPct = Math.round((latestAttempt.correct / latestAttempt.total) * 100);
   return (
-    <>
-      <PageHead
-        eyebrow="Performance"
-        title="Stats that show what to do next."
-        lede="Your projected score, mastery wins, full-length exam attempts, and the concepts most worth reviewing next."
-      />
-
-      <div className="cols-4">
-        <Tile value={student.projection} label="Current projection" sub={`${student.target - student.projection} points to ${student.target}`} />
-        <Tile value={student.baseline} label="Diagnostic baseline" sub="From your diagnostic report" tone="steady" />
-        <Tile value={`${latestPct}%`} label="Latest full SAT" sub={`${latestAttempt.correct}/${latestAttempt.total} on latest attempt`} tone="in-progress" />
-        <Tile value={`${masteredCount}/${concepts.length}`} label="Mastery progress" sub={`${inProgressCount} in progress, ${concepts.length - masteredCount - inProgressCount} not started`} tone="mastered" />
+    <div className="grid gap-4 lg:grid-cols-12">
+      <div className="lg:col-span-12">
+        <PageHeader
+          eyebrow="Performance"
+          title="Stats that show what to do next."
+          lede="Your projected score, mastery wins, full-length exam attempts, and the concepts most worth reviewing next."
+          aside={
+            <Badge variant="outline" className="h-7 bg-card px-2.5 text-[13px] font-medium">
+              Target {student.target}
+            </Badge>
+          }
+        />
       </div>
 
-      <div className="cols-4">
-        <Link className="quick" href={`/concepts/${studyNext.slug}`}>
-          <b>Review {studyNext.name}</b>
-          <span>Current mastery score: {studyNext.mastery}/10.</span>
-        </Link>
-        <Link className="quick" href="/exams">
-          <b>Take a full SAT practice exam</b>
-          <span>{examAttempts.length} submitted attempts tracked here.</span>
-        </Link>
-        <Link className="quick" href="/flashcards">
-          <b>Refresh with flash cards</b>
-          <span>Use concept cards before retesting weak areas.</span>
-        </Link>
-        <Link className="quick" href="/dashboard">
-          <b>Return to today&rsquo;s plan</b>
-          <span>Jump back to the study plan and current priority.</span>
-        </Link>
+      <div className="grid gap-4 sm:grid-cols-2 lg:col-span-12 lg:grid-cols-4">
+        <StatTile label="Current projection" value={student.projection} note={`${student.target - student.projection} points to ${student.target}`} tone="navy" icon={<TrendingUp className="size-4" />} />
+        <StatTile label="Diagnostic baseline" value={student.baseline} note="From your diagnostic report" icon={<Target className="size-4" />} />
+        <StatTile label="Latest full SAT" value={`${latestPct}%`} note={`${latestAttempt.correct}/${latestAttempt.total} on the latest attempt`} tone="progress" icon={<Timer className="size-4" />} />
+        <StatTile label="Mastery progress" value={`${masteredCount}/${concepts.length}`} note={`${inProgressCount} in progress, ${concepts.length - masteredCount - inProgressCount} not started`} tone="mastered" icon={<BookCheck className="size-4" />} />
       </div>
 
-      <div className="cols-2">
-        <Card>
-          <div className="section-head">
+      <TrajectoryChart className="lg:col-span-7" />
+
+      <Card className="gap-0 py-0 shadow-none lg:col-span-5">
+        <CardHeader className="p-5 pb-0">
+          <CardTitle className="font-serif text-xl font-normal">By section</CardTitle>
+          <CardDescription className="mt-1">Diagnostic split and mastery, Reading and Writing against Math.</CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-5 p-5">
+          {sectionSummary.map((s) => (
+            <div key={s.section} className="flex flex-col gap-2">
+              <div className="flex items-baseline justify-between">
+                <span className="font-medium">{s.section === "R&W" ? "Reading and Writing" : "Math"}</span>
+                <span className="font-serif text-2xl leading-none">{s.score}</span>
+              </div>
+              <Progress value={((s.score - 200) / 600) * 100} className="[&_[data-slot=progress-track]]:h-1.5 [&_[data-slot=progress-indicator]]:bg-navy" />
+              <div className="flex justify-between text-xs text-muted-foreground">
+                <span>
+                  {s.mastered} of {s.total} mastered · {s.inProgress} in progress
+                </span>
+                <span>+{s.upside} pts available</span>
+              </div>
+            </div>
+          ))}
+          <div className="rounded-lg border border-dashed p-4 text-[13px] text-muted-foreground">
+            The section with more points available is where the next sessions go. Right now that is{" "}
+            <span className="font-medium text-foreground">{sectionSummary[0].upside >= sectionSummary[1].upside ? "Reading and Writing" : "Math"}</span>.
+          </div>
+        </CardContent>
+      </Card>
+
+      <UpsideChart className="lg:col-span-7" />
+
+      <div className="flex flex-col gap-4 lg:col-span-5">
+        <AttemptsChart />
+        <Card className="gap-0 py-0 shadow-none">
+          <CardContent className="flex items-center justify-between gap-4 p-5">
             <div>
-              <span className="card__eyebrow">Mastery-driven projection</span>
-              <h2 className="h3">Score trajectory</h2>
+              <span className="text-[11px] font-medium uppercase tracking-[0.08em] text-muted-foreground">Next best move</span>
+              <div className="mt-1 font-serif text-xl leading-tight">{studyNext.name}</div>
+              <div className="mt-1 text-[13px] text-muted-foreground">Retake its 10-question mastery set after a quick review. Mastery {studyNext.mastery}/10.</div>
             </div>
-            <p>Target {student.target}</p>
-          </div>
-          <p className="card__text" style={{ margin: "8px 0 16px" }}>
-            The line moves when mastery work creates projected gains. Full SAT attempts are shown separately so the two signals stay clear.
-          </p>
-          <Trajectory />
-        </Card>
-        <Card>
-          <span className="card__eyebrow">Next best move</span>
-          <div className="stack-16">
-            <div className="quick" style={{ borderLeft: "3px solid var(--critical)" }}>
-              <span className="chip chip--critical">Most urgent concept</span>
-              <b style={{ color: "var(--ink)", fontSize: 17 }}>{studyNext.name}</b>
-              <span>Retake its 10-question mastery set after a quick review.</span>
-            </div>
-            <div className="quick" style={{ borderLeft: "3px solid var(--mastered)" }}>
-              <span className="chip chip--mastered">Keep the streak</span>
-              <b style={{ color: "var(--ink)", fontSize: 17 }}>{student.streakDays}-day streak</b>
-              <span>One session today keeps the projection moving.</span>
-            </div>
-          </div>
+            <Button size="sm" className="shrink-0 rounded-full" nativeButton={false} render={<Link href={`/concepts/${studyNext.slug}`} />}>
+              Start <ArrowRight />
+            </Button>
+          </CardContent>
         </Card>
       </div>
-    </>
+    </div>
   );
 }

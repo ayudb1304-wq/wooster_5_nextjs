@@ -14,8 +14,8 @@ The signed-in product, rebuilt to the brand inside this repo. Eight screens behi
 | --- | --- | --- |
 | Data | `lib/app/data.ts` | One typed module: the student, the 29 concepts with rank, section, upside, status and mastery, exam attempts, the trajectory. Every screen reads from it through props. The live app replaces this module with real data calls and leaves the components alone. |
 | Shell | `app/(app)/layout.tsx`, `components/app/AppSidebar.tsx`, `components/app/TopBar.tsx` | shadcn collapsible sidebar with grouped, iconed navigation and a user menu; a sticky top bar with breadcrumb, ⌘K search over pages and concepts, streak badge and the primary action. Routes are the live app's routes, path for path. |
-| Styles | `app/(app)/theme.css`, `app/(app)/app.css` | Tailwind v4 and the shadcn theme, imported only by the app layout, without Tailwind's preflight so the marketing pages are untouched. Theme tokens map to the brand palette; fonts are Newsreader and Public Sans by literal name. `app.css` keeps the styles the not-yet-rebuilt screens use. |
-| Components | `components/ui/*` (shadcn), `components/app/dashboard/*` | shadcn: sidebar, card, badge, button, progress, tooltip, dropdown-menu, avatar, separator, skeleton, chart (Recharts), breadcrumb, command, input, tabs, select, toggle-group, empty. Dashboard regions: StudyNextCard with the Ring, KpiCards, TrajectoryChart, StreakHeatmap, PriorityCards, RecentActivity. `components/app/concepts/ConceptLibrary.tsx` and `components/app/PageHeader.tsx` for the four library screens. Legacy: `components/app/ui.tsx` for exams, stats and profile until they are rebuilt. |
+| Styles | `app/(app)/theme.css`, `app/(app)/app.css` | Tailwind v4 and the shadcn theme, imported only by the app layout, without Tailwind's preflight so the marketing pages are untouched. Theme tokens map to the brand palette; fonts are Newsreader and Public Sans by literal name. `app.css` holds only the content column. |
+| Components | `components/ui/*` (shadcn), `components/app/dashboard/*` | shadcn: sidebar, card, badge, button, progress, tooltip, dropdown-menu, avatar, separator, skeleton, chart (Recharts), breadcrumb, command, input, tabs, select, toggle-group, empty, table. Dashboard regions: StudyNextCard with the Ring, KpiCards, TrajectoryChart, StreakHeatmap, PriorityCards, RecentActivity. `components/app/concepts/ConceptLibrary.tsx` and `components/app/PageHeader.tsx` for the four library screens; `components/app/StatTile.tsx` and `components/app/stats/*` (UpsideChart, AttemptsChart) for stats, exams and profile. No legacy components remain. |
 | Screens | `app/(app)/*/page.tsx` | Thin: compose the shared pieces with the data. |
 
 ---
@@ -29,9 +29,9 @@ The signed-in product, rebuilt to the brand inside this repo. Eight screens behi
 | `/flashcards` | same, rebuilt | Same library, "Open flash cards", sub-label "PDF deck". |
 | `/practice` | same, rebuilt | Same library, "Open review deck". |
 | `/practice-exams/mastery` | same, rebuilt | Same library, "Start mastery set". |
-| `/exams` | same | Start card plus the attempt list as rows on hairlines instead of stacked cards. |
-| `/stats` | same | Four tiles with a colored top rule instead of colored dashes, quick links, the trajectory chart drawn in navy, and the "next best move" panel in status colors. |
-| `/profile` | same | Account facts as a hairline list, access card, snapshot tiles. Demo data only. |
+| `/exams` | same, rebuilt | Start card with the primary action; three tiles (latest, best, remaining); a stacked bar chart of attempts (R&W and Math); the attempts as a table with a results action per row. |
+| `/stats` | same, rebuilt | Four KPI tiles; the trajectory chart; a by-section card (diagnostic split, mastery per section, points available, and which section the next sessions go to); a horizontal bar chart of the eight unmastered concepts worth the most points in their tier colors; the attempts chart; and a "next best move" card with the action. |
+| `/profile` | same, rebuilt | Avatar and identity, then Account and Access tabs (facts as a hairline list, access progress bar), edit actions, and the snapshot tiles beside it. Demo data only. |
 
 **Sidebar labels shortened.** "Practice Exams : Mastery 10 Questions by Concept" is "Mastery sets"; "Flash Cards : Refresh your concept study" is "Flash cards"; the others follow. The page heads carry the longer description.
 

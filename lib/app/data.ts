@@ -158,3 +158,16 @@ export const recentActivity: Activity[] = [
   { id: "r3", kind: "exam", title: "Full-length exam attempt", detail: "0/98, abandoned early", at: "2026-06-07T16:47:07" },
   { id: "r4", kind: "mastery", title: "Linear Equations in One Variable", detail: "10/10, mastered", at: "2026-06-05T20:10:00" },
 ];
+
+/** Concepts by section with counts, for the section split. */
+export const sectionSummary = (["R&W", "Math"] as const).map((section) => {
+  const list = concepts.filter((c) => c.section === section);
+  return {
+    section,
+    total: list.length,
+    mastered: list.filter((c) => c.status === "mastered").length,
+    inProgress: list.filter((c) => c.status === "in-progress").length,
+    upside: list.reduce((sum, c) => sum + c.upside, 0),
+    score: section === "R&W" ? student.split.rw : student.split.math,
+  };
+});
