@@ -21,6 +21,14 @@
   --light-30: rgba(255, 255, 255, 0.3);
   --light-12: rgba(255, 255, 255, 0.12);
 
+  /* Status colors, used only in the app for concept and exam state. */
+  --critical: #a83a2e;
+  --critical-tint: rgba(168, 58, 46, 0.1);
+  --progress: #9a6b12;
+  --progress-tint: rgba(154, 107, 18, 0.12);
+  --mastered: #2d6b4a;
+  --mastered-tint: rgba(45, 107, 74, 0.12);
+
   --sans: var(--font-public-sans), "Public Sans", "Helvetica Neue", Arial, sans-serif;
   --serif: var(--font-newsreader), "Newsreader", "Times New Roman", Georgia, serif;
 

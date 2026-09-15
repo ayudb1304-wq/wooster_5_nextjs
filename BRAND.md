@@ -69,6 +69,16 @@ All values live as custom properties on `:root` in `app/globals.css`. Use the to
 | `--ink-30` | `rgba(23,27,34,0.30)` | Ghost button borders, icon-circle borders, rank numerals. |
 | `--ink-12` | `rgba(23,27,34,0.12)` | Hairlines and dividers on light grounds. |
 
+### Status colors (app only)
+
+| Token | Value | Role |
+| --- | --- | --- |
+| `--critical`, `--critical-tint` | `#A83A2E`, 10 percent | Concepts worth the most points, urgent moves. |
+| `--progress`, `--progress-tint` | `#9A6B12`, 12 percent | In progress, high-priority, latest exam. |
+| `--mastered`, `--mastered-tint` | `#2D6B4A`, 12 percent | Mastered concepts, streaks kept. |
+
+Used only in the signed-in app for concept and exam state: chips, the top rule on tiles and concept cards, progress bars. Never on the marketing pages, never for actions. Actions are ink or navy.
+
 ### Light alphas (text and lines on dark grounds)
 
 | Token | Value | Role |
@@ -87,7 +97,7 @@ White (hero) → dark (pitch) → white (method index) → dark (film band) → 
 - Navy is an accent, not a ground. Do not paint sections navy. Inline links in reading copy are navy with a 35 percent navy underline, full navy on hover.
 - Hairlines are 1px at the 12 percent alpha of the current ground.
 - `::selection` is navy with white text.
-- There is no success, warning, or error color yet. When one is needed, add it here first.
+- The three status colors are the only colors beyond the palette, and they stay inside the app.
 
 ---
 
@@ -306,6 +316,17 @@ Hairline on top, `clamp(48px, 6vw, 80px)` above. A six-column grid (1.4fr for th
 
 ---
 
+## 6b. The app (signed-in screens)
+
+Documented in full in `APP.md`. Rules that keep it on brand:
+
+- **Shell.** A 240px white sidebar with a hairline on the right, the logo at 140px, text-only navigation at 14px weight 500 (`--ink-70`, active in navy on the `--soft` ground), and the student, "Demo account" and log out at the bottom. Content column on `--soft`, capped at 1240px. Under 960px the sidebar becomes a top bar.
+- **Cards.** White, hairline border, 4px corners, 18 to 26px padding. The one dark card per screen ("Study this next") uses `--dark` with a white primary button. Concept cards and stat tiles carry a 3px top rule in the status color.
+- **Type.** Page titles and card titles in Newsreader; numbers on tiles and the score path in Newsreader; everything else Public Sans. Eyebrows are 12px uppercase in `--ink-50`.
+- **Chips.** 22px, uppercase 11px at weight 600, tinted with the status color. Section chips (R&W, Math) are neutral. Stat chips at the top of a page are white with a hairline, sentence case.
+- **Bars.** 4px, `--ink-12` track, status-colored fill. The score path bar is 8px in navy.
+- **Copy.** Sidebar labels are two words. The page head carries the long description.
+
 ## 7. Motion
 
 Motion is slow, eased, and additive. Nothing bounces. Nothing loops except the film.
@@ -475,6 +496,7 @@ The hero headline uses viewport-relative sizing, so under about 500px the second
 
 Newest first. One line per UI or UX change. Date, what changed, where.
 
+- 2026-09-15 · App screens added as a proof of concept (see `APP.md`): shell, dashboard, four concept grids, exams, stats, profile, on demo data, behind the login. Status colors added to the palette. Marketing pages moved into a site route group.
 - 2026-09-15 · Film section rebuilt as a dark rounded card: copy left, film right with rounded corners and an Unmute pill. The tilted laptop is gone.
 - 2026-09-15 · Discoverability layer added (see `SEO.md`): metadata defaults and share images, robots and sitemap, JSON-LD on every page, FAQ section before the CTA, `/pricing` and `/glossary` routes, trademark line in the footer, Speed Insights. Indexing is off until `NEXT_PUBLIC_INDEXABLE=true`.
 - 2026-09-15 · Hero headline at weight 400; Newsreader loads its optical-size axis so large headings render with finer strokes.

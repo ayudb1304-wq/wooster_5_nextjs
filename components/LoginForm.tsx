@@ -1,17 +1,20 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { links } from "@/lib/links";
 
-/* Email and password mirror the form at woosterprep.com/login. UI shell only:
-   wire onSubmit and the Google button to the auth backend; nothing is sent today. */
+/* Email and password mirror the form at woosterprep.com/login. Demo only:
+   any submission opens the demo student's dashboard. Nothing is sent. */
 export default function LoginForm() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStatus("Sign in is not connected yet.");
+    setStatus("Opening the demo account…");
+    router.push("/dashboard");
   };
 
   return (
@@ -69,7 +72,7 @@ export default function LoginForm() {
       <button
         className="btn btn--ghost btn--lg btn--block"
         type="button"
-        onClick={() => setStatus("Google sign in is not connected yet.")}
+        onClick={() => router.push("/dashboard")}
       >
         Continue with Google
       </button>

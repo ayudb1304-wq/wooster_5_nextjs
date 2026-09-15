@@ -18,6 +18,11 @@ pnpm lint
 `BRAND.md` is the brand card: colors, type, spacing, components, motion, voice, and a changelog.
 It is the reference for every page in the product. Update it in the same change as any UI or UX edit.
 
+## App screens
+
+`APP.md` describes the signed-in screens built as a proof of concept under `app/(app)/`, on demo data from `lib/app/data.ts`.
+Open `/login` and submit to walk them. Marketing pages live under `app/(site)/`.
+
 ## SEO
 
 `SEO.md` lists everything built for search, answer engines and AI assistants, with verification steps.

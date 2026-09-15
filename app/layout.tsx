@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Newsreader, Public_Sans } from "next/font/google";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import JsonLd from "@/components/JsonLd";
-import RevealObserver from "@/components/RevealObserver";
 import { graph, indexable, organization, site, siteUrl, website } from "@/lib/seo";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -38,10 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${publicSans.variable} ${newsreader.variable}`} data-scroll-behavior="smooth">
       <body>
         <JsonLd data={graph(organization(), website())} />
-        <Header />
-        <main id="top">{children}</main>
-        <Footer />
-        <RevealObserver />
+        {children}
         <SpeedInsights />
       </body>
     </html>
