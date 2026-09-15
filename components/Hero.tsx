@@ -83,7 +83,6 @@ export default function Hero() {
                 <ArrowDown />
               </span>
             </a>
-            <span className="hero__note">Free. No card.</span>
           </div>
         </div>
         <div className="hero__meta" data-intro="meta">

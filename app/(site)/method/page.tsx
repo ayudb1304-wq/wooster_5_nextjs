@@ -36,7 +36,6 @@ export default function MethodPage() {
             <Link className="btn btn--primary btn--lg" href={links.diagnostic}>
               Start Your Diagnostic
             </Link>
-            <span className="method__note">Free. No card.</span>
           </div>
         </div>
       </section>

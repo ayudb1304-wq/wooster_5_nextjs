@@ -43,7 +43,6 @@ export default function Method() {
           <Link className="btn btn--ghost" href={links.method}>
             See the method in detail
           </Link>
-          <span className="method__note">Free. No card.</span>
         </div>
       </div>
     </section>

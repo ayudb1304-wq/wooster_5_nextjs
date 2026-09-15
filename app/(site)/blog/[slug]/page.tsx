@@ -141,7 +141,7 @@ export default async function PostPage({ params }: { params: Promise<Params> }) 
 
             <section className="article__cta reveal">
               <h2 className="h2">Begin with the free diagnostic.</h2>
-              <p className="lede">Find out exactly what to study next. Free. No card.</p>
+              <p className="lede">Find out exactly what to study next.</p>
               <Link className="btn btn--primary btn--lg" href={links.diagnostic}>
                 Start Your Diagnostic
                 <span className="btn__arrow">

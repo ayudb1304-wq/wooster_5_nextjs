@@ -306,7 +306,6 @@ html { scroll-snap-type: y proximity; }
 .hero__word { will-change: transform; }
 
 .hero__cta-row { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 14px 22px; }
-.hero__note { flex-basis: 100%; text-align: center; font-size: 14px; color: var(--ink-50); }
 .hero__cta {
   display: inline-flex;
   align-items: center;
@@ -527,9 +526,11 @@ html { scroll-snap-type: y proximity; }
   text-wrap: balance;
 }
 .pitch__statement em { font-style: italic; color: var(--light-60); }
-.pitch__steps { display: flex; flex-direction: column; justify-content: space-between; gap: 26px; padding-top: 10px; }
-.pitch__step { display: grid; gap: 6px; padding-top: 22px; border-top: 1px solid var(--light-12); }
+/* Even rhythm: each step is the same block, separated by a hairline, centered against the statement. */
+.pitch__steps { display: grid; gap: 0; align-self: center; }
+.pitch__step { display: grid; gap: 8px; padding-block: 26px; border-top: 1px solid var(--light-12); }
 .pitch__step:first-child { padding-top: 0; border-top: 0; }
+.pitch__step:last-child { padding-bottom: 0; }
 .pitch__lead { font-size: clamp(20px, 1.9vw, 26px); font-weight: 500; line-height: 1.15; letter-spacing: -0.03em; }
 .pitch__sub { font-size: 15px; line-height: 1.45; color: var(--light-60); max-width: 40ch; }
 .pitch__foot { display: grid; gap: 28px; margin-top: var(--head-gap); padding-top: 28px; border-top: 1px solid var(--light-12); }

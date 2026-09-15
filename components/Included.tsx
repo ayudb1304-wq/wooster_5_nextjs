@@ -3,7 +3,7 @@ import Accordion, { type AccordionItem } from "@/components/Accordion";
 export const includedItems: AccordionItem[] = [
   {
     title: "Free diagnostic",
-    body: "Start with a focused quant diagnostic to pinpoint how SAT point gains happen for you specifically. No card, no commitment.",
+    body: "Start with a focused quant diagnostic to pinpoint how SAT point gains happen for you specifically.",
   },
   {
     title: "Personalized study modules",
