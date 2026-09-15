@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Newsreader, Public_Sans } from "next/font/google";
 import JsonLd from "@/components/JsonLd";
 import { graph, indexable, organization, site, siteUrl, website } from "@/lib/seo";
+import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <JsonLd data={graph(organization(), website())} />
         {children}
+        <Analytics />
         <SpeedInsights />
       </body>
     </html>

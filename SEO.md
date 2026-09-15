@@ -35,7 +35,7 @@ All canonical URLs, the sitemap, Open Graph URLs, and every JSON-LD `@id` derive
 | `robots.txt` | `app/robots.ts` | Allows all crawlers on production, explicitly including GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Bingbot, Applebot. Disallows `/login`. Points to the sitemap. |
 | `sitemap.xml` | `app/sitemap.ts` | Every route, every blog post with its published or updated date, every glossary term. |
 | Trademark line in the footer | `components/Footer.tsx` | The College Board non-affiliation statement on every page, not only `/disclaimer`. |
-| Speed Insights | `app/layout.tsx` | Field Core Web Vitals (LCP, INP, CLS) once deployed on Vercel. |
+| Speed Insights and Analytics | `app/layout.tsx` | Field Core Web Vitals (LCP, INP, CLS) and page-view analytics once deployed on Vercel. Both are no-ops outside Vercel. |
 
 ### Homepage (`app/page.tsx`)
 
