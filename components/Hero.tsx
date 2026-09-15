@@ -83,6 +83,7 @@ export default function Hero() {
                 <ArrowDown />
               </span>
             </a>
+            <span className="hero__note">Free. No card.</span>
           </div>
         </div>
         <div className="hero__meta" data-intro="meta">
@@ -90,9 +91,6 @@ export default function Hero() {
             A free diagnostic finds the concepts costing you the most points. A plan tells you exactly what to
             study next, every day, until the test.
           </p>
-          <a className="btn btn--ghost" href={links.login}>
-            Existing Student Login
-          </a>
         </div>
       </div>
     </section>

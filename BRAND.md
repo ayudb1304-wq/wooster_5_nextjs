@@ -199,7 +199,7 @@ Body is 15px Public Sans, line-height 1.45, letterspacing -0.01em, antialiased, 
 
 **Hero ground.** Behind the hero sits a slow mesh-gradient shader (`components/ui/shader-hero.tsx`, Paper Shaders) in whites, the soft ground and three navy tints down to `#7F95C3`, distortion 0.8, swirl 0.12, a trace of grain, speed 0.18 and paused under reduced motion. A white radial wash sits over it behind the copy and white fades at the top and bottom, so the navy headline and ink text keep their contrast and the section still reads as white at its edges. It is decoration only, hidden from assistive tech.
 
-**Alignment.** Left aligned by default. The hero headline, with the primary button and the "How it works" link directly beneath it, is the one centered block. The pitch sentence and the login button sit centred at the bottom of the hero. Step headings sit stacked under their number and pill, never in a right-hand column.
+**Alignment.** Left aligned by default. The hero headline, with the primary button, the "How it works" link and the "Free. No card." note directly beneath it, is the one centered block. The paragraph sits at the bottom; login lives in the header only. The pitch sentence and the login button sit centred at the bottom of the hero. Step headings sit stacked under their number and pill, never in a right-hand column.
 
 **Grid.** Two equal columns for case cards, collapsing to one under 960px.
 
@@ -446,7 +446,7 @@ Only three icons exist, all 12 by 12 inline SVG, 1.2 stroke, `currentColor`, in 
 - The question bank size is a live figure, never typed into copy. It lives once in `lib/stats.ts` and every mention (hero paragraph, statement slide, pricing heading) renders from it. Raise it there when the bank grows. Size is framed as a means to personalisation (a fresh question for the weakest concept), not as volume for its own sake; the statement slide says "and counting".
 - "SAT" is always uppercase. "Wooster Prep" is two words.
 - Call-to-action verbs: Start, Begin, See, Take. The main action is always "Start Your Diagnostic".
-- "Free. No card." appears only on the diagnostic page, beside its form. Nowhere else.
+- "Free. No card." appears under the hero's primary button and beside the form on the diagnostic page. Nowhere else.
 - Do not use exclamation marks. Do not promise a specific score. The one promise we make is the score guarantee (1300 or below, at least 100 points higher on the next official score, or the course again for free), and it is stated in full only in the Guarantee section.
 - Avoid ed-tech jargon: no "learners", "gamified", "AI-powered". Say student, plan, concept, mastery.
 
@@ -521,6 +521,7 @@ The hero headline uses viewport-relative sizing, so under about 500px the second
 
 Newest first. One line per UI or UX change. Date, what changed, where.
 
+- 2026-09-16 · Hero: "Free. No card." back under the buttons; the Existing Student Login button removed (login stays in the header).
 - 2026-09-16 · "Free. No card." kept on the diagnostic page only; removed from the hero, the method section, the method page, the blog CTA and the included list. Pitch steps given an even rhythm.
 - 2026-09-16 · Hero: mesh-gradient shader background in brand tints with a white wash behind the copy.
 - 2026-09-16 · Dark mode for every app screen, switched with the sky toggle in the top bar; dark palette added to the color section.

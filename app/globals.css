@@ -306,6 +306,7 @@ html { scroll-snap-type: y proximity; }
 .hero__word { will-change: transform; }
 
 .hero__cta-row { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 14px 22px; }
+.hero__note { flex-basis: 100%; text-align: center; font-size: 14px; color: var(--ink-50); }
 .hero__cta {
   display: inline-flex;
   align-items: center;
